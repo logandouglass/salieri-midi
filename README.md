@@ -21,7 +21,7 @@ There's lots of music composition software out there, and some of it is incredib
 * Create a variety of functions that can be used to customize the rhythm, bass, and lead lines.  (different arpeggios, strum patterns, generalizable licks and phrases, etc)
 * Add a site-mounted MIDI player to test the composition (if I can figure out how to implement it)
 
-### Scheme
+### Schema
 Honestly it's going to be hard to get the models right, I'll need to think a little before I map it all out.
 
 ### Week 1
