@@ -72,7 +72,7 @@ Honestly it's going to be hard to get the models right, I'll need to think a lit
 ### (Probably) Won't Haves... (for the future, if I stick with it)
 * robust chord support ("augmented 7th flat 9th?  we got those!")
 * ability to write an entire song with multiple progressions in one go 
-pre-selectable progression templates
+* pre-selectable progression templates
 * ability to generate a randomized "solo" over the progression
 * robust enough function variety to make sophisticated compositions 
 * ability to log in, save your compositions
