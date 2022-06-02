@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Composition
+from .models import Composition, Track
 
 class   ProgressionForm(ModelForm):
     class   Meta:
@@ -20,4 +20,28 @@ class   ProgressionForm(ModelForm):
             "chord4_bars",
             "chord5_tonic",
             "chord5_quality",
-            "chord5_bars", ]
+            "chord5_bars", 
+            ]
+
+class   TrackForm(ModelForm):
+    class   Meta:
+        model = Track
+        fields = [
+            "trackname",
+
+            "chord1_style",
+            "chord1_denom",
+
+            "chord2_style",
+            "chord2_denom",
+
+            "chord3_style",
+            "chord3_denom",
+
+            "chord4_style",
+            "chord4_denom",
+
+            "chord5_style",
+            "chord5_denom",
+
+        ]

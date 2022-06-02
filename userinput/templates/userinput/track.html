@@ -11,14 +11,17 @@
 <body class = "bg-light-gray pl2">
     <H1 class="calisto dark-blue i f2"> Salieri </H1>
     <hr class = "bg-green">
-    <H2 class = "calisto dark-blue f3">chart the progression:</H2>
+    <H2 class = "calisto dark-blue f3">new track:</H2>
 
-    <form action="{% url 'userinput:track' %}" method="post">
+    <form action="{% url 'userinput:trackadd' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="add track" />
     </form>
 
+    <button class = "mt3" type="button">
+        finish composition
+    </button>
 
 
 </body>
