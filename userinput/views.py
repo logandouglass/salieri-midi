@@ -22,52 +22,53 @@ def index(request):
 
 def track(request):
     ## Get progression data and create model
-    name = request.POST.get('name')
-    chord1_tonic = request.POST.get('chord1_tonic')
-    chord1_quality = request.POST.get('chord1_quality')
-    chord1_bars = request.POST.get('chord1_bars')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        chord1_tonic = request.POST.get('chord1_tonic')
+        chord1_quality = request.POST.get('chord1_quality')
+        chord1_bars = request.POST.get('chord1_bars')
 
-    chord2_tonic = request.POST.get('chord2_tonic')
-    chord2_quality = request.POST.get('chord2_quality')
-    chord2_bars = request.POST.get('chord2_bars')
+        chord2_tonic = request.POST.get('chord2_tonic')
+        chord2_quality = request.POST.get('chord2_quality')
+        chord2_bars = request.POST.get('chord2_bars')
 
-    chord3_tonic = request.POST.get('chord3_tonic')
-    chord3_quality = request.POST.get('chord3_quality')
-    chord3_bars = request.POST.get('chord3_bars')
+        chord3_tonic = request.POST.get('chord3_tonic')
+        chord3_quality = request.POST.get('chord3_quality')
+        chord3_bars = request.POST.get('chord3_bars')
 
-    chord4_tonic = request.POST.get('chord4_tonic')
-    chord4_quality = request.POST.get('chord4_quality')
-    chord4_bars = request.POST.get('chord4_bars')
+        chord4_tonic = request.POST.get('chord4_tonic')
+        chord4_quality = request.POST.get('chord4_quality')
+        chord4_bars = request.POST.get('chord4_bars')
 
-    chord5_tonic = request.POST.get('chord5_tonic')
-    chord5_quality = request.POST.get('chord5_quality')
-    chord5_bars = request.POST.get('chord5_bars')
+        chord5_tonic = request.POST.get('chord5_tonic')
+        chord5_quality = request.POST.get('chord5_quality')
+        chord5_bars = request.POST.get('chord5_bars')
 
-    Composition.objects.create(
-
-        name = name,
-        chord1_tonic = chord1_tonic,
-        chord1_quality = chord1_quality,
-        chord1_bars = chord1_bars,
-
-        chord2_tonic = chord2_tonic,
-        chord2_quality = chord2_quality,
-        chord2_bars = chord2_bars,
-
-        chord3_tonic = chord3_tonic,
-        chord3_quality = chord3_quality,
-        chord3_bars = chord3_bars,
-
-        chord4_tonic = chord4_tonic,
-        chord4_quality = chord4_quality,
-        chord4_bars = chord4_bars,
-
-        chord5_tonic = chord5_tonic,
-        chord5_quality = chord5_quality,
-        chord5_bars = chord5_bars,
-        midi = None
-
-            )
+        Composition.objects.create(
+        
+            name = name,
+            chord1_tonic = chord1_tonic,
+            chord1_quality = chord1_quality,
+            chord1_bars = chord1_bars,
+    
+            chord2_tonic = chord2_tonic,
+            chord2_quality = chord2_quality,
+            chord2_bars = chord2_bars,
+    
+            chord3_tonic = chord3_tonic,
+            chord3_quality = chord3_quality,
+            chord3_bars = chord3_bars,
+    
+            chord4_tonic = chord4_tonic,
+            chord4_quality = chord4_quality,
+            chord4_bars = chord4_bars,
+    
+            chord5_tonic = chord5_tonic,
+            chord5_quality = chord5_quality,
+            chord5_bars = chord5_bars,
+            midi = None
+    
+                )
 
     
     form = TrackForm()
@@ -103,8 +104,8 @@ def trackadd(request):
             chord5_denom = chord5_denom,
     )    
 
-    context = {}
-    return redirect(request, "userinput/track.html", context)
+    # context = {}
+    return redirect("/track")
 
 def magic(request):
     # Here's where the magic will have to happen...perhaps in a different app.

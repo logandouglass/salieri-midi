@@ -108,4 +108,4 @@ class Track(models.Model):
     chord5_denom = models.IntegerField(default = 4)
 
     def __str__(self):
-        return f"{self.trackname} | {self.comp.name}"
+        return self.trackname
