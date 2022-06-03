@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, HiddenInput
 from .models import Composition, Track
 
 class   ProgressionForm(ModelForm):
@@ -45,3 +45,7 @@ class   TrackForm(ModelForm):
             "chord5_denom",
 
         ]
+
+    #################################
+    ## Addition scrap
+        # widgets = {'comp': HiddenInput()}

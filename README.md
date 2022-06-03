@@ -34,7 +34,7 @@ Honestly it's going to be hard to get the models right, I'll need to think a lit
 ### Week 2
 * finish MVP of models (if need be)
 * write, write, write enough functions to give the user some degree of compositional freedom
-* figure out how user can download the generated MIDI file 
+* figure out how user can download the generated MIDI file
 
 
 ### Week 3

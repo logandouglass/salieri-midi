@@ -13,15 +13,21 @@
     <hr class = "bg-green">
     <H2 class = "calisto dark-blue f3">new track:</H2>
 
-    <form action="{% url 'userinput:trackadd' %}" method="post">
+    <form action="{% url 'userinput:trackadd' composition.id %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="add track" />
     </form>
 
-    <button class = "mt3" type="button">
+    <a href = "{% url 'generation:magic' composition.id %}">
+    <button class = "mt3" type="button" method="post">
         finish composition
     </button>
+    </a> 
+    <!-- adding || method = "get" || didn't work... -->
+    <!-- action="{% url 'generation:magic' composition.id %}" -->
+
+
 
 
 </body>
