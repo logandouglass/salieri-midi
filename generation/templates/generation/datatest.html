@@ -12,10 +12,21 @@
     <H1 class="calisto dark-blue i f2"> Salieri </H1>
     <hr class = "bg-green">
     <H2 class = "calisto dark-blue f3"> composition data </H2>
-    <p class = courier class = "mt3">
+    <p class = "roboto f4 dark-green" class = "mt3">
         
+        Debug:<br>
+        {{data_test}} <br>
+        {{data_test_2}}<br>
+        <!-- {{type_test}} <br> -->
+        <!-- {{track_obj_length}} <br> -->
+        <br><br>
 
+        
+        Comp name:<br>
         {{name_harvest}} <br>
+        <br><br>
+
+        Comp data:<br>
         {{chord1_tonic_harvest}} <br> 
         {{chord1_quality_harvest}} <br>
         {{chord1_bars_harvest}} <br>
@@ -35,6 +46,14 @@
         {{chord5_tonic_harvest}} <br>
         {{chord5_quality_harvest}} <br>
         {{chord5_bars_harvest}} <br>
+        <br><br>
+
+        Track names:<br>     
+        
+        {% for track in track_objs %}    
+        {{track.trackname}}<br>
+        {% endfor %}
+
 
 
     </p>
