@@ -47,7 +47,7 @@ def magic(request, id):
     all_tracks = Track.objects.all()
     track_objs = all_tracks.filter(comp=comp_obj)
     track_obj_length = len(track_objs)
-    track_params = list(Track.objects.values()[0].keys())
+    track_params = list(Track.objects.values()[0].keys()) # investigate rube goldbergy way?
     ###=======================================================
     
     ### make the master dict list of track data
