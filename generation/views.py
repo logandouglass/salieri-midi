@@ -48,27 +48,43 @@ def magic(request, id):
     track_objs = all_tracks.filter(comp=comp_obj)
     track_obj_length = len(track_objs)
     track_params = list(Track.objects.values()[0].keys()) # investigate rube goldbergy way?
+
+    
     ###=======================================================
     
     ### make the master dict list of track data
     track_dict_list = []
+    for i in range(len(track_objs)):
+        new_dict = {}
+        for ii in range (len(track_params)):
+            new_dict.update({track_params[ii]:list(list(all_tracks.filter(comp=comp_obj).values_list())[i])[ii]}) # needs to be fixed
+        track_dict_list.append(new_dict)
+
     # for i in track_obj_length:
     #     new_dict = {}
     #     for
 
     ### debugging
+    test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
     data_test = track_params
-    data_test_2 = Track._meta.get_fields()
+    data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
+    data_test_3 = track_dict_list
+    # blorg = Track()
+    # blorg.
+
+    # track_1_values = 
     ###=========================================================
 
 
     context={
 
         ### debugging
+        "test_track":test_track,
         "type_test":type_test,
         "data_test":data_test,
         "data_test_2":data_test_2,
+        "data_test_3":data_test_3,
         ###====================
 
         "name_harvest":name_harvest,
@@ -118,4 +134,10 @@ def magic(request, id):
 
     ###############################################
     # scrap
-    # Track._meta.get_fields()
+    # Track._meta.get_fields() ## for non-rg retrieval of track model parameters
+
+        # for track in track_objs:
+    #     new_dict = {}
+    #     for i in range (len(track_params)):
+    #         new_dict.update({track_params[i]:track.objects.values[i]})
+    #     track_dict_list.append(new_dict)
