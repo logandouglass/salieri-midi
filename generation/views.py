@@ -92,13 +92,6 @@ def magic(request, id):
 
     feed_progression = tuple_cleaner(chord_tuples)
 
-
-    # progression_seed = [
-    #     (chord1_tonic_harvest)
-    
-    # ]
-    ###=======================================================
-
     ### summon the comp tracks, the len of their set, and the track model param list 
     all_tracks = Track.objects.all()
     track_objs = all_tracks.filter(comp=comp_obj)
@@ -120,12 +113,55 @@ def magic(request, id):
     #     new_dict = {}
     #     for
 
+    #####================================================================
+    ### MASTER LOOP ###
+    ## Begin by iterating over the tupled progression
+    for sequence in feed_progression:
+        schord = sequence[0]
+        sduration = sequence[1]
+        for i in range(len(track_dict_list)): # iterate over every track in the track list 
+            new_track = Mtrack() # start a
+            ...
+
+    ## or do I want to do this the other way????? 
+    for i in range(len(track_dict_list)):
+        counter = 1
+        new_track_data_dict = track_dict_list[i]
+        for sequence in feed_progression:
+            if counter == 1:
+                ...
+            elif counter == 2:
+                ...
+            elif counter == 3:
+                ...
+            elif counter == 4:
+                ...
+            elif counter == 5:
+                ...
+            
+            
+            ...
+
+
+
+
+
+
+
+
+
+    #####================================================================
+
+
+
+
+
     ### debugging
     test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
     data_test = feed_progression
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
-    data_test_3 = chord_tuples
+    data_test_3 = track_dict_list
     ###=========================================================
 
 

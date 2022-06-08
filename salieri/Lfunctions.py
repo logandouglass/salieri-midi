@@ -95,10 +95,22 @@ def bassify(classed_note_list):
     return bassified_classed_note_list
 
 #####===============================================================================
-#### Note & Rest-placing functions
+#### Legacy Note & Rest-placing Functions
 
-def simpbass(chord, denominator):
-    "Writes really simple basslines"
+def silencio():
+    """
+    ===1st draft===
+    Fills a bar with silence...
+    Helpful logistically and musically!
+
+    (only formatted for 4/4 time)
+    """
+    bar = Bar()
+    bar.place_rest(1)
+    return bar
+
+def simpline(chord, denominator):
+    "Writes simple steady figures"
     bar = Bar()
     note = chord[0]
     note = Note(note) # do I need these even?
@@ -107,8 +119,8 @@ def simpbass(chord, denominator):
         bar.place_notes(note, denominator)
     return bar
 
-def gallopbass(chord):
-    "Writes galloping bass a la Iron Maiden"
+def gallopline(chord):
+    "Writes galloping lines a la Iron Maiden"
     bar = Bar()
     note = chord[0]
     note = Note(note)    
@@ -119,8 +131,8 @@ def gallopbass(chord):
         bar.place_notes(note, 16)
     return bar
 
-def reverse_gallopbass(chord):
-    "Writes reverse galloping bass...also a la Iron Maiden"
+def reverse_gallopline(chord):
+    "Writes reverse galloping lines...also a la Iron Maiden"
     bar = Bar()
     note = chord[0]
     note = Note(note)    
@@ -132,7 +144,7 @@ def reverse_gallopbass(chord):
     return bar
 
 def simprhythm(chord, denominator):
-    "Writes really simple harmony like a rock rhythm guitar or piano"
+    "Writes simple steady harmony like a hard rock rhythm guitar"
     bar = Bar()
     notes = NoteContainer()
     notes.add_notes(chord)
@@ -157,7 +169,7 @@ def arp(chord, denominator):
     return bar
 
 def arpreturn(chord, denominator):
-    "Writes steady up and down arpeggios, like a sweep-picking guitarist"
+    "Writes steady up and down arpeggios, like a classical pianist or sweep-picking guitarist would play"
     bar = Bar()
     for note in chord:
         note = Note()
@@ -171,6 +183,59 @@ def arpreturn(chord, denominator):
         for note in chord_r:
             bar.place_notes(note, denominator)
     return bar
+
+#####===============================================================================================
+#### Function Remasters
+
+
+def s_arpup(chord, denominator):
+    bar = Bar()
+    chord = octave_ascend(chord)
+    chord.append(chord[0].octave_up())
+    while True:
+        for note in chord:
+            bar.place_notes(note, denominator)
+            if bar.is_full:
+                return bar
+
+
+#####===============================================================================================
+#### == MASTER COMBINATORIAL FUNCTION ==
+
+def deus_ex_machina(chord, duration, style, denom):
+    """
+        'A god from the machine'
+    
+    """
+    bar_list = []
+    # add range here
+    if style == "arpup":
+
+        
+        ...
+    ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##################################################################

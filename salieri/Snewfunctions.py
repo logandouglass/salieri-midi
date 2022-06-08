@@ -17,9 +17,49 @@ from mingus.midi import midi_file_out
 
 ### functions
 #==================
-##### current
+##### workshop
 
+def silence():
+    """
+    ===prototype===
+    Fills a bar with silence...
+    Helpful logistically and musically!
 
+    """
+    bar = Bar()
+    bar.place_rest(1)
+    return bar
+    # for _ in range(20):
+    #     bar.place_rest(4)
+    #     if bar.current_beat == 1:
+    #         return bar
+    # return bar
+
+def silencio_alt():
+    """
+    ===1st draft===
+    Fills a bar with silence...
+    Helpful logistically and musically!
+
+    """
+    bar = Bar()
+    for _ in range(20):
+        bar.place_rest(1)
+        if bar.current_beat == 1:
+            return bar
+    return bar
+
+def silencio():
+    """
+    ===1st draft===
+    Fills a bar with silence...
+    Helpful logistically and musically!
+
+    (only formatted for 4/4 time)
+    """
+    bar = Bar()
+    bar.place_rest(1)
+    return bar
 
 
 
