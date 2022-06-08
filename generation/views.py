@@ -1,20 +1,20 @@
 ### imports
 # For acquiring and using music theoretical data
-import mingus.core.progressions as progressions
-import mingus.core.chords as chords
-import mingus.core.scales as scales
-import mingus.core.intervals as intervals
-import mingus.core.notes as notes
+# import mingus.core.progressions as progressions
+# import mingus.core.chords as chords
+# import mingus.core.scales as scales
+# import mingus.core.intervals as intervals
+# import mingus.core.notes as notes
 
-## For writing notes, chords bars, tracks, comps
-from mingus.containers import Note
-from mingus.containers import NoteContainer
-from mingus.containers import Bar
-from mingus.containers import Composition as Mcomposition
-from mingus.containers import Track as Mtrack
+# ## For writing notes, chords bars, tracks, comps
+# from mingus.containers import Note
+# from mingus.containers import NoteContainer
+# from mingus.containers import Bar
+# from mingus.containers import Composition as Mcomposition
+# from mingus.containers import Track as Mtrack
 
-## for writing MIDI
-from mingus.midi import midi_file_out
+# ## for writing MIDI
+# from mingus.midi import midi_file_out
 
 ## django stuff
 from django.shortcuts import render, redirect
@@ -124,72 +124,77 @@ def magic(request, id):
     #         ...
 
     ## or do I want to do this the other way????? 
-    final_comp = Mcomposition()
-    for i in range(len(track_dict_list)):
-        new_track = Mtrack() ## There may be some trouble with this
-        counter = 1
-        new_track_data_dict = track_dict_list[i]
-        new_trackname = new_track_data_dict["trackname"]
-        for tuple in feed_progression:
-            current_chord = tuple[0] # a list of unclassed notes as strings
-            current_duration = tuple[1] # a number of bars
-            if counter == 1:
-                current_style = new_track_data_dict["chord1_style"]
-                current_denom = new_track_data_dict["chord1_denom"]
-                # mutators = [] ## coming eventually...
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
-                new_track = bar_adder(bar_list, new_track)
+
+
+
+    #@@@@
+
+    # final_comp = Mcomposition()
+    # for i in range(len(track_dict_list)):
+    #     new_track = Mtrack() ## There may be some trouble with this
+    #     counter = 1
+    #     new_track_data_dict = track_dict_list[i]
+    #     new_trackname = new_track_data_dict["trackname"]
+    #     for tuple in feed_progression:
+    #         current_chord = tuple[0] # a list of unclassed notes as strings
+    #         current_duration = tuple[1] # a number of bars
+    #         if counter == 1:
+    #             current_style = new_track_data_dict["chord1_style"]
+    #             current_denom = new_track_data_dict["chord1_denom"]
+    #             # mutators = [] ## coming eventually...
+    #             bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+    #             new_track = bar_adder(bar_list, new_track)
                 
-                ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+    #             ##
+    #             new_track.name = new_trackname
+    #             final_comp.add_track(new_track)
 
-            elif counter == 2:
-                current_style = new_track_data_dict["chord2_style"]
-                current_denom = new_track_data_dict["chord2_denom"]
-                # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+    #         elif counter == 2:
+    #             current_style = new_track_data_dict["chord2_style"]
+    #             current_denom = new_track_data_dict["chord2_denom"]
+    #             # mutators = [] ## coming eventually..
+    #             musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
                 
-                ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+    #             ##
+    #             new_track.name = new_trackname
+    #             final_comp.add_track(new_track)
 
-            elif counter == 3:
-                current_style = new_track_data_dict["chord3_style"]
-                current_denom = new_track_data_dict["chord3_denom"]
-                # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+    #         elif counter == 3:
+    #             current_style = new_track_data_dict["chord3_style"]
+    #             current_denom = new_track_data_dict["chord3_denom"]
+    #             # mutators = [] ## coming eventually..
+    #             musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+    #             new_track.name = new_trackname
+    #             final_comp.add_track(new_track)
 
-                ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+    #             ##
+    #             new_track.name = new_trackname
+    #             final_comp.add_track(new_track)
 
-            elif counter == 4:
-                current_style = new_track_data_dict["chord4_style"]
-                current_denom = new_track_data_dict["chord4_denom"]
-                # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+    #         elif counter == 4:
+    #             current_style = new_track_data_dict["chord4_style"]
+    #             current_denom = new_track_data_dict["chord4_denom"]
+    #             # mutators = [] ## coming eventually..
+    #             musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
 
-                ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+    #             ##
+    #             new_track.name = new_trackname
+    #             final_comp.add_track(new_track)
 
-            elif counter == 5:
-                current_style = new_track_data_dict["chord5_style"]
-                current_denom = new_track_data_dict["chord5_denom"]
-                # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+    #         elif counter == 5:
+    #             current_style = new_track_data_dict["chord5_style"]
+    #             current_denom = new_track_data_dict["chord5_denom"]
+    #             # mutators = [] ## coming eventually..
+    #             musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
                 
-                ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
-                
-            counter += 1
+    #             ##
+    #             new_track.name = new_trackname
+    #             final_comp.add_track(new_track)
+
+    #         counter += 1
 
 
-
+    #@@@
 
 
 

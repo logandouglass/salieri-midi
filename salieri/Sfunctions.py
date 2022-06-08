@@ -48,6 +48,7 @@ def octave_ascend(scale):
     Returns list of classed notes ascending from the tonic in the octave.
     """
     start_note = scale[0]
+    corrected_scale = [] ##
     initial = True
     for note in scale:
         oct_up = False
@@ -58,13 +59,17 @@ def octave_ascend(scale):
         if oct_up == True:
             note.octave_up()
         initial = False
-    return scale
+        corrected_scale.append(note) ##
+    return corrected_scale ##
 
 def octave_descend(scale):
     """
     Returns list of classed notes descending from the tonic in the octave.
+    
+    May need corrections flagged above with '##'
     """
     start_note = scale[0]
+    corrected_scale = []
     initial = True
     for note in scale:
         oct_down = False
@@ -75,7 +80,8 @@ def octave_descend(scale):
         if oct_down == True:
             note.octave_down()
         initial = False
-    return scale
+        corrected_scale.append(note)
+    return corrected_scale
 
 def chordbuild(tonic, quality):
     """
@@ -195,13 +201,13 @@ def arpreturn(chord, denominator):
     return bar
 
 #####===============================================================================================
-#### Function Remasters
+#### Salieri Functions (Inc Remasters)
 
 
 def s_arpup(chord, denominator):
     bar = Bar()
-    chord = octave_ascend(chord)
-    chord.append(chord[0].octave_up())
+    chord_adj = octave_ascend(chord)
+    chord_adj.append(chord_adj[0].octave_up())
     while True:
         for note in chord:
             bar.place_notes(note, denominator)

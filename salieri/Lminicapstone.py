@@ -24,11 +24,11 @@ from mingus.midi import midi_file_out
 
 ### my functions
 ## these compose things for me algorithmically
-from Lfunctions import simpbass
-from Lfunctions import simprhythm
-from Lfunctions import arp
-from Lfunctions import arpreturn
-from Lfunctions import gallopbass
+from Sfunctions import simpline
+from Sfunctions import simprhythm
+from Sfunctions import arp
+from Sfunctions import arpreturn
+from Sfunctions import gallopline
 
 ### feed
 ## The chord progression to be automated over tupled with the number of bars the chord lingers.
@@ -71,7 +71,7 @@ for tupe in solo_prog: # Cycle through the progression(s) to populated with note
     bass_chord = tupe[0]
     for _ in range(tupe[1]): # This repeats note population for correct # of bars.
         # bass_bar = gallopbass(bass_chord)
-        bass_bar = simpbass(bass_chord, bass_denom)
+        bass_bar = simpline(bass_chord, bass_denom)
         bass_track.add_bar(bass_bar)
 ## write the rhythm
 rhythm_denom = 8 # Choose what length of note you want to take as a parameter
@@ -236,7 +236,7 @@ for tupe in solo_prog: # Cycle through the progression(s) to populated with note
     bass2_chord = tupe[0]
     for _ in range(tupe[1]): # This repeats note population for correct # of bars.
         # bass_bar = gallopbass(bass_chord)
-        bass2_bar = gallopbass(bass2_chord)
+        bass2_bar = gallopline(bass2_chord)
         bass2_track.add_bar(bass2_bar)
 
 
