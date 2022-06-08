@@ -1,10 +1,10 @@
 ### imports
-## For acquiring and using music theoretical data
-# import mingus.core.progressions as progressions
-# import mingus.core.chords as chords
-# import mingus.core.scales as scales
-# import mingus.core.intervals as intervals
-# import mingus.core.notes as notes
+# For acquiring and using music theoretical data
+import mingus.core.progressions as progressions
+import mingus.core.chords as chords
+import mingus.core.scales as scales
+import mingus.core.intervals as intervals
+import mingus.core.notes as notes
 
 ## For writing notes, chords bars, tracks, comps
 from mingus.containers import Note
@@ -74,6 +74,23 @@ def magic(request, id):
     chord4 = chordbuild(comp_data_dict['chord4_tonic'], comp_data_dict['chord4_quality'])
     chord5 = chordbuild(comp_data_dict['chord5_tonic'], comp_data_dict['chord5_quality'])
 
+    ### Begin the tupling
+    chord1_tuple = (chord1, comp_data_dict["chord1_bars"])
+    chord2_tuple = (chord2, comp_data_dict["chord2_bars"])
+    chord3_tuple = (chord3, comp_data_dict["chord3_bars"])
+    chord4_tuple = (chord4, comp_data_dict["chord4_bars"])
+    chord5_tuple = (chord5, comp_data_dict["chord5_bars"])
+
+    chord_tuples = [
+            chord1_tuple,
+            chord2_tuple,
+            chord3_tuple,
+            chord4_tuple,
+            chord5_tuple,
+
+    ]
+
+    feed_progression = tuple_cleaner(chord_tuples)
 
 
     # progression_seed = [
@@ -106,9 +123,9 @@ def magic(request, id):
     ### debugging
     test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
-    data_test = chord1
+    data_test = feed_progression
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
-    data_test_3 = track_dict_list
+    data_test_3 = chord_tuples
     ###=========================================================
 
 

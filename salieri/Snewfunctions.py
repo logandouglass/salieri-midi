@@ -16,6 +16,19 @@ from mingus.midi import midi_file_out
 ###=========================================================================
 
 ### functions
+#==================
+##### current
+
+
+
+
+
+#####
+#===================
+
+
+
+
 
 ## utility
 def octave_ascend(scale):

@@ -17,10 +17,22 @@ from mingus.containers import Track as Mtrack
 
 ## For writing MIDI
 from mingus.midi import midi_file_out
-###==========================================================================
 
-### General Musical functions
-## Octave correction
+
+
+#####==========================================================================
+#### Logistical
+def tuple_cleaner(tuple_list):
+    """
+    Weeds out any incomplete or invalid tuples
+    """
+    cleaned_list = []
+    for tuple in tuple_list:
+        if (0 or None) not in tuple:
+            cleaned_list.append(tuple)
+    return cleaned_list
+
+#### General Musical functions
 def octave_ascend(scale):
     """
     Returns list of classed notes ascending from the tonic in the octave.
@@ -55,7 +67,6 @@ def octave_descend(scale):
         initial = False
     return scale
 
-## Chord-maker
 def chordbuild(tonic, quality):
     """
     Returns an unclassed list of the notes in a chord.
@@ -71,7 +82,6 @@ def chordbuild(tonic, quality):
             note_list = chords.minor_triad(tonic)
         return note_list
 
-## Bassifier
 def bassify(classed_note_list):
     """
     Input unclassed note list, returns a classed list of every note in the input list an octave down.
@@ -84,11 +94,8 @@ def bassify(classed_note_list):
         bassified_classed_note_list.append(note)
     return bassified_classed_note_list
 
-###===============================================================================
-
-
-
-### Note & Rest-placing functions
+#####===============================================================================
+#### Note & Rest-placing functions
 
 def simpbass(chord, denominator):
     "Writes really simple basslines"
@@ -113,7 +120,7 @@ def gallopbass(chord):
     return bar
 
 def reverse_gallopbass(chord):
-    "Writes galloping bass a la Iron Maiden"
+    "Writes reverse galloping bass...also a la Iron Maiden"
     bar = Bar()
     note = chord[0]
     note = Note(note)    
@@ -175,7 +182,7 @@ def arpreturn(chord, denominator):
 
 
 
-
+# Come back to the tupler!
 
 #### Percussion ###
 ### Not working yet
