@@ -32,14 +32,14 @@ def tuple_cleaner(tuple_list):
             cleaned_list.append(tuple)
     return cleaned_list
 
-def bar_adder(barr_list, Mcompp):
+def bar_adder(barr_list, Mtrackk):
     """
     Adds bars to a MTrack, and returns the updated MTrack
     """
     for barr in barr_list:
-        Mcompp.add_bar(barr)
+        Mtrackk.add_bar(barr)
     
-    return Mcompp
+    return Mtrackk
     ...
 
 #### General Musical functions
