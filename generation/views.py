@@ -116,30 +116,49 @@ def magic(request, id):
     #####================================================================
     ### MASTER LOOP ###
     ## Begin by iterating over the tupled progression
-    for sequence in feed_progression:
-        schord = sequence[0]
-        sduration = sequence[1]
-        for i in range(len(track_dict_list)): # iterate over every track in the track list 
-            new_track = Mtrack() # start a
-            ...
+    # for sequence in feed_progression:
+    #     schord = sequence[0]
+    #     sduration = sequence[1]
+    #     for i in range(len(track_dict_list)): # iterate over every track in the track list 
+    #         new_track = Mtrack() # start a
+    #         ...
 
     ## or do I want to do this the other way????? 
     for i in range(len(track_dict_list)):
         counter = 1
         new_track_data_dict = track_dict_list[i]
-        for sequence in feed_progression:
+        new_trackname = new_track_data_dict["trackname"]
+        for tuple in feed_progression:
+            current_chord = tuple[0] # a list of unclassed notes as strings
+            current_duration = tuple[1] # a number of bars
             if counter == 1:
+                current_style = new_track_data_dict["chord1_style"]
+                current_denom = new_track_data_dict["chord1_denom"]
+                # mutators = [] ## coming eventually...
+                # repeatable master executor function here
                 ...
             elif counter == 2:
+                current_style = new_track_data_dict["chord2_style"]
+                current_denom = new_track_data_dict["chord2_denom"]
+                # mutators = [] ## coming eventually..
                 ...
             elif counter == 3:
+                current_style = new_track_data_dict["chord3_style"]
+                current_denom = new_track_data_dict["chord3_denom"]
+                # mutators = [] ## coming eventually..
                 ...
             elif counter == 4:
+                current_style = new_track_data_dict["chord4_style"]
+                current_denom = new_track_data_dict["chord4_denom"]
+                # mutators = [] ## coming eventually..
                 ...
             elif counter == 5:
+                current_style = new_track_data_dict["chord5_style"]
+                current_denom = new_track_data_dict["chord5_denom"]
+                # mutators = [] ## coming eventually..
                 ...
-            
-            
+            counter += 1
+
             ...
 
 
@@ -224,6 +243,7 @@ def magic(request, id):
 
     ###############################################
     # scrap
+
     # Track._meta.get_fields() ## for non-rg retrieval of track model parameters
 
         # for track in track_objs:
@@ -234,3 +254,7 @@ def magic(request, id):
 
         # comp_params = list(list(Composition.objects.filter(id=id).values())[0].keys())
     # comp_values =
+
+
+                # if counter > 5: #if the counter exceeds the max number of chord sequences that can be written...
+            #     counter = 1

@@ -208,8 +208,12 @@ def deus_ex_machina(chord, duration, style, denom):
     
     """
     bar_list = []
-    # add range here
-    if style == "arpup":
+    for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
+        if style == "arpup":
+            bar = s_arpup(chord, denom)
+            bar_list.append(bar)
+        else:
+            bar = silencio(bar)
 
         
         ...
@@ -240,6 +244,8 @@ def deus_ex_machina(chord, duration, style, denom):
 
 ##################################################################
 
+## Notes
+## Make only .5 and then integers selectable
 
 
 
@@ -247,7 +253,6 @@ def deus_ex_machina(chord, duration, style, denom):
 
 
 
-# Come back to the tupler!
 
 #### Percussion ###
 ### Not working yet
