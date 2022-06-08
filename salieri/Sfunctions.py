@@ -32,6 +32,16 @@ def tuple_cleaner(tuple_list):
             cleaned_list.append(tuple)
     return cleaned_list
 
+def bar_adder(barr_list, Mcompp):
+    """
+    Adds bars to a MTrack, and returns the updated MTrack
+    """
+    for barr in barr_list:
+        Mcompp.add_bar(barr)
+    
+    return Mcompp
+    ...
+
 #### General Musical functions
 def octave_ascend(scale):
     """
@@ -202,22 +212,32 @@ def s_arpup(chord, denominator):
 #####===============================================================================================
 #### == MASTER COMBINATORIAL FUNCTION ==
 
-def deus_ex_machina(chord, duration, style, denom):
+def musicorum_ex_machina(chord, duration, style, denom):
     """
-        'A god from the machine'
+        
     
     """
     bar_list = []
+    
+    ###
+    ## for future functionality ##
+    if denom == .5:
+        half_flag = True
+        denom = 1
+    elif denom == .25:
+        quarter_flag = True
+        denom = 1
+    ###
+    
     for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
         if style == "arpup":
             bar = s_arpup(chord, denom)
             bar_list.append(bar)
         else:
             bar = silencio(bar)
-
-        
-        ...
-    ...
+            bar_list.append(bar)
+    
+    return bar_list
 
 
 

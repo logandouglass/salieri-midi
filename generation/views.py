@@ -30,7 +30,7 @@ from userinput.forms import ProgressionForm, TrackForm
 # import pprint
 
 ### my music-writing functions
-from salieri.Lfunctions import *
+from salieri.Sfunctions import *
 ###===============================================================
 
 #### views
@@ -124,6 +124,7 @@ def magic(request, id):
     #         ...
 
     ## or do I want to do this the other way????? 
+    Mcomp = Mcomposition()
     for i in range(len(track_dict_list)):
         counter = 1
         new_track_data_dict = track_dict_list[i]
@@ -135,31 +136,33 @@ def magic(request, id):
                 current_style = new_track_data_dict["chord1_style"]
                 current_denom = new_track_data_dict["chord1_denom"]
                 # mutators = [] ## coming eventually...
-                # repeatable master executor function here
-                ...
+                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+
             elif counter == 2:
                 current_style = new_track_data_dict["chord2_style"]
                 current_denom = new_track_data_dict["chord2_denom"]
                 # mutators = [] ## coming eventually..
-                ...
+                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+
             elif counter == 3:
                 current_style = new_track_data_dict["chord3_style"]
                 current_denom = new_track_data_dict["chord3_denom"]
                 # mutators = [] ## coming eventually..
-                ...
+                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+
             elif counter == 4:
                 current_style = new_track_data_dict["chord4_style"]
                 current_denom = new_track_data_dict["chord4_denom"]
                 # mutators = [] ## coming eventually..
-                ...
+                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+
             elif counter == 5:
                 current_style = new_track_data_dict["chord5_style"]
                 current_denom = new_track_data_dict["chord5_denom"]
                 # mutators = [] ## coming eventually..
-                ...
-            counter += 1
+                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
 
-            ...
+            counter += 1
 
 
 
