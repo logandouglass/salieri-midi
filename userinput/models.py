@@ -71,7 +71,8 @@ class Track(models.Model):
 
 
     pattern_choices = [
-    ("arpup", "upwardarpeggios" ),
+    ("arpup", "upward arpeggios" ),
+    ("simpline", "steady bass"),
 
     ]
     ##############################

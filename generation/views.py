@@ -190,13 +190,17 @@ def magic(request, id):
             counter += 1
             # if feed_progression.index(tuple) == -1:
             #     final_comp.add_track(new_track) ## for debugging
-    final_comp.add_track(new_track)
+        final_comp.add_track(new_track)
 
 
 
 
     ## for testing       
-    midi_file_out.write_Composition("helloworld7.mid", final_comp)
+    midi_file_out.write_Composition(f"generation/dtmidi/{name_harvest}.mid", final_comp)
+    comp_obj.midi = None # how will I do this?
+
+
+
 
     #@@@
 

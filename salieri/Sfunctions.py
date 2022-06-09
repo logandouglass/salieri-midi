@@ -271,6 +271,10 @@ def musicorum_ex_machina(chord, duration, style, denom):
         if style == "arpup":
             bar = s_arpup(chord, denom)
             bar_list.append(bar)
+        elif style == "simpline":
+            bar = simpline(chord, denom)
+            bar_list.append(bar)
+
         else:
             bar = silencio()
             bar_list.append(bar)
