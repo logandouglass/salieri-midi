@@ -203,16 +203,52 @@ def arpreturn(chord, denominator):
 #####===============================================================================================
 #### Salieri Functions (Inc Remasters)
 
-
+## reworking
 def s_arpup(chord, denominator):
     bar = Bar()
     chord_adj = octave_ascend(chord)
-    chord_adj.append(chord_adj[0].octave_up())
-    while True:
-        for note in chord:
+    ##
+    # tonic_pull = chord_adj[0]
+    # tonic_pull.octave_up()
+    # chord_adj.append(tonic_pull)
+    ##
+    
+    #$
+
+    tonic_octave = Note()
+    tonic_octave.name = chord_adj[0].name
+    tonic_octave.octave = chord_adj[0].octave
+    tonic_octave.octave_up()
+    chord_adj.append(tonic_octave)
+
+
+    #$
+
+    print(chord_adj)
+    # print(chord_adj[0].name)
+    # print(type(chord_adj[0].name))
+    # print(type(chord_adj[0]))
+    print(tonic_octave)
+    for _ in range(10):
+        for note in chord_adj:
             bar.place_notes(note, denominator)
-            if bar.is_full:
-                return bar
+    return bar
+
+## why doesn't this work??
+
+# def s_arpup(chord, denominator):
+#     bar = Bar()
+#     chord_adj = octave_ascend(chord)
+#     # chord_adj.append(chord_adj[0].octave_up())
+#     print(chord_adj)
+#     print(type(chord_adj))
+#     print(chord_adj[0])
+#     print(type(chord_adj[0]))
+#     while True:
+#         for note in chord_adj:
+#             bar.place_notes(note, denominator)
+#             if bar.is_full:
+#                 return bar
 
 
 #####===============================================================================================
@@ -220,8 +256,6 @@ def s_arpup(chord, denominator):
 
 def musicorum_ex_machina(chord, duration, style, denom):
     """
-        
-    
     """
     bar_list = []
     
@@ -240,7 +274,7 @@ def musicorum_ex_machina(chord, duration, style, denom):
             bar = s_arpup(chord, denom)
             bar_list.append(bar)
         else:
-            bar = silencio(bar)
+            bar = silencio()
             bar_list.append(bar)
     
     return bar_list

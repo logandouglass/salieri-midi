@@ -20,31 +20,30 @@ from Sfunctions import *
 
 ####==================================================================
 
-def st_arpup(chord, denominator):
-    bar = Bar()
-    chord_adj = octave_ascend(chord)
-    print(chord_adj)
-    print(chord_adj[0])
-    print(type(chord_adj[0]))
-    # chord_adj.append(chord_adj[0].octave_up())
-    while True:
-        for note in chord:
-            bar.place_notes(note, denominator)
-            if bar.is_full:
-                return bar
+# def st_arpup(chord, denominator):
+#     bar = Bar()
+#     chord_adj = octave_ascend(chord)
+#     print(chord_adj)
+#     print(chord_adj[0])
+#     print(type(chord_adj[0]))
+#     # chord_adj.append(chord_adj[0].octave_up())
+#     while True:
+#         for note in chord:
+#             bar.place_notes(note, denominator)
+#             if bar.is_full:
+#                 return bar
 
 
 
 ####==================================================================
 ### Testing 
-
-st_arpup(['E', 'G', 'B'], 16)
+# test =
+test = s_arpup(['E', 'G', 'B'], 16)
 
 
 
 ####==============================================================
 ### MIDI test-writing
 
-
 # test = arpreturn(chords.major_triad("A"), 16)
-# midi_file_out.write_Bar("tests/latesttest.mid", test, 120, 7)
+midi_file_out.write_Bar("stests/debug4.mid", test, 120, 7)
