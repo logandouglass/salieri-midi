@@ -40,7 +40,11 @@ def bar_adder(barr_list, Mtrackk):
         Mtrackk.add_bar(barr)
     
     return Mtrackk
-    ...
+
+def track_return():
+    gen_track = Mtrack()
+
+    return gen_track
 
 #### General Musical functions
 def octave_ascend(scale):
@@ -92,13 +96,14 @@ def chordbuild(tonic, quality):
     if tonic in ["", None]:
         return None
     else:
+        # add many more qualities when you have time
         if quality == "major":
             note_list = chords.major_triad(tonic)
         elif quality == "minor":
             note_list = chords.minor_triad(tonic)
         return note_list
 
-def bassify(classed_note_list):
+def bassify(classed_note_list): # may need to adjust it to take in a list of classed items
     """
     Input unclassed note list, returns a classed list of every note in the input list an octave down.
     Good for writing basslines.
@@ -113,17 +118,6 @@ def bassify(classed_note_list):
 #####===============================================================================
 #### Legacy Note & Rest-placing Functions
 
-def silencio():
-    """
-    ===1st draft===
-    Fills a bar with silence...
-    Helpful logistically and musically!
-
-    (only formatted for 4/4 time)
-    """
-    bar = Bar()
-    bar.place_rest(1)
-    return bar
 
 def simpline(chord, denominator):
     "Writes simple steady figures"
@@ -201,17 +195,26 @@ def arpreturn(chord, denominator):
     return bar
 
 #####===============================================================================================
-#### Salieri Functions (Inc Remasters)
+#### Salieri Functions Note & Rest-placing Functions
+
+def silencio():
+    """
+    ===1st draft===
+    Fills a bar with silence...
+    Helpful logistically and musically!
+
+    (only formatted for 4/4 time)
+    """
+    bar = Bar()
+    bar.place_rest(1)
+    return bar
+
+
 
 ## reworking
 def s_arpup(chord, denominator):
     bar = Bar()
     chord_adj = octave_ascend(chord)
-    ##
-    # tonic_pull = chord_adj[0]
-    # tonic_pull.octave_up()
-    # chord_adj.append(tonic_pull)
-    ##
     
     #$
 
@@ -221,14 +224,8 @@ def s_arpup(chord, denominator):
     tonic_octave.octave_up()
     chord_adj.append(tonic_octave)
 
-
     #$
 
-    print(chord_adj)
-    # print(chord_adj[0].name)
-    # print(type(chord_adj[0].name))
-    # print(type(chord_adj[0]))
-    print(tonic_octave)
     for _ in range(10):
         for note in chord_adj:
             bar.place_notes(note, denominator)
@@ -261,15 +258,16 @@ def musicorum_ex_machina(chord, duration, style, denom):
     
     ###
     ## for future functionality ##
-    if denom == .5:
+    if duration == .5:
         half_flag = True
-        denom = 1
-    elif denom == .25:
+        duration = 1
+    elif duration == .25:
         quarter_flag = True
-        denom = 1
+        duration = 1
     ###
     
     for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
+        ## These conditionals will eventually nest every note and silence writer, so it will become massive.
         if style == "arpup":
             bar = s_arpup(chord, denom)
             bar_list.append(bar)
@@ -339,3 +337,12 @@ def musicorum_ex_machina(chord, duration, style, denom):
 # # test = arpreturn(chords.major_triad("A"), 16)
 
 # # midi_file_out.write_Bar("tests/arpreturn.mid", test, 120, 7)
+
+
+##scrap
+#sarpup
+    # print(chord_adj)
+    # # print(chord_adj[0].name)
+    # # print(type(chord_adj[0].name))
+    # # print(type(chord_adj[0]))
+    # print(tonic_octave)

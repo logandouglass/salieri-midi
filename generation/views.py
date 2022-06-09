@@ -121,11 +121,13 @@ def magic(request, id):
 
     final_comp = Mcomposition()
     for i in range(len(track_dict_list)):
-        new_track = Mtrack() ## There may be some trouble with this -- there is, it needs to be a new track every time
-        ## Make a dictionary with 8 tracks with integers as keys, add a counter, it assigns "new track" to a different track every time
+        new_track = Mtrack()
+        # new_track = track_return()
+
+
         counter = 1
         new_track_data_dict = track_dict_list[i]
-        new_trackname = new_track_data_dict["trackname"]
+        new_track.name = new_track_data_dict["trackname"]
         for tuple in feed_progression:
             current_chord = tuple[0] # a list of unclassed notes as strings
             current_duration = tuple[1] # a number of bars
@@ -137,55 +139,64 @@ def magic(request, id):
                 new_track = bar_adder(bar_list, new_track)
                 
                 ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+                # new_track.name = new_trackname
+                # final_comp.add_track(new_track)
 
             elif counter == 2:
                 current_style = new_track_data_dict["chord2_style"]
                 current_denom = new_track_data_dict["chord2_denom"]
                 # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                new_track = bar_adder(bar_list, new_track)
                 
-                ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+            #     ##
+            #     # new_track.name = new_trackname
+            #     # final_comp.add_track(new_track)
 
             elif counter == 3:
                 current_style = new_track_data_dict["chord3_style"]
                 current_denom = new_track_data_dict["chord3_denom"]
                 # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                new_track = bar_adder(bar_list, new_track)
+
 
                 ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+                # new_track.name = new_trackname
+                # final_comp.add_track(new_track)
 
             elif counter == 4:
                 current_style = new_track_data_dict["chord4_style"]
                 current_denom = new_track_data_dict["chord4_denom"]
                 # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                new_track = bar_adder(bar_list, new_track)
 
                 ##
-                new_track.name = new_trackname
-                final_comp.add_track(new_track)
+                # new_track.name = new_trackname
+                # final_comp.add_track(new_track)
 
             elif counter == 5:
                 current_style = new_track_data_dict["chord5_style"]
                 current_denom = new_track_data_dict["chord5_denom"]
                 # mutators = [] ## coming eventually..
-                musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                new_track = bar_adder(bar_list, new_track)
                 
                 ##
-                new_track.name = new_trackname
+                # new_track.name = new_trackname
                 final_comp.add_track(new_track)
 
             counter += 1
+            # if feed_progression.index(tuple) == -1:
+            #     final_comp.add_track(new_track) ## for debugging
+    final_comp.add_track(new_track)
+
+
+
 
     ## for testing       
-    midi_file_out.write_Composition("helloworld.mid", final_comp)
+    midi_file_out.write_Composition("helloworld7.mid", final_comp)
 
     #@@@
 
@@ -203,7 +214,8 @@ def magic(request, id):
     ### debugging
     test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
-    data_test = feed_progression
+    data_test = counter
+    # data_test = track_dict_list[0]
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
     data_test_3 = track_dict_list
     ###=========================================================
@@ -297,3 +309,6 @@ def magic(request, id):
     #         ...
 
     ## or do I want to do this the other way????? 
+
+    ## There may be some trouble with this -- there is, it needs to be a new track every time
+        ## Make a dictionary with 8 tracks with integers as keys, add a counter, it assigns "new track" to a different track every time
