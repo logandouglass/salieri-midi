@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Salieri Datatest </title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
-    <script src="https://unpkg.com/vue@3"></script>
+    <!-- <script src="https://unpkg.com/vue@3"></script> -->
 
 </head>
 
@@ -74,8 +74,68 @@
 
         </p>
 
+        <a href = {{comp_obj.midi.url}} download>
         <button class = "mt3 mb3"> Download </button>
+        </a>
+
+
     </div>
+
+    <!-- <script>
+
+
+        const App = {
+            // the data property is a function that returns an object
+            data() {
+              return {
+        
+              }
+            },
+        
+            methods: {
+        
+        
+        
+        
+        
+               
+            },
+        }
+
+        Vue.createApp(App).mount('#app')
+        
+        //////////////////////////////////////////////////
+
+
+
+        // code from mdn wed docs
+        
+        
+        function onStartedDownload(id) {
+            console.log(`Started downloading: ${id}`);
+          }
+          
+          function onFailed(error) {
+            console.log(`Download failed: ${error}`);
+          }
+          
+          let downloadUrl = "";
+          
+          let downloading = browser.downloads.download({
+            url : downloadUrl,
+            filename : 'my-image-again.png',
+            conflictAction : 'uniquify'
+          });
+          
+          downloading.then(onStartedDownload, onFailed);
+    
+    
+    
+    
+        </script> -->
+
+
+
 
 </body>
 

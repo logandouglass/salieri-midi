@@ -16,9 +16,14 @@
 # ## for writing MIDI
 # from mingus.midi import midi_file_out
 
+## might need OS
+from msilib.schema import File
+import os
+
 ## django stuff
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
+from django.core.files import File
 
 from userinput.models import Composition, Track
 from userinput.forms import ProgressionForm, TrackForm
@@ -195,9 +200,18 @@ def magic(request, id):
 
 
 
-    ## for testing       
-    midi_file_out.write_Composition(f"generation/dtmidi/{name_harvest}.mid", final_comp)
-    comp_obj.midi = None # how will I do this?
+    ## for testing
+    # midi_file_out.write_Composition("debuggg.mid", final_comp)  
+    path = f"{name_harvest} (id{comp_obj.id}).mid"     
+    midi_file_out.write_Composition(path, final_comp)
+    
+    
+    # midi_file_out.write_Composition(f"generation/dtmidi/{name_harvest}.mid", final_comp)
+    # comp_obj.__setattr__(midi, f"media/{name_harvest} (id{comp_obj.id}).mid") ## Doesn't work?
+    # comp_obj.midi.name = path
+    with open(path, "rb") as f: ## rb is write binary, need for opening the midi
+        comp_obj.midi = File(f) # import from django
+        comp_obj.save()
 
 
 
@@ -221,7 +235,7 @@ def magic(request, id):
     data_test = counter
     # data_test = track_dict_list[0]
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
-    data_test_3 = track_dict_list
+    data_test_3 = comp_obj.chord1_quality
     ###=========================================================
 
 
@@ -259,6 +273,8 @@ def magic(request, id):
 
         "track_objs":track_objs,
         "track_obj_length":track_obj_length,
+
+        "comp_obj":comp_obj, 
 
         }
 
