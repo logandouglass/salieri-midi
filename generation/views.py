@@ -16,9 +16,9 @@
 # ## for writing MIDI
 # from mingus.midi import midi_file_out
 
-## might need OS
-from msilib.schema import File
-import os
+# ## might need OS
+# from msilib.schema import File
+# import os
 
 ## django stuff
 from django.shortcuts import render, redirect
@@ -332,3 +332,7 @@ def magic(request, id):
 
     ## There may be some trouble with this -- there is, it needs to be a new track every time
         ## Make a dictionary with 8 tracks with integers as keys, add a counter, it assigns "new track" to a different track every time
+
+        # ## might need OS
+# from msilib.schema import File
+# import os

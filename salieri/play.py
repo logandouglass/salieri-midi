@@ -18,6 +18,95 @@
 # ## For writing MIDI
 # from mingus.midi import midi_file_out
 
+from Sfunctions import *
+tonic = "C"
+
+# print(chords.dominant7(tonic))
+# print(chords.major_seventh(tonic))
+# print(chords.minor_seventh(tonic))
+# print(chords.augmented_triad(tonic))
+print(chords.minor_major_seventh(tonic))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # #####===================================================================
 
 # def silence():
@@ -88,10 +177,3 @@
 # #     bar.place_notes(note, 4)
 # #     bar.place_notes(note, 4)
 # #     return bar
-
-def appender(list, item):
-    list.append(item)
-    return list
-
-new_list = appender([1,2,3], 4)
-print(new_list)

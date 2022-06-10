@@ -101,6 +101,34 @@ def chordbuild(tonic, quality):
             note_list = chords.major_triad(tonic)
         elif quality == "minor":
             note_list = chords.minor_triad(tonic)
+        elif quality == "minor7":
+            note_list = chords.minor_seventh(tonic)
+        elif quality == "major7":
+            note_list = chords.major_seventh(tonic)
+        elif quality == "dominant7":
+            note_list = chords.dominant7(tonic)
+        elif quality == "diminished7":
+            note_list = chords.diminished_seventh(tonic)
+        elif quality == "half-diminished7":
+            note_list = chords.minor_seventh_flat_five(tonic)
+        elif quality == "augmented":
+            note_list = chords.augmented_triad(tonic)
+        elif quality == "augmented major7":
+            note_list = chords.augmented_major_seventh(tonic)
+        elif quality == "minor-major7":
+            note_list = chords.minor_major_seventh(tonic)
+
+        
+        
+
+
+
+
+
+
+
+
+
         return note_list
 
 def bassify(classed_note_list): # may need to adjust it to take in a list of classed items
@@ -216,14 +244,12 @@ def s_arpup(chord, denominator):
     bar = Bar()
     chord_adj = octave_ascend(chord)
     
-    #$
-
+    #$ For adding another tonic note an octave up
     tonic_octave = Note()
     tonic_octave.name = chord_adj[0].name
     tonic_octave.octave = chord_adj[0].octave
     tonic_octave.octave_up()
     chord_adj.append(tonic_octave)
-
     #$
 
     for _ in range(10):

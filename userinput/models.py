@@ -5,6 +5,8 @@ class Composition(models.Model):
     ##################
 
     tonic_choices = [
+   
+
     ("", ""),
     ("A", "A"), 
     ("A#", "A#/Bb",), 
@@ -18,11 +20,24 @@ class Composition(models.Model):
     ("F#", "F#/Gb"), 
     ("G", "G"), 
     ("G#", "G#/Ab")
+
     ]
     quality_choices =[
+
+
+
     ("", ""),
     ("major", "major"),
     ("minor", "minor"),
+    ("diminished7", "diminished7"),
+    ("half-diminished7", "half-diminished7"),
+    ("minor7", "minor7"),
+    ("major7", "major7"),
+    ("dominant7", "dominant7"),
+    ("minor-major7", "minor-major7"),
+    ("augmented major7", "augmented major7"),
+
+
     ]
    
     ##################################################################
@@ -30,29 +45,29 @@ class Composition(models.Model):
     name = models.CharField(max_length=30)
 
     chord1_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
-    chord1_quality = models.CharField(max_length=10, choices=quality_choices, null=True, blank=True, default="major")
+    chord1_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord1_bars = models.IntegerField(default=0)
 
 
     
     chord2_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
-    chord2_quality = models.CharField(max_length=10, choices=quality_choices, null=True, blank=True, default="major")
+    chord2_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord2_bars = models.IntegerField(default=0)
 
 
     chord3_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
-    chord3_quality = models.CharField(max_length=10, choices=quality_choices, null=True, blank=True, default="major")
+    chord3_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord3_bars = models.IntegerField(default=0)
 
 
 
     chord4_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
-    chord4_quality = models.CharField(max_length=10, choices=quality_choices, null=True, blank=True, default="major")
+    chord4_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord4_bars = models.IntegerField(default=0)
 
 
     chord5_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
-    chord5_quality = models.CharField(max_length=10, choices=quality_choices, null=True, blank=True, default="major")
+    chord5_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord5_bars = models.IntegerField(default=0)
 
 
