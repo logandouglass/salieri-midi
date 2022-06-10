@@ -41,10 +41,12 @@ def bar_adder(barr_list, Mtrackk):
     
     return Mtrackk
 
-def track_return():
-    gen_track = Mtrack()
-
-    return gen_track
+def listify_mutators(mutator_string):
+    if mutator_string == ("" or None):
+        return None
+    else:
+        mutator_list = mutator_string.split()
+        return (mutator_list)
 
 #### General Musical functions
 def octave_ascend(scale):
@@ -277,7 +279,7 @@ def s_arpup(chord, denominator):
 #####===============================================================================================
 #### == MASTER COMBINATORIAL FUNCTION ==
 
-def musicorum_ex_machina(chord, duration, style, denom):
+def musicorum_ex_machina(chord, duration, style, denom, mutator_list=None):
     """
     """
     bar_list = []

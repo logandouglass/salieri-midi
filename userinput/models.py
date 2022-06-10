@@ -49,10 +49,12 @@ class Composition(models.Model):
     chord1_bars = models.IntegerField(default=0)
 
 
+
     
     chord2_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
     chord2_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord2_bars = models.IntegerField(default=0)
+
 
 
     chord3_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
@@ -66,9 +68,11 @@ class Composition(models.Model):
     chord4_bars = models.IntegerField(default=0)
 
 
+
     chord5_tonic = models.CharField(max_length=5, choices=tonic_choices, null=True, blank=True, default=None)
     chord5_quality = models.CharField(max_length=30, choices=quality_choices, null=True, blank=True, default="major")
     chord5_bars = models.IntegerField(default=0)
+
 
 
     midi = models.FileField(null=True, blank=True, default=None)
@@ -86,7 +90,7 @@ class Track(models.Model):
 
 
     pattern_choices = [
-    ("arpup", "upward arpeggios" ),
+    ("arpup", "arpeggios" ),
     ("simpline", "steady bass"),
 
     ]
@@ -103,25 +107,30 @@ class Track(models.Model):
 
     chord1_style = models.CharField(max_length=50, choices=pattern_choices, null=True, blank=True, default=None)
     chord1_denom = models.IntegerField(default = 4)
+    chord1_mutators = models.CharField(max_length=40, null=True, blank=True, default=None)
 
 
     chord2_style = models.CharField(max_length=50, choices=pattern_choices, null=True, blank=True, default=None)
     chord2_denom = models.IntegerField(default = 4)
+    chord2_mutators = models.CharField(max_length=40, null=True, blank=True, default=None)
 
 
 
     chord3_style = models.CharField(max_length=50, choices=pattern_choices, null=True, blank=True, default=None)
     chord3_denom = models.IntegerField(default = 4)
+    chord3_mutators = models.CharField(max_length=40, null=True, blank=True, default=None)
 
 
 
     chord4_style = models.CharField(max_length=50, choices=pattern_choices, null=True, blank=True, default=None)
     chord4_denom = models.IntegerField(default = 4)
+    chord4_mutators = models.CharField(max_length=40, null=True, blank=True, default=None)
 
 
 
     chord5_style = models.CharField(max_length=50, choices=pattern_choices, null=True, blank=True, default=None)
     chord5_denom = models.IntegerField(default = 4)
+    chord5_mutators = models.CharField(max_length=40, null=True, blank=True, default=None)
 
     def __str__(self):
         return self.trackname

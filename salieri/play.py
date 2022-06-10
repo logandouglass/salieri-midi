@@ -27,6 +27,12 @@ tonic = "C"
 # print(chords.augmented_triad(tonic))
 print(chords.minor_major_seventh(tonic))
 
+test_string = "dog frog bog log hypatia"
+bowgle = None
+p = test_string.split()
+q = bowgle.split()
+print(p)
+
 
 
 

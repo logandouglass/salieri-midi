@@ -1,6 +1,3 @@
-
-
-
 # def silence():
 #     """
 #     ===prototype===
@@ -50,9 +47,11 @@
 
 
 
+# def track_return():
+#     gen_track = Mtrack()
 
+#     return gen_track
 
-# ## utility
 # def octave_ascend(scale):
 #     """
 #     Input unclassed list of chord or scale notes, returns classed notes of a chord or scale in the octave ascending from the tonic.

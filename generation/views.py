@@ -55,22 +55,27 @@ def magic(request, id):
     chord1_tonic_harvest = comp_obj.chord1_tonic
     chord1_quality_harvest = comp_obj.chord1_quality
     chord1_bars_harvest = comp_obj.chord1_bars
+    # chord1_mutators_harvest = comp_obj.chord1_mutators
 
     chord2_tonic_harvest = comp_obj.chord2_tonic
     chord2_quality_harvest = comp_obj.chord2_quality
     chord2_bars_harvest = comp_obj.chord2_bars
+    # chord2_mutators_harvest = comp_obj.chord2_mutators
 
     chord3_tonic_harvest = comp_obj.chord3_tonic
     chord3_quality_harvest = comp_obj.chord3_quality
     chord3_bars_harvest = comp_obj.chord3_bars
+    # chord3_mutators_harvest = comp_obj.chord3_mutators
 
     chord4_tonic_harvest = comp_obj.chord4_tonic
     chord4_quality_harvest = comp_obj.chord4_quality
     chord4_bars_harvest = comp_obj.chord4_bars
+    # chord4_mutators_harvest = comp_obj.chord4_mutators
 
     chord5_tonic_harvest = comp_obj.chord5_tonic
     chord5_quality_harvest = comp_obj.chord5_quality
     chord5_bars_harvest = comp_obj.chord5_bars
+    # chord5_mutators_harvest = comp_obj.chord5_mutators
 
     ### Turn the tonic and quality data into chords as lists of unclassed notes
     chord1 = chordbuild(comp_data_dict['chord1_tonic'], comp_data_dict['chord1_quality'])
@@ -139,8 +144,9 @@ def magic(request, id):
             if counter == 1:
                 current_style = new_track_data_dict["chord1_style"]
                 current_denom = new_track_data_dict["chord1_denom"]
-                # mutators = [] ## coming eventually...
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                # mutators
+                current_mutators = listify_mutators(new_track_data_dict["chord1_mutators"])
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
                 new_track = bar_adder(bar_list, new_track)
                 
                 ##
@@ -151,7 +157,8 @@ def magic(request, id):
                 current_style = new_track_data_dict["chord2_style"]
                 current_denom = new_track_data_dict["chord2_denom"]
                 # mutators = [] ## coming eventually..
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                current_mutators = listify_mutators(new_track_data_dict["chord2_mutators"])
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
                 new_track = bar_adder(bar_list, new_track)
                 
             #     ##
@@ -162,7 +169,8 @@ def magic(request, id):
                 current_style = new_track_data_dict["chord3_style"]
                 current_denom = new_track_data_dict["chord3_denom"]
                 # mutators = [] ## coming eventually..
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                current_mutators = listify_mutators(new_track_data_dict["chord3_mutators"])
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
                 new_track = bar_adder(bar_list, new_track)
 
 
@@ -173,8 +181,9 @@ def magic(request, id):
             elif counter == 4:
                 current_style = new_track_data_dict["chord4_style"]
                 current_denom = new_track_data_dict["chord4_denom"]
+                current_mutators = listify_mutators(new_track_data_dict["chord4_mutators"])
                 # mutators = [] ## coming eventually..
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
                 new_track = bar_adder(bar_list, new_track)
 
                 ##
@@ -185,7 +194,8 @@ def magic(request, id):
                 current_style = new_track_data_dict["chord5_style"]
                 current_denom = new_track_data_dict["chord5_denom"]
                 # mutators = [] ## coming eventually..
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom)
+                current_mutators = listify_mutators(new_track_data_dict["chord5_mutators"])
+                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
                 new_track = bar_adder(bar_list, new_track)
                 
                 ##
@@ -232,7 +242,7 @@ def magic(request, id):
     ### debugging
     test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
-    data_test = counter
+    data_test = None
     # data_test = track_dict_list[0]
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
     data_test_3 = comp_obj.chord1_quality
