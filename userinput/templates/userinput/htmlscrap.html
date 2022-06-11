@@ -1,0 +1,96 @@
+<form action="/cities/" method="POST" style="padding: 2rem;">
+    {% csrf_token %}
+
+    <!-- an input element's name attribute is very important
+    it is how you can extract the data from the form
+    on the backend -->
+
+    <!-- a label's for attribute will match it to an input's id attribute -->
+    <label for="name-input"> Name </label>
+    <input id="name-input" type="text" name="name" />
+    <br />
+
+    <label for="chord-1-tonic"> chord 1 tonic </label>
+    <input id="chord-1-tonic" type="number" name="population" />
+    <br />
+
+    <label for="chord-1-quality"> Chord 1 Quality </label>
+    <select id="chord-1-quality" name="climate">
+        <option value="TR">Tropical</option>
+        <option value="DR">Dry</option>
+        <option value="TE">Temperate</option>
+        <option value="CT">Continental</option>
+        <option value="CO">Polar</option>
+    </select>
+    <br />
+
+    <label for="chord-1-bars"> chord 1 bars </label>
+    <select id="chord 1 bars" name="climate">
+        <option value="TR">Tropical</option>
+        <option value="DR">Dry</option>
+        <option value="TE">Temperate</option>
+        <option value="CT">Continental</option>
+        <option value="CO">Polar</option>
+    </select>
+
+
+
+    <hr>
+
+
+
+    <label for="chord-2-tonic"> chord 2 tonic </label>
+        <input id="chord-2-tonic" type="number" name="population" />
+        <br />
+
+        <label for="chord-2-quality"> chord 2 quality </label>
+        <select id="chord-2-quality" name="climate">
+            <option value="TR">Tropical</option>
+            <option value="DR">Dry</option>
+            <option value="TE">Temperate</option>
+            <option value="CT">Continental</option>
+            <option value="CO">Polar</option>
+        </select>
+        <br />
+
+        <label for="chord-2-bars"> chord 2 bars </label>
+        <select id="chord-2-bars" name="climate">
+            <option value="TR">Tropical</option>
+            <option value="DR">Dry</option>
+            <option value="TE">Temperate</option>
+            <option value="CT">Continental</option>
+            <option value="CO">Polar</option>
+        </select>
+
+    <input type="submit" value="Add New City" />
+    <!-- <input type="submit"> and <button type="submit">
+        can both be used for form submission -->
+    <!-- <button type="submit">Add New City</button> -->
+
+    <label for="chord-3-tonic"> chord 3 tonic </label>
+        <input id="chord-3-tonic" type="number" name="population" />
+        <br />
+
+        <label for="chord-3-quality"> chord 3 quality </label>
+        <select id="chord-3-quality" name="climate">
+            <option value="TR">Tropical</option>
+            <option value="DR">Dry</option>
+            <option value="TE">Temperate</option>
+            <option value="CT">Continental</option>
+            <option value="CO">Polar</option>
+        </select>
+        <br />
+
+        <label for="climate-select"> Chord 3 Duration </label>
+        <select id="climate-select" name="climate">
+            <option value="TR">Tropical</option>
+            <option value="DR">Dry</option>
+            <option value="TE">Temperate</option>
+            <option value="CT">Continental</option>
+            <option value="CO">Polar</option>
+        </select>
+
+
+
+        <hr>
+</form>

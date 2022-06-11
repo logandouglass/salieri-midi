@@ -25,13 +25,37 @@ tonic = "C"
 # print(chords.major_seventh(tonic))
 # print(chords.minor_seventh(tonic))
 # print(chords.augmented_triad(tonic))
-print(chords.minor_major_seventh(tonic))
+# print(chords.minor_major_seventh(tonic))
 
-test_string = "dog frog bog log hypatia"
-bowgle = None
-p = test_string.split()
-q = bowgle.split()
-print(p)
+print(scales.NaturalMinor("G"))
+
+# test_string = "dog frog bog log hypatia"
+# bowgle = None
+# p = test_string.split()
+# q = bowgle.split()
+# print(p)
+
+# p = [1,2,3]
+# q = [4,5,6]
+
+# for member in q:
+#     p.append(member)
+
+# print(p)
+
+
+
+
+
+
+
+
+
+
+### Today's Mantra ###
+## Climb a ladder, throw it away...
+## Climb a ladder, throw it away...
+## Climb a ladder, throw it away...
 
 
 

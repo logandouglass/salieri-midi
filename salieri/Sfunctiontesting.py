@@ -15,7 +15,7 @@
 # ### for writing MIDI
 # from mingus.midi import midi_file_out
 
-from Sfunctions import *
+from Snewfunctions import *
 
 
 ####==================================================================
@@ -38,12 +38,9 @@ from Sfunctions import *
 ####==================================================================
 ### Testing 
 # test =
+
+
+
 test = s_arpup(['E', 'G', 'B'], 16)
 
-
-
-####==============================================================
-### MIDI test-writing
-
-# test = arpreturn(chords.major_triad("A"), 16)
-midi_file_out.write_Bar("stests/debug4.mid", test, 120, 7)
+midi_file_out.write_Bar("stests/debug4.mid", test, 120, 4)

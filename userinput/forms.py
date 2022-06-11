@@ -1,4 +1,4 @@
-from django.forms import ModelForm, HiddenInput
+from django.forms import ModelForm, HiddenInput, TextInput
 from .models import Composition, Track
 
 class   ProgressionForm(ModelForm):
@@ -27,8 +27,114 @@ class   ProgressionForm(ModelForm):
             "chord5_quality",
             "chord5_bars", 
 
-
             ]
+
+        # widgets = {
+
+        #     "name": TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+             
+
+        #     ##
+
+        #     "chord1_tonic":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }), 
+
+        #     "chord1_quality":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }), 
+
+        #     "chord1_bars":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     ##
+            
+        #     "chord2_tonic":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     "chord2_quality":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     "chord2_bars":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     ##
+            
+        #     "chord3_tonic":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }), 
+        #     "chord3_quality":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+        #     "chord3_bars":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     ##
+            
+        #     "chord4_tonic":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+        #     "chord4_quality":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+        #     "chord4_bars":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     ##
+
+        #     "chord5_tonic":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+        #     "chord5_quality":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+        #     "chord5_bars":TextInput(attrs={
+        #         'class': "",
+        #         'style': 'max-width: 300px;',
+        #         'placeholder': 'Name'
+        #         }),
+
+        #     ##
+
+        # }
 
 class   TrackForm(ModelForm):
     class   Meta:
