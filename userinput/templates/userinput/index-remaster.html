@@ -7,10 +7,11 @@
     <title>messy formtest</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 </head>
-<body class = "bg-lightest-blue">
+<body class = "bg-near-white">
     
-    <!-- action="/cities/" method="POST" -->
+    
     <form class="pa4 black-80" action="{% url 'userinput:index' %}" method="POST">
+      {% csrf_token %}
         <div class="measure">
 
 
@@ -18,16 +19,14 @@
           <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" name="name">
           <small id="name-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
-          <br><br><hr class = "bg-black "><br><br>
-
-        <!--chord1 tonic X quality X  wait I could use django loops in these... ---- -->
+        <br><br><hr class = "bg-black "><br><br>
+        <!--chord1 -->
 
           <label for="chord-1-tonic" class="f4 calisto b db mb2"> chord 1 tonic <span class="normal black-60"></span></label>
-          <!-- <input id="chord-1-tonic"> -->
-          <select id="chord-1-tonic" name="chord1_tonic" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-tonic-desc" >
+          <select id="chord-1-tonic" name="chord1_tonic" class=" input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-tonic-desc" >
             <option value=""> </option>
-			<option value="A"> A </option>
-			<option value="A#" > A#/Bb </option>
+			      <option value="A"> A </option>
+			      <option value="A#" > A#/Bb </option>
             <option value="B"> B </option>
             <option value="C"> C </option>
             <option value="C#" > C#/Db </option>
@@ -39,51 +38,40 @@
             <option value="F#" > F#/Gb </option>
             <option value="G"> G </option>
             <option value="G#" > G#/Ab </option>
-        </select>
-        <small id="chord-1-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-        <br>
+          </select>
+          <small id="chord-1-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
+          <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 1 quality <span class="normal black-60"></span></label>
           <!-- <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" name="chord1_quality" > -->
           <small id="chord-1-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-            <select id="chord-1-quality" name="chord1_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" >
+          <select id="chord-1-quality" name="chord1_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" >
                 <option value=""> </option>
-			    <option value="augmented major7" > augmented major7 </option>
+			          <option value="augmented major7" > augmented major7 </option>
                 <option value="diminished7"> diminished7 </option>
                 <option value="dominant7" > dominant7 </option>
                 <option value="half-diminished7"> half-diminished7 </option>
                 <option value="major"> major </option>
                 <option value="major7"> major7 </option>
-			    <option value="minor" > minor </option>
+			          <option value="minor" > minor </option>
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
-            </select>
+          </select>
             <br>
           
-          
-          
-          
-          
-          
-          
-          
-          
           <label for="chord-1-bars" class="f4 calisto b db mb2"> chord 1 bars <span class="normal black-60"></span></label>
-          <input id="chord-1-bars" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-bars-desc" name="chord1_bars" >
+          <input id="chord-1-bars" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-1-bars-desc" name="chord1_bars" >
           <small id="chord-1-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-
-
-            
-          <br><br><hr class = "bg-black "><br><br>
-
-        <!--chord2 tonic X quality X---- -->
+          
+        <br><br><hr class = "bg-black "><br><br>
+        <!--chord2-->
 
           <label for="chord-2-tonic" class="f4 calisto b db mb2"> chord 2 tonic <span class="normal black-60"></span></label>
           <small id="chord-2-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-            <select id="chord-2-tonic" name="chord2_tonic" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-tonic-desc" >
+          <select id="chord-2-tonic" name="chord2_tonic" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-tonic-desc" >
                 <option value=""> </option>
-			    <option value="A"> A </option>
-			    <option value="A#" > A#/Bb </option>
+			          <option value="A"> A </option>
+			          <option value="A#" > A#/Bb </option>
                 <option value="B"> B </option>
                 <option value="C"> C </option>
                 <option value="C#" > C#/Db </option>
@@ -95,12 +83,12 @@
                 <option value="F#" > F#/Gb </option>
                 <option value="G"> G </option>
                 <option value="G#" > G#/Ab </option>
-            </select>
-            <br>
+          </select>
+          <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 2 quality <span class="normal black-60"></span></label>
           <small id="chord-2-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-              <select id="chord-2-quality" name="chord2_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-quality-desc" >
+          <select id="chord-2-quality" name="chord2_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-quality-desc" >
                 <option value=""> </option>
                 <option value="augmented major7" > augmented major7 </option>
                 <option value="diminished7"> diminished7 </option>
@@ -111,43 +99,39 @@
                 <option value="minor" > minor </option>
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
-            </select>
-            <br>
+          </select>
+          <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 2 bars <span class="normal black-60"></span></label>
-          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-bars-desc" name="chord2_bars" >
+          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-2-bars-desc" name="chord2_bars" >
           <small id="chord-2-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
           <br><br><hr class = "bg-black "><br><br>
-
-
           <!--chord3 tonic X quality X---- -->
 
           <label for="chord-3-tonic" class="f4 calisto b db mb2"> chord 3 tonic <span class="normal black-60"></span></label>
           
-                <select id="chord-3-tonic" name="chord3_tonic" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-tonic-desc" >
-                    <option value=""> </option>
-                    <option value="A"> A </option>
-                    <option value="A#" > A#/Bb </option>
-                    <option value="B"> B </option>
-                    <option value="C"> C </option>
-                    <option value="C#" > C#/Db </option>
-                    <option value="D"> D </option>
-                    <option value="D#" > D#/Eb </option>
-                    <option value="E"> E </option>
-                    <option value="D#" > D#/Eb </option>
-                    <option value="F"> F </option>
-                    <option value="F#" > F#/Gb </option>
-                    <option value="G"> G </option>
-                    <option value="G#" > G#/Ab </option>
-                </select>
-                <small id="chord-3-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-                <br>
+          <select id="chord-3-tonic" name="chord3_tonic" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-tonic-desc" >
+                <option value=""> </option>
+                <option value="A"> A </option>
+                <option value="A#" > A#/Bb </option>
+                <option value="B"> B </option>
+                <option value="C"> C </option>
+                <option value="C#" > C#/Db </option>
+                <option value="D"> D </option>
+                <option value="D#" > D#/Eb </option>
+                <option value="E"> E </option>
+                <option value="D#" > D#/Eb </option>
+                <option value="F"> F </option>
+                <option value="F#" > F#/Gb </option>
+                <option value="G"> G </option>
+                <option value="G#" > G#/Ab </option>
+          </select>
+          <small id="chord-3-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
+          <br>
 
-          <label for="name" class="f4 calisto b db mb2"> chord 3 quality <span class="normal black-60"></span></label>
-          <!-- <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-quality-desc" name="chord3_quality" > -->
-          
-              <select id="chord-3-quality" name="chord3_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-quality-desc" >
+          <label for="name" class="f4 calisto b db mb2"> chord 3 quality <span class="normal black-60"></span></label>         
+          <select id="chord-3-quality" name="chord3_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-quality-desc" >
                 <option value=""> </option>
                 <option value="augmented major7" > augmented major7 </option>
                 <option value="diminished7"> diminished7 </option>
@@ -158,13 +142,13 @@
                 <option value="minor" > minor </option>
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
-            </select>
-            <small id="chord-3-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
-            <br>
+          </select>
+          <small id="chord-3-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
+          <br>
                 
 
           <label for="name" class="f4 calisto b db mb2"> chord 3 bars <span class="normal black-60"></span></label>
-          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-bars-desc" name="chord3_bars" >
+          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-3-bars-desc" name="chord3_bars" >
           <small id="chord-3-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
           <br><br><hr class = "bg-black "><br><br>
@@ -191,9 +175,7 @@
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 4 quality <span class="normal black-60"></span></label>
-          <!-- <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-quality-desc" name="chord4_quality" > -->
-          
-              <select id="chord-4-quality" name="chord4_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-quality-desc" >
+          <select id="chord-4-quality" name="chord4_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-quality-desc" >
                 <option value=""> </option>
                 <option value="augmented major7" > augmented major7 </option>
                 <option value="diminished7"> diminished7 </option>
@@ -209,7 +191,7 @@
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 4 bars <span class="normal black-60"></span></label>
-          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-bars-desc" name="chord4_bars" >
+          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-4-bars-desc" name="chord4_bars" >
           <small id="chord-4-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
           <br><br><hr class = "bg-black "><br><br>
@@ -237,9 +219,7 @@
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 5 quality <span class="normal black-60"></span></label>
-          <!-- <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-quality-desc" name="chord5_quality" > -->
-          
-              <select id="chord-5-quality" name="chord5_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-quality-desc" >
+          <select id="chord-5-quality" name="chord5_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-quality-desc" >
                 <option value=""> </option>
                 <option value="augmented major7" > augmented major7 </option>
                 <option value="diminished7"> diminished7 </option>
@@ -255,7 +235,7 @@
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 5 bars <span class="normal black-60"></span></label>
-          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-bars-desc" name="chord5_bars" >
+          <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-5-bars-desc" name="chord5_bars" >
           <small id="chord-5-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
           <br><br><hr class = "bg-black "><br><br>

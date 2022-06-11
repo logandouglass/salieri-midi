@@ -11,23 +11,33 @@ def index(request):
         name = request.POST.get('name')
         chord1_tonic = request.POST.get('chord1_tonic')
         chord1_quality = request.POST.get('chord1_quality')
-        chord1_bars = request.POST.get('chord1_bars')
+        if request.POST.get('chord1_bars') == "":
+            chord1_bars = 0
+        else: chord1_bars = request.POST.get('chord1_bars')
 
         chord2_tonic = request.POST.get('chord2_tonic')
         chord2_quality = request.POST.get('chord2_quality')
-        chord2_bars = request.POST.get('chord2_bars')
+        if request.POST.get('chord2_bars') == "":
+            chord2_bars = 0
+        else: chord2_bars = request.POST.get('chord2_bars')
 
         chord3_tonic = request.POST.get('chord3_tonic')
         chord3_quality = request.POST.get('chord3_quality')
-        chord3_bars = request.POST.get('chord3_bars')
+        if request.POST.get('chord3_bars') == "":
+            chord3_bars = 0
+        else: chord3_bars = request.POST.get('chord3_bars')
 
         chord4_tonic = request.POST.get('chord4_tonic')
         chord4_quality = request.POST.get('chord4_quality')
-        chord4_bars = request.POST.get('chord4_bars')
+        if request.POST.get('chord4_bars') == "":
+            chord4_bars = 0
+        else: chord4_bars = request.POST.get('chord4_bars')
 
         chord5_tonic = request.POST.get('chord5_tonic')
         chord5_quality = request.POST.get('chord5_quality')
-        chord5_bars = request.POST.get('chord5_bars')
+        if request.POST.get('chord5_bars') == "":
+            chord5_bars = 0
+        else: chord5_bars = request.POST.get('chord5_bars')
 
         composition = Composition.objects.create(
 
@@ -55,18 +65,11 @@ def index(request):
 
                 )
         return redirect(f"/track/{composition.id}")
-    # if request.method == 'POST': # receiving a form submission
-    #     form = ProgressionForm(request.POST)
-    #     if form.is_valid():
-    #         form.save() # save the todo item associated with the form
-    #         form = ProgressionForm() # create a new blank form
-    #     # if the form is invalid, we just send it back to the template
-    # else: # receiving a GET request
-    #     form = ProgressionForm() # create a new blank form
 
-    form = ProgressionForm() # create a new blank form
-    context = {"form":form}
-    return render(request, "userinput/index.html", context)
+
+    # form = ProgressionForm() # Won't need this if it works
+    context = {}
+    return render(request, "userinput/index-remaster.html", context)
 
 def track(request, id):
     ## Get progression data and create model
