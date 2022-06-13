@@ -10,48 +10,35 @@
     <!-- <script src="indexscript.js" defer></script> -->
     {% load static %}
 
-    <style>
-      label {color: #E2D8CC}
-      small {color: #E2D8CC}
-      a {color: #E2D8CC}
-      select {background-color: #0F0B26; color: #E2D8CC}
-      input {background-color: #0F0B26; color: #E2D8CC}
-
-    </style>
-  
-  
-  
   </head>
 
-<body class = "" style = "background-color: #0F0B26;">
+<body style = "background-color: #0F0B26;">
 
 
   <div class="pt4 tc">
     <img
-        src="{% static 'userinput/coolsal.png' %}"
+        src="{% static 'userinput/coolsalierismall.png' %}"
         class="br4 h5 w5 ba bw2 dib" alt="avatar"
-        style = "border-color: #BE853E">
+        style = "border-color: #A56E11">
   </div>
 
   <!-- <div class = "flex justify-center">
   <img src="{% static 'userinput/coolsalierismall.png' %}" alt="salieri">
   </div> -->
 
-  <!-- black-80 -->
-  <header class="tc pv4 calisto" style="color: #E2D8CC">
+  <header class="black-80 tc pv4 avenir">
     <!-- <a href="" class="bg-black-80 ba b--black dib pa3 w2 h2 br-100">
       <svg class="white" data-icon="skull" viewBox="0 0 32 32" style="fill:currentcolor"><title>skull icon</title><path d="M16 0 C6 0 2 4 2 14 L2 22 L6 24 L6 30 L26 30 L26 24 L30 22 L30 14 C30 4 26 0 16 0 M9 12 A4.5 4.5 0 0 1 9 21 A4.5 4.5 0 0 1 9 12 M23 12 A4.5 4.5 0 0 1 23 21 A4.5 4.5 0 0 1 23 12"></path></svg>
     </a> -->
 
-    <!-- ttu tracked -->
-    <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
-    <h2 class="mt2 f4 fw1 calisto i">you don't have to be mozart </h2>
+    <h1 class="mt2 mb0 baskerville i fw1 f1">Salieri</h1>
+    <h2 class="mt2 mb0 f6 fw4 ttu tracked">you don't have to be mozart </h2>
     <nav class=" bt bb tc mw7 center mt4" >
-      <a class="f4 f4-l link bg-animate hover-bg-dark-gray dib pa3 ph4-l" href="">Home</a>
-      <a class="f4 f4-l link bg-animate hover-bg-dark-gray dib pa3 ph4-l" href="">About</a>
-      <a class="f4 f4-l link bg-animate hover-bg-dark-gray dib pa3 ph4-l" href="">Instructions</a>
-      <a class="f4 f4-l link bg-animate hover-bg-dark-gray dib pa3 ph4-l" href="">Dedication</a>
-      <!-- f5-l  -->
+      <a class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="/">Home</a>
+      <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="/portfolio">About</a>
+      <a class="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" href="/shop">Instructions</a>
+      <a class="f6 f5-l link bg-animate black-80 hover-bg-light-pink dib pa3 ph4-l" href="/about">Dedication</a>
+      <!-- <a class="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l" href="/contact">Contact</a> -->
     </nav>
   </header>
 
@@ -59,16 +46,15 @@
 
   <div id = "app" class = "flex justify-center">
 
-    <form class="pa4 black-80 ba bw2  br4" action="{% url 'userinput:index' %}" style = 'background-color:#590B3E; border-color: #B9ADB1
-    ' method="POST">
+    <form class="pa4 black-80" action="{% url 'userinput:index' %}" method="POST">
       {% csrf_token %}
         <div class="measure-narrow">
 
           <label for="name" class="f4 calisto b db mb2"> title <span class="normal black-60"></span></label>
           <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" name="name">
-          <small id="name-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="name-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
-        <br><br><hr class = " "><br><br>
+        <br><br><hr class = "bg-black "><br><br>
 
         <div id = "chord1-data" v-show="chord1Vis">
           <label for="chord-1-tonic" class="f4 calisto b db mb2"> chord 1 tonic <span class="normal black-60"></span></label>
@@ -88,12 +74,12 @@
             <option value="G"> G </option>
             <option value="G#" > G#/Ab </option>
           </select>
-          <small id="chord-1-tonic-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-1-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
           <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 1 quality <span class="normal black-60"></span></label>
           <!-- <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" name="chord1_quality" > -->
-          
+          <small id="chord-1-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
           <select id="chord-1-quality" name="chord1_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" >
                 <option value=""> </option>
 			          <option value="augmented major7" > augmented major7 </option>
@@ -106,21 +92,20 @@
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
           </select>
-          <small id="chord-1-quality-desc" class="f5 db mb2">Helper text for the form control.</small>
             <br>
           
           <label for="chord-1-bars" class="f4 calisto b db mb2"> chord 1 bars <span class="normal black-60"></span></label>
           <input id="chord-1-bars" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-1-bars-desc" name="chord1_bars" >
-          <small id="chord-1-bars-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-1-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
         
           
-          <br><br><hr class = " "><br><br>
+          <br><br><hr class = "bg-black "><br><br>
         </div>
         
         <div id = "chord2-data" v-show="chord2Vis">
 
           <label for="chord-2-tonic" class="f4 calisto b db mb2"> chord 2 tonic <span class="normal black-60"></span></label>
-          <small id="chord-2-tonic-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-2-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
           <select id="chord-2-tonic" name="chord2_tonic" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-tonic-desc" >
                 <option value=""> </option>
 			          <option value="A"> A </option>
@@ -140,7 +125,7 @@
           <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 2 quality <span class="normal black-60"></span></label>
-          <small id="chord-2-quality-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-2-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
           <select id="chord-2-quality" name="chord2_quality" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-quality-desc" >
                 <option value=""> </option>
                 <option value="augmented major7" > augmented major7 </option>
@@ -157,9 +142,9 @@
 
           <label for="name" class="f4 calisto b db mb2"> chord 2 bars <span class="normal black-60"></span></label>
           <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-2-bars-desc" name="chord2_bars" >
-          <small id="chord-2-bars-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-2-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
-          <br><br><hr class = " "><br><br>
+          <br><br><hr class = "bg-black "><br><br>
         </div>
 
         <div id = "chord3-data" v-show="chord3Vis">
@@ -181,7 +166,7 @@
                 <option value="G"> G </option>
                 <option value="G#" > G#/Ab </option>
           </select>
-          <small id="chord-3-tonic-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-3-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
           <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 3 quality <span class="normal black-60"></span></label>         
@@ -197,15 +182,15 @@
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
           </select>
-          <small id="chord-3-quality-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-3-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
           <br>
                 
 
           <label for="name" class="f4 calisto b db mb2"> chord 3 bars <span class="normal black-60"></span></label>
           <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-3-bars-desc" name="chord3_bars" >
-          <small id="chord-3-bars-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-3-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
-          <br><br><hr class = " "><br><br>
+          <br><br><hr class = "bg-black "><br><br>
         </div>
 
         <div id = "chord4-data" v-show="chord4Vis">
@@ -226,7 +211,7 @@
                 <option value="G"> G </option>
                 <option value="G#" > G#/Ab </option>
             </select>
-            <small id="chord-4-tonic-desc" class="f5 db mb2">Helper text for the form control.</small>
+            <small id="chord-4-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 4 quality <span class="normal black-60"></span></label>
@@ -242,14 +227,14 @@
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
             </select>
-            <small id="chord-4-quality-desc" class="f5 db mb2">Helper text for the form control.</small>
+            <small id="chord-4-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 4 bars <span class="normal black-60"></span></label>
           <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-4-bars-desc" name="chord4_bars" >
-          <small id="chord-4-bars-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-4-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
-          <br><br><hr class = " "><br><br>
+          <br><br><hr class = "bg-black "><br><br>
         </div>
 
         <div id = "chord5-data" v-show="chord5Vis">
@@ -271,7 +256,7 @@
                 <option value="G"> G </option>
                 <option value="G#" > G#/Ab </option>
             </select>
-            <small id="chord-5-tonic-desc" class="f5 db mb2">Helper text for the form control.</small>
+            <small id="chord-5-tonic-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 5 quality <span class="normal black-60"></span></label>
@@ -287,14 +272,14 @@
                 <option value="minor-major7"> minor-major7 </option>
                 <option value="minor7" > minor7 </option>
             </select>
-            <small id="chord-5-quality-desc" class="f5 db mb2">Helper text for the form control.</small>
+            <small id="chord-5-quality-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
             <br>
 
           <label for="name" class="f4 calisto b db mb2"> chord 5 bars <span class="normal black-60"></span></label>
           <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-5-bars-desc" name="chord5_bars" >
-          <small id="chord-5-bars-desc" class="f5 db mb2">Helper text for the form control.</small>
+          <small id="chord-5-bars-desc" class="f6 black-60 db mb2">Helper text for the form control.</small>
 
-          <br><br><hr class = " "><br><br>
+          <br><br><hr class = "bg-black "><br><br>
         </div>
 
         
