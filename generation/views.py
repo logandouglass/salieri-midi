@@ -200,7 +200,7 @@ def magic(request, id):
                 
                 ##
                 # new_track.name = new_trackname
-                final_comp.add_track(new_track)
+                # final_comp.add_track(new_track)
 
             counter += 1
             # if feed_progression.index(tuple) == -1:
