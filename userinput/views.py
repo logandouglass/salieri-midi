@@ -67,7 +67,7 @@ def index(request):
         return redirect(f"/track/{composition.id}")
 
 
-    # form = ProgressionForm() # Won't need this if it works
+    form = ProgressionForm() # Won't need this if it works
     context = {}
     return render(request, "userinput/index-remaster.html", context)
 
