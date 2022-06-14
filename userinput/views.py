@@ -81,7 +81,7 @@ def track(request, id):
         "form":form,
         "composition":composition
     }
-    return render(request, "userinput/track.html", context)
+    return render(request, "userinput/track-remaster.html", context) ####@@@
     
 def trackadd(request, id):
     trackname = request.POST.get('trackname')
@@ -113,7 +113,7 @@ def trackadd(request, id):
     )    
 
     # context = {}
-    return redirect(f"/track/{id}")
+    return redirect(f"/track-remaster/{id}") ####@@@
 
 def dummy(request):
     return HttpResponse("You made it, dummy!")

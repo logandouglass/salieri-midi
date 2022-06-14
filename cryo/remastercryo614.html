@@ -26,12 +26,8 @@
         ; border-color: #E2D8CC}
       #submit {background-color: #0D0D0D; border-color: #E2D8CC
       }
+      #miniheadline {color: #E2D8CC}
       #sig {color: #E2D8CC}
-      #miniheadline1 {color:#E0AB79
-      }
-      #miniheadline2 {color:#E2D8CC}
-      #miniheadline3 {color:#E2D8CC}
-      
 
     </style>
   
@@ -80,13 +76,9 @@
       {% csrf_token %}
         <div class="measure-narrow">
 
-          <div class = "flex flex-column justify-center">
-            <span id="miniheadline1" class = "f3 tc w-100">MIDI Composition</span>
-            <span id="miniheadline2" class = "f4 fw1 tc w-100">Part I: Progression</span>
-            <br>
-            <!-- <span id="miniheadline3" class = "f4 tc w-100">Add Tracks</span> -->
-            
-            </div>
+          <div class = "flex justify-center">
+          <span id="miniheadline" class = "f3 tc w-100">MIDI Composition</span>
+          </div>
 
           <hr><br>
 
@@ -188,14 +180,8 @@
           <br>
 
           <label for="name" class="f4 calisto  db mb2"> Chord 2 Bars <span class="normal black-60"></span></label>
-          <select id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-2-bars-desc" name="chord2_bars" >
+          <input id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-2-bars-desc" name="chord2_bars" >
           <small id="chord-2-bars-desc" class="f5 db mb2"></small>
-          <option value="0" > 0 </option>
-            <option value="1"> 1 </option>
-            <option value="2" > 2 </option>
-            <option value="3"> 3 </option>
-            <option value="4"> 4 </option>
-          </select>
 
           <br><hr class = " "><br>
         </div>
@@ -240,14 +226,8 @@
                 
 
           <label for="name" class="f4 calisto  db mb2"> Chord 3 Bars <span class="normal black-60"></span></label>
-          <select id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-3-bars-desc" name="chord3_bars" >
+          <input id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-3-bars-desc" name="chord3_bars" >
           <small id="chord-3-bars-desc" class="f5 db mb2"></small>
-          <option value="0" > 0 </option>
-            <option value="1"> 1 </option>
-            <option value="2" > 2 </option>
-            <option value="3"> 3 </option>
-            <option value="4"> 4 </option>
-          </select>
 
           <br><hr class = " "><br>
         </div>
@@ -290,13 +270,7 @@
             <br>
 
           <label for="name" class="f4 calisto  db mb2"> Chord 4 Bars <span class="normal black-60"></span></label>
-          <select id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-4-bars-desc" name="chord4_bars" >
-          <option value="0" > 0 </option>
-            <option value="1"> 1 </option>
-            <option value="2" > 2 </option>
-            <option value="3"> 3 </option>
-            <option value="4"> 4 </option>
-          </select>
+          <input id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-4-bars-desc" name="chord4_bars" >
           <small id="chord-4-bars-desc" class="f5 db mb2"></small>
 
           <br><hr class = " "><br>
@@ -341,13 +315,7 @@
             <br>
 
           <label for="name" class="f4 calisto  db mb2"> Chord 5 Bars <span class="normal black-60"></span></label>
-          <select id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-bars-desc" name="chord5_bars" >
-          <option value="0" > 0 </option>
-            <option value="1"> 1 </option>
-            <option value="2" > 2 </option>
-            <option value="3"> 3 </option>
-            <option value="4"> 4 </option>
-          </select>
+          <input id="name" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="number" aria-describedby="chord-5-bars-desc" name="chord5_bars" >
           <small id="chord-5-bars-desc" class="f5 db mb2"></small>
 
           <br><br><hr class = " "><br><br>

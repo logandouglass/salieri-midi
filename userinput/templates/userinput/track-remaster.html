@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Salieri Track Add </title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- <script src="indexscript.js" defer></script> -->
+    {% load static %}
+
+    <style>
+      label {color: #E2D8CC}
+      small {color: #E2D8CC}
+      a {color: #E2D8CC}
+      nav {background-color: #130B23
+
+        ;}
+      select {background-color: #E2D8CC; color: #130B23}
+      input {background-color: #E2D8CC; color: #130B23;}
+      body {background-image: linear-gradient(#0F0B26, #8C2641);}
+      form {background-color: #130B23
+        ;}
+      button {background-color: #0D0D0D
+        ; border-color: #E2D8CC}
+      #submit {background-color: #0D0D0D; border-color: #E2D8CC
+      }
+      #miniheadline {color: #E2D8CC}
+      #sig {color: #E2D8CC}
+      #miniheadline1 {color:#E0AB79
+      }
+      #miniheadline2 {color:#E2D8CC}
+      #miniheadline3 {color:#E2D8CC}
+
+    </style>
+</head>
+<body>
+
+    <!-- Sal image div -->
+
+    <div class="mt5 tc">
+        <img
+            src="{% static 'userinput/coolsal.png' %}"
+            class="br4 h5 w5 ba bw2 dib" alt="avatar"
+            style = "border-color: #E2D8CC">
+      </div>
+
+
+    <!-- Nav -->
+
+    <header class="tc pv4 calisto" style="color: #E2D8CC">
+        <!-- <a href="" class="bg-black-80 ba b--black dib pa3 w2 h2 br-100">
+          <svg class="white" data-icon="skull" viewBox="0 0 32 32" style="fill:currentcolor"><title>skull icon</title><path d="M16 0 C6 0 2 4 2 14 L2 22 L6 24 L6 30 L26 30 L26 24 L30 22 L30 14 C30 4 26 0 16 0 M9 12 A4.5 4.5 0 0 1 9 21 A4.5 4.5 0 0 1 9 12 M23 12 A4.5 4.5 0 0 1 23 21 A4.5 4.5 0 0 1 23 12"></path></svg>
+        </a> -->
+    
+        <!-- ttu tracked hover-bg-gray-->
+        <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
+        <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
+        <nav class=" bt bb bw1 tc mw7 center mt4" >
+          <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">Home</a>
+          <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">About</a>
+          <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">Instructions</a>
+          <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">Dedication</a>
+          <!-- f5-l  -->
+        </nav>
+      </header>
+
+
+      <!-- App and Form Div  -->
+
+      <div id = "app" class = "flex justify-center">
+        <div id = "column" class = "">
+        <form class="pa4 mb3 calisto black-80 ba bw2  br4" action="{% url 'userinput:index' %}" style = ' border-color: #E2D8CC
+        ' method="POST">
+          {% csrf_token %}
+            <div class="measure-narrow">
+    
+            <!-- Comp mini-headlines div -->
+            
+              <div class = "flex flex-column justify-center">
+              <span id="miniheadline1" class = "f3 tc w-100">MIDI Composition</span>
+              <span id="miniheadline2" class = "f4 fw1 tc w-100">Part II: Tracks</span>
+              <br>
+              <!-- <span id="miniheadline3" class = "f4 tc w-100">Add Tracks</span> -->
+              
+              </div>
+    
+              <hr><br> 
+              <!--  -->
+    
+              <label for="name" class="f4 calisto  db mb2"> Title <span class="normal black-60"></span></label>
+              <input id="name" class="f3 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" name="name">
+              <small id="name-desc" class="f5 db mb2"></small>
+    
+            <br><hr class = " "><br>
+
+            <!-- Begin fields -->
+    
+            <div id = "chord1-data" v-show="chord1Vis">
+              <label for="chord-1-tonic" class="f4 calisto  db mb2"> Chord 1 Tonic <span class="normal black-60"></span></label>
+              <select ref= "chord1Tonic" id="chord-1-tonic" name="chord1_tonic" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-tonic-desc" >
+                <option value=""> </option>
+                      <option value="A"> A </option>
+                      <option value="A#" > A#/Bb </option>
+                <option value="B"> B </option>
+                <option value="C"> C </option>
+                <option value="C#" > C#/Db </option>
+                <option value="D"> D </option>
+                <option value="D#" > D#/Eb </option>
+                <option value="E"> E </option>
+                <option value="D#" > D#/Eb </option>
+                <option value="F"> F </option>
+                <option value="F#" > F#/Gb </option>
+                <option value="G"> G </option>
+                <option value="G#" > G#/Ab </option>
+              </select>
+              <small id="chord-1-tonic-desc" class="f5 db mb2"></small>
+              <br>
+    
+              <label for="name" class="f4 calisto  db mb2"> Chord 1 Quality <span class="normal black-60"></span></label>
+              
+              
+              <select id="chord-1-quality" name="chord1_quality" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" >
+                    <option value=""> </option>
+                          <option value="augmented major7" > augmented major7 </option>
+                    <option value="diminished7"> diminished7 </option>
+                    <option value="dominant7" > dominant7 </option>
+                    <option value="half-diminished7"> half-diminished7 </option>
+                    <option value="major"> major </option>
+                    <option value="major7"> major7 </option>
+                          <option value="minor" > minor </option>
+                    <option value="minor-major7"> minor-major7 </option>
+                    <option value="minor7" > minor7 </option>
+              </select>
+              <small id="chord-1-quality-desc" class="f5 db mb2"></small>
+                <br>
+              
+              <label for="chord-1-bars" class="f4 calisto  db mb2"> Chord 1 Bars <span class="normal black-60"></span></label>
+              <select id="chord-1-bars" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-1-bars-desc" name="chord1_bars" >
+                <option value="0" > 0 </option>
+                <option value="1"> 1 </option>
+                <option value="2" > 2 </option>
+                <option value="3"> 3 </option>
+                <option value="4"> 4 </option>
+              </select>
+              <small id="chord-1-bars-desc" class="f5 db mb2"></small>
+            
+              
+              <br><hr class = " "><br>
+            </div>
+            
+    
+            <div id="button-div" class = "flex justify-center">
+            <button @click.prevent = "updatePage" class = "dim pointer mr1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type = "button"> add bars </button>  
+            <input id="submit" class = "dim pointer ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="submit" value="finish"/>
+            </div>
+    
+            </div>
+    
+          </form>
+    
+          <br>
+          
+        </div>
+          
+    
+      </div>
+
+      <h4 id = "sig" class = "calisto f5 mb4 tc" > Logan Douglass | 2022 </h4>
+
+      
+
+
+
+
+
+    
+</body>
+</html>
