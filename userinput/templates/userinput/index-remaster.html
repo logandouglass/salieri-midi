@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Salieri </title>
+    <title> Salieri | Home </title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
     <script src="https://unpkg.com/vue@3"></script>
+
+
     <!-- <script src="indexscript.js" defer></script> -->
     {% load static %}
 
@@ -63,10 +65,10 @@
     <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
     <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
     <nav class=" bt bb bw1 tc mw7 center mt4" >
-      <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">Home</a>
-      <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">About</a>
-      <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">Instructions</a>
-      <a class="f4 f4-l link bg-animate dim dib pa3 ph4-l" href="">Dedication</a>
+      <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Home</a>
+      <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">About</a>
+      <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Instructions</a>
+      <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Dedication</a>
       <!-- f5-l  -->
     </nav>
   </header>
@@ -90,7 +92,7 @@
 
           <hr><br>
 
-          <label for="name" class="f4 calisto  db mb2"> Title <span class="normal black-60"></span></label>
+          <label for="name" class="f4 calisto  db mb2"> Composition Title <span class="normal black-60"></span></label>
           <input id="name" class="f3 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" name="name">
           <small id="name-desc" class="f5 db mb2"></small>
 
@@ -354,8 +356,8 @@
         </div>
 
         <div id="button-div" class = "flex justify-center">
-        <button @click.prevent = "updatePage" class = "dim pointer mr1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type = "button"> add bar(s) </button>  
-        <input id="submit" class = "dim pointer ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="submit" value="finish"/>
+        <button @click.prevent = "updatePage" class = " pointer mr1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type = "button"> add bar(s) </button>  
+        <input id="submit" class = " pointer ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="submit" value="finish"/>
         </div>
 
         </div>

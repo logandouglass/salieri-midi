@@ -240,35 +240,12 @@ def magic(request, id):
 
 
     ### debugging
-
-
-
-    
-    tracknames = []
-    for track_dict in track_dict_list:
-        tracknames.append(track_dict["trackname"])
-
-
     test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
-    data_test = tracknames
+    data_test = None
     # data_test = track_dict_list[0]
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
-    data_test_3 = track_objs
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    data_test_3 = comp_obj.chord1_quality
     ###=========================================================
 
 

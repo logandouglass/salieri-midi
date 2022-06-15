@@ -279,21 +279,26 @@ def s_arpup(chord, denominator):
 #####===============================================================================================
 #### == MASTER COMBINATORIAL FUNCTION ==
 
-def musicorum_ex_machina(chord, duration, style, denom, mutator_list=None):
+def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
     """
     """
     bar_list = []
     
     ###
     ## for future functionality ##
-    if duration == .5:
-        half_flag = True
-        duration = 1
-    elif duration == .25:
-        quarter_flag = True
-        duration = 1
+    # if duration == .5:
+    #     half_flag = True
+    #     duration = 1
+    # elif duration == .25:
+    #     quarter_flag = True
+    #     duration = 1
     ###
     
+
+    ## can use meter change to fake writing half, quarter bars
+
+    # if duration not in [1,2,3,4]: ##nest within for non-fractional bar totals, need half measure flags
+
     for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
         ## These conditionals will eventually nest every note and silence writer, so it will become massive.
         if style == "arpup":
@@ -308,6 +313,13 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=None):
             bar_list.append(bar)
     
     return bar_list
+
+    # elif duration = 1/2:
+        # meter = 2/4
+
+    # elif duration = 1/4:
+        # meter = 1/4
+
 
 
 

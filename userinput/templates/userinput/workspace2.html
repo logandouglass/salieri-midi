@@ -1,0 +1,67 @@
+
+
+
+
+
+
+
+
+  <!--  -->
+
+
+  <option value="1" > 1 (whole) </option>
+  <option value="2" > 2 (half) </option>
+  <option value="4" > 4 (quarter) </option>
+  <option value="6" > 6 (tupled-quarter) </option>
+  <option value="8" > 8 (eighth) </option>
+  <option value="12" > 12 (tupled-eighth) </option>
+  <option value="16" > 16 (sixteenth) </option>
+  <option value="24" > 24 (tupled-16th) </option>
+  <option value="32" > 32 (thirty-second) </option>
+  <option value="64" > 64 (sixty-fourth) </option>
+  
+  <!-- chord5 trackfix -->
+
+
+  <div id = "chord5-data" v-show="chord5Vis">
+      <label for="chord-5-style" class="f4 calisto  db mb2"> Chord 5 Style <span class="normal black-60"></span></label>
+      <select ref= "chord5style" id="chord-5-style" name="chord5_style" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-style-desc" >
+              <option value=""> </option>
+              <option value="arpup"> arpeggios </option>
+              <option value="simpline"> steady bass </option>
+
+      <small id="chord-5-style-desc" class="f5 db mb2"></small>
+      <br>
+  
+      <label for="chord-5-denom" class="f4 calisto  db mb2"> Chord 5 Denominator <span class="normal black-60"></span></label>
+      
+      <!-- fix XX-->
+      <select id="chord-5-denom" name="chord5_denom" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-denom-desc" >
+              <!-- <option value=""> </option> -->
+              <option value="1" > 1 (whole) </option>
+              <option value="2" > 2 (half) </option>
+              <option value="2" > 2 (half) </option>
+              <option value="4" > 4 (quarter) </option>
+              <option value="6" > 6 (tupled-quarter) </option>
+              <option value="8" > 8 (eighth) </option>
+              <option value="12" > 12 (tupled-eighth) </option>
+              <option value="16" > 16 (sixteenth) </option>
+              <option value="24" > 24 (tupled-16th) </option>
+              <option value="32" > 32 (thirty-second) </option>
+              <option value="64" > 64 (sixty-fourth) </option>
+
+      </select>
+      <small id="chord-5-denom-desc" class="f5 db mb2"></small>
+        <br>
+      
+      <!-- fix  XX-->
+      <label for="chord-5-mutators" class="f4 calisto  db mb2"> Chord 5 Mutators <span class="normal black-60"></span></label>
+      <input id="chord-5-mutators" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-mutators-desc" name="chord5_mutators" >
+
+      <small id="chord-5-mutators-desc" class="f5 db mb2"></small>
+    
+      
+      <br><hr class = " "><br>
+    </div>
+
+  

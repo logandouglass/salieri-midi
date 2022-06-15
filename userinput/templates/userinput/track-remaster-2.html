@@ -20,8 +20,6 @@
       select {background-color: #E2D8CC; color: #130B23}
       input {background-color: #E2D8CC; color: #130B23;}
       body {background-image: linear-gradient(#0F0B26, #8C2641);}
-      form {background-color: #130B23
-        ;}
       button {background-color: #0D0D0D
         ; border-color: #E2D8CC}
       #submit {background-color: #0D0D0D; border-color: #E2D8CC
@@ -32,6 +30,13 @@
       }
       #miniheadline2 {color:#E2D8CC}
       #miniheadline3 {color:#E2D8CC}
+      #formcontainer {background-color: #130B23
+        ; border-color: #E2D8CC}
+      #datacontainer {background-color: #A6896F
+
+        ; border-color: #E2D8CC}
+      #malarkey {background-color: darkorange;}
+      #datap {background-color: #E2D8CC; color: #130B23 }
 
     </style>
 </head>
@@ -69,9 +74,13 @@
 
       <!-- App and Form Div  -->
 
-      <div id = "app" class = "flex justify-center">
-        <div id = "column" class = "">
-        <form class="pa4 mb3 calisto black-80 ba bw2  br4" action= "{% url 'userinput:trackadd' composition.id %}" style = 'border-color: #E2D8CC' method="POST">
+      <div id = "app">
+
+        
+      <div id = "containersdiv" class = "flex justify-center h-100">
+  
+        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2  br4 mr2">
+          <form class="" action= "{% url 'userinput:trackadd' composition.id %}" style = 'border-color: #E2D8CC' method="POST">
           {% csrf_token %}
             <div class="measure-narrow">
     
@@ -311,6 +320,7 @@
               <button class = "pointer ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="button" method="post">
                   finish composition
               </button>
+            </a>
 
               <!-- false finish button -->
 
@@ -319,14 +329,67 @@
     
             </div>
     
-          </form>
-    
-          <br>
-          
+            </form>
+          </div>
+
+        <div id = "datacontainer" class = "pa4 mb3 calisto ba bw2  br4 ml2">
+
+          <!-- <img
+            src="{% static 'userinput/coolsal.png' %}"
+            class="br4 h5 w5 ba bw2 dib" alt="avatar"
+            style = "border-color: #E2D8CC"> -->
+
+          <p id = "datap" class = "calisto f4 pa2 tc br4">
+            
+
+            <u>Progression</u><br><br>
+            {% if chord1_vis %}    
+            Chord 1 <br>
+            {{chord1_tonic}}
+            {{chord1_quality}}
+            {{chord1_bars}}{{chord1_bars_u}}<br>
+            {% endif %}
+            
+            {% if chord2_vis %} 
+            fuuuuck
+            {{chord2_tonic}}
+            {{chord2_quality}}
+            {{chord2_bars}}{{chord2_bars_u}}<br>
+            {% endif %}
+
+            {% if chord3_vis %}
+            {{chord3_tonic}}
+            {{chord3_quality}}
+            {{chord3_bars}}{{chord3_bars_u}}<br>
+            {% endif %}
+
+            {% if chord4_vis %}
+            {{chord4_tonic}}
+            {{chord4_quality}}
+            {{chord4_bars}}{{chord4_bars_u}}<br>
+            {% endif %}
+
+            {% if chord5_vis %}
+            {{chord5_tonic}}
+            {{chord5_quality}}
+            {{chord5_bars}}{{chord5_bars_u}}<br>
+            {% endif %}
+            <br>
+
+            <u></u><br><br>
+
+
+          </p>
+
         </div>
+
+
+        </div> <!-- close flexbox -->
+
+        
+
+      </div> <!-- close app div -->
           
-    
-      </div>
 
       <h4 id = "sig" class = "calisto f5 mb4 tc" > Logan Douglass | 2022 </h4>
 
