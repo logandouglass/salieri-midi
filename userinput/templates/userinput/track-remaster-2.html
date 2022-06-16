@@ -32,7 +32,7 @@
       #miniheadline3 {color:#E2D8CC}
       #formcontainer {background-color: #130B23
         ; border-color: #E2D8CC}
-      #datacontainer {background-color: #A6896F
+      #datacontainer {background-color: #130B23
 
         ; border-color: #E2D8CC}
       #malarkey {background-color: darkorange;}
@@ -347,38 +347,77 @@
             Chord 1 <br>
             {{chord1_tonic}}
             {{chord1_quality}}
-            {{chord1_bars}}{{chord1_bars_u}}<br>
+            {{chord1_bars}} {{chord1_bars_u}}<br>
             {% endif %}
             
             {% if chord2_vis %} 
             fuuuuck
             {{chord2_tonic}}
             {{chord2_quality}}
-            {{chord2_bars}}{{chord2_bars_u}}<br>
+            {{chord2_bars}} {{chord2_bars_u}}<br>
             {% endif %}
 
             {% if chord3_vis %}
             {{chord3_tonic}}
             {{chord3_quality}}
-            {{chord3_bars}}{{chord3_bars_u}}<br>
+            {{chord3_bars}} {{chord3_bars_u}}<br>
             {% endif %}
 
             {% if chord4_vis %}
             {{chord4_tonic}}
             {{chord4_quality}}
-            {{chord4_bars}}{{chord4_bars_u}}<br>
+            {{chord4_bars}} {{chord4_bars_u}}<br>
             {% endif %}
 
             {% if chord5_vis %}
             {{chord5_tonic}}
             {{chord5_quality}}
-            {{chord5_bars}}{{chord5_bars_u}}<br>
+            {{chord5_bars}} {{chord5_bars_u}}<br>
             {% endif %}
             <br>
+            -----<br><br>
 
-            <u></u><br><br>
+            <!-- Current Chord Section -->
+            <u>Current Chord</u><br><br>
+            <!-- v-show="chord1Vis" -->
+            <span id = "chord1-data" v-show="chord1Vis">
+            {{chord1_tonic}}
+            {{chord1_quality}}
+            {{chord1_bars}} {{chord1_bars_u}}
+            </span>
 
+            <span id = "chord2-data" v-show="chord2Vis">
+              {{chord2_tonic}}
+              {{chord2_quality}}
+              {{chord2_bars}} {{chord2_bars_u}}
+            </span>
 
+            <span id = "chord3-data" v-show="chord3Vis">
+              {{chord3_tonic}}
+              {{chord3_quality}}
+              {{chord3_bars}} {{chord3_bars_u}}
+            </span>
+
+            <span id = "chord4-data" v-show="chord4Vis">
+              {{chord4_tonic}}
+              {{chord4_quality}}
+              {{chord4_bars}} {{chord4_bars_u}}
+            </span>
+
+            <span id = "chord5-data" v-show="chord5Vis">
+              {{chord5_tonic}}
+              {{chord5_quality}}
+              {{chord5_bars}} {{chord5_bars_u}}
+            </span>
+            
+            <br><br>-----<br><br>
+            
+            <u>Tracks</u><br><br>
+            {% for track_name in track_names %}
+            {{track_name}}
+            {% endfor %}
+
+            
           </p>
 
         </div>

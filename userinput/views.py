@@ -146,6 +146,13 @@ def track(request, id):
     if "" not in chord5_dg:
         chord5_vis = True
 
+    all_tracks = Track.objects.all()
+    track_objs = all_tracks.filter(comp=composition)
+    track_names = []
+    for track in track_objs:
+        trackn = track.trackname
+        track_names.append(trackn) 
+
 
     
     # form = TrackForm()
@@ -180,7 +187,8 @@ def track(request, id):
         "chord2_vis": chord2_vis,
         "chord3_vis": chord3_vis,
         "chord4_vis": chord4_vis,
-        "chord5_vis": chord5_vis, 
+        "chord5_vis": chord5_vis,
+        "track_names": track_names,
     
     
     
