@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Salieri | Home </title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- <script src="indexscript.js" defer></script> -->
+    {% load static %}
+
+    <style>
+      label {color: #E2D8CC}
+      small {color: #E2D8CC}
+      a {color: #E2D8CC}
+      nav {background-color: #130B23; }
+      select {background-color: #E2D8CC; color: #130B23}
+      input {background-color: #E2D8CC; color: #130B23;}
+      body {background-image: linear-gradient(#0F0B26, #8C2641);}
+      button {background-color: #0D0D0D
+        ; border-color: #E2D8CC}
+      #submit {background-color: #0D0D0D; border-color: #E2D8CC
+      }
+      #miniheadline {color: #E2D8CC}
+      #sig {color: #E2D8CC}
+      #miniheadline1 {color:#E0AB79
+      }
+      #miniheadline2 {color:#E2D8CC}
+      #miniheadline3 {color:#E2D8CC}
+      #formcontainer {background-color: #130B23
+        ; border-color: #E2D8CC}
+      #datacontainer {background-color: #130B23
+
+        ; border-color: #E2D8CC}
+      #datap {background-color: #E2D8CC; color: #130B23 }
+      #dataheadings {color:#8C2641
+      }
+      #styleupdate{color:#22731D}
+      #currchord{color:#22731D}
+
+    </style>
+</head>
+<body>
+
+    <!-- Sal image div -->
+
+    <div class="mt5 tc">
+        <img
+            src="{% static 'userinput/coolsal.png' %}"
+            class="br4 h5 w5 ba bw2 dib" alt="avatar"
+            style = "border-color: #E0AB79">
+      </div>
+
+
+    <!-- Nav -->
+
+    <header class="tc pv4 calisto" style="color: #E2D8CC">
+        <!-- <a href="" class="bg-black-80 ba b--black dib pa3 w2 h2 br-100">
+          <svg class="white" data-icon="skull" viewBox="0 0 32 32" style="fill:currentcolor"><title>skull icon</title><path d="M16 0 C6 0 2 4 2 14 L2 22 L6 24 L6 30 L26 30 L26 24 L30 22 L30 14 C30 4 26 0 16 0 M9 12 A4.5 4.5 0 0 1 9 21 A4.5 4.5 0 0 1 9 12 M23 12 A4.5 4.5 0 0 1 23 21 A4.5 4.5 0 0 1 23 12"></path></svg>
+        </a> -->
+    
+        <!-- ttu tracked hover-bg-gray-->
+        <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
+        <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
+        <nav class=" bt bb bw1 tc mw7 center mt4" style = "border-color: #E0AB79">
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Home</a>
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">About</a>
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Instructions</a>
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Dedication</a>
+          <!-- f5-l  -->
+        </nav>
+      </header>
+
+
+      <!-- App and Form Div  -->
+
+      <div id = "app">
+
+        
+      <div id = "containersdiv" class = "flex justify-center h-100">
+  
+        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100  br4 mr2" style = "border-color: #E0AB79">
+          <form class="" action= "{% url 'userinput:index' %}" style = 'border-color: #E2D8CC' method="POST">
+          {% csrf_token %}
+            <div class="measure-narrow">
+    
+            <!-- Comp mini-headlines div -->
+            
+
+
+              <!-- false finish button -->
+
+
+          </div>
+    
+            </div>
+    
+            </form>
+
+        <div id = "datacontainer" class = " flex flex-column items-center pa4 mb3 calisto ba bw2  br4 ml2" style = "border-color: #E0AB79">
+
+          <!-- <img
+            src="{% static 'userinput/coolsal.png' %}"
+            class="br4 h5 w5 ba bw2 dib" alt="avatar"
+            style = "border-color: #E2D8CC"> -->
+          <span id="miniheadline1" class = "f3 tc b w-100"> Title </span>
+          <!-- <br> -->
+          <span id="miniheadline2" class = "f3 tc w-100">{{composition.name}}</span>
+          <br>
+          <hr class = w-100>
+
+
+          <p id = "datap" class = "calisto f4 ph4 pv2 tc br4">
+            
+            <br>
+            
+            <span id="dataheadings" class = "b f3"> Selected Chord<br></span>
+            <!-- v-show="chord1Vis" -->
+            ------------------------------<br>
+            <span id = "currchord" v-show="chord1Vis">
+            <b>Chord [[chordCurrent]]</b> <br>
+            {{chord1_tonic}}
+            {{chord1_quality}}
+            {{chord1_bars}} {{chord1_bars_u}}
+            </span>
+
+            <span id = "currchord" v-show="chord2Vis">
+              <b>Chord [[chordCurrent]]</b> <br>
+              {{chord2_tonic}}
+              {{chord2_quality}}
+              {{chord2_bars}} {{chord2_bars_u}}
+            </span>
+
+            <span id = "currchord" v-show="chord3Vis">
+              <b>Chord [[chordCurrent]]</b> <br>
+              {{chord3_tonic}}
+              {{chord3_quality}}
+              {{chord3_bars}} {{chord3_bars_u}}
+            </span>
+
+            <span id = "currchord" v-show="chord4Vis">
+              <b>Chord [[chordCurrent]]</b> <br>
+              {{chord4_tonic}}
+              {{chord4_quality}}
+              {{chord4_bars}} {{chord4_bars_u}}
+            </span>
+
+            <span id = "currchord" v-show="chord5Vis">
+              <b>Chord [[chordCurrent]]</b> <br>
+              {{chord5_tonic}}
+              {{chord5_quality}}
+              {{chord5_bars}} {{chord5_bars_u}}
+            </span>
+            
+            <br>-----
+            
+            <br><br>
+            
+            
+            
+            
+            
+            
+            <span id="dataheadings" class = "b f3">Progression<br></span>
+
+            ------------------------------<br>
+            {% if chord1_vis %}
+            <span class = "pointer" @click.prevent="toChord1()">    
+            <b>Chord 1</b> <br>
+            {{chord1_tonic}}
+            {{chord1_quality}}
+            {{chord1_bars}} {{chord1_bars_u}}<br>
+            <span id="styleupdate"> + [[chord1Style]] [[chord1Denom]]</span><br>
+            -----<br>
+          </span>
+            {% endif %}
+          
+            
+
+
+            {% if chord2_vis %}
+            <span class = "pointer" @click.prevent="toChord2()">
+            <b>Chord 2</b><br>
+            {{chord2_tonic}}
+            {{chord2_quality}}
+            {{chord2_bars}} {{chord2_bars_u}}<br>
+            <span id="styleupdate"> + [[chord2Style]] [[chord2Denom]]</span><br>
+            -----<br>
+          </span>
+            {% endif %}
+            
+
+           {% if chord3_vis %}
+           <span class = "pointer" @click.prevent="toChord3()">
+            <b>Chord 3</b><br>
+            {{chord3_tonic}}
+            {{chord3_quality}}
+            {{chord3_bars}} {{chord3_bars_u}}<br>
+            <span id="styleupdate"> + [[chord3Style]] [[chord3Denom]]</span><br>
+            -----<br>
+          </span>
+            {% endif %}
+      
+
+          {% if chord4_vis %}
+          <span class = "pointer" @click.prevent="toChord4()">
+            <b>Chord 4</b><br>
+            {{chord4_tonic}}
+            {{chord4_quality}}
+            {{chord4_bars}} {{chord4_bars_u}}<br>
+            <span id="styleupdate"> + [[chord4Style]] [[chord4Denom]]</span><br>
+            -----<br>
+          </span>
+            {% endif %}
+          
+
+            {% if chord5_vis %}
+            <span class = "pointer" @click.prevent="toChord5()">
+            <b>Chord 5</b><br>
+            {{chord5_tonic}}
+            {{chord5_quality}}
+            {{chord5_bars}} {{chord5_bars_u}}<br>
+            <span id="styleupdate"> + [[chord5Style]] [[chord5Denom]]</span><br>
+            -----<br>
+            </span>
+            {% endif %}
+            
+            <br>
+            <!-- Current Chord Section -->
+            
+            <span id="dataheadings" class = "b f3"> Tracks <br></span>
+            ------------------------------<br>
+            {% if no_tracks %}
+              <b><i>None</i></b><br>
+            -----<br>
+            {% endif %}
+            
+            {% for track_name in track_names %}
+            <b>{{track_name}}</b><br>
+            -----<br>
+            {% endfor %}
+            <br>
+
+            
+          </p>
+
+        </div>
+
+            </div> <!-- close flexbox -->
+
+
+        
+
+      </div> <!-- close app div -->
+          
+
+      <h4 id = "sig" class = "calisto f5 mb4 tc" > Logan Douglass | 2022 </h4>
+
+      <script>
+        const App = {
+          // the data property is a function that returns an object
+          data() {
+            return {
+              debug: 'helloworld',
+              chord1Vis: true,
+              chord2Vis: false,
+              chord3Vis: false,
+              chord4Vis: false,
+              chord5Vis: false,
+              obliterate: false,
+              chordCurrent: 1,
+              chord1Style: "",
+              chord1Denom: "",
+              chord1Mut: undefined,
+              chord2Style: "",
+              chord2Denom: "",
+              chord2Mut: undefined,
+              chord3Style: "",
+              chord3Denom: "",
+              chord3Mut: undefined,
+              chord4Style: "",
+              chord4Denom: "",
+              chord4Mut: undefined,
+              chord5Style: "",
+              chord5Denom: "",
+              chord5Mut: undefined,
+              currentChordDict: 
+                {
+                1: `"f${this.chord1Style} ${this.chord1Denom}"`,
+                2: `"f${this.chord1Style} ${this.chord1Denom}"`,
+                3: `"f${this.chord1Style} ${this.chord1Denom}"`,
+                4: `"f${this.chord1Style} ${this.chord1Denom}"`,
+                5: `"f${this.chord1Style} ${this.chord1Denom}"`,
+                              
+
+              },
+              currentChordDisplay: undefined,
+
+              //chord1StyleLabel: undefined,
+              //chord1DenomLabel: undefined,
+              //chord1MutLabel: undefined,
+              //chord2StyleLabel: undefined,
+              //chord2DenomLabel: undefined,
+              //chord2MutLabel: undefined,
+              //chord3StyleLabel: undefined,
+              //chord3DenomLabel: undefined,
+              //chord3MutLabel: undefined,
+              //chord4StyleLabel: undefined,
+              //chord4DenomLabel: undefined,
+              //chord4MutLabel: undefined,
+              //chord5StyleLabel: undefined,
+              //chord5DenomLabel: undefined,
+              //chord5MutLabel: undefined,
+
+
+      
+            }
+          },
+    
+          //
+      
+          delimiters: ["[[", "]]"],
+    
+          //
+    
+          //mounted () {
+    
+            //this.$refs.chord1Tonic.focus()
+    
+          //},
+    
+          //
+          
+          methods: {
+    
+            updatePage() {
+
+
+
+    
+              console.log("here0")
+              if (this.chordCurrent == 1)
+              {
+                //console.log("here1")
+                //console.log("here1.25")
+                this.chordCurrent = 2
+                //console.log("here1.5")
+                this.chord1Vis = false
+                //console.log("here1.75") 
+                this.chord2Vis = true
+                //console.log("here2")
+                this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+              }
+              
+              else if (this.chordCurrent == 2){
+              this.chordCurrent = 3
+              this.chord2Vis = false
+              this.chord3Vis = true
+              this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+              }
+    
+              else if (this.chordCurrent == 3){
+              this.chordCurrent = 4
+              this.chord3Vis = false
+              this.chord4Vis = true
+              this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+              }
+              else if (this.chordCurrent == 4){
+              this.chordCurrent = 5
+              this.chord4Vis = false
+              this.chord5Vis = true
+              this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+            }
+              // console.log(`${this.chord2Vis}`)}
+    
+    
+            },
+
+          toChord1() {
+            this.chordCurrent = 1
+            this.chord1Vis = true
+            this.chord2Vis = false
+            this.chord3Vis = false
+            this.chord4Vis = false
+            this.chord5Vis = false
+            this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+    
+              
+    
+          },
+
+          toChord2() {
+            this.chordCurrent = 2
+            this.chord1Vis = false
+            this.chord2Vis = true
+            this.chord3Vis = false
+            this.chord4Vis = false
+            this.chord5Vis = false
+            this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+          
+        },
+
+        toChord3() {
+          this.chordCurrent = 3
+          this.chord1Vis = false
+          this.chord2Vis = false
+          this.chord3Vis = true
+          this.chord4Vis = false
+          this.chord5Vis = false
+          this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+        
+      },
+
+      toChord4() {
+        this.chordCurrent = 4
+        this.chord1Vis = false
+        this.chord2Vis = false
+        this.chord3Vis = false
+        this.chord4Vis = true
+        this.chord5Vis = false
+        this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+      
+    },
+
+      toChord5() {
+        this.chordCurrent = 5
+        this.chord1Vis = false
+        this.chord2Vis = false
+        this.chord3Vis = false
+        this.chord4Vis = false
+        this.chord5Vis = true
+        this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
+
+        
+
+      },
+      
+      }
+
+    }
+    
+    const app = Vue.createApp(App)
+    app.mount('#app')
+    
+    
+    
+      </script>
+
+
+
+
+
+    
+</body>
+</html>
