@@ -316,7 +316,7 @@ def magic(request, id):
 
     ###########################
 
-    return render(request, "generation/datatest.html", context)
+    return render(request, "generation/finalpage.html", context)
     ###=================================================================================
     ##py debugging
 

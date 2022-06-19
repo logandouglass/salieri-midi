@@ -1,4 +1,57 @@
 from Sfunctions import *
+####################
+
+def arpeggio(chord=["E", "B", "G"], denominator=4, mut_list=[]):
+    bar = Bar()
+    chord_adj_triad = octave_ascend(chord)
+    # chord_adj_full = chord_adj_triad.copy()
+    
+
+    ## make the arpeggio full
+    # tonic_octave = Note()
+    # tonic_octave.name = chord_adj_triad[0].name
+    # tonic_octave.octave = chord_adj_triad[0].octave
+    # tonic_octave.octave_up()
+    # chord_adj_full.append(tonic_octave)
+    
+    
+    ## first test of double octave
+    num_octaves = 1
+    
+    expanded_set = []
+    expanded_set.append(chord_adj_triad)
+    for _ in range(num_octaves):
+        counter = 1
+        # expanded_set = []
+        new_octave = []
+        for degree in chord_adj_triad:
+            note = Note()
+            note.name = degree.name
+            note.octave = (degree.octave + 1)
+            new_octave.append(note)
+        for new_note in new_octave:
+            expanded_set.append(new_note)
+        counter +=1
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+###########
+
+
+
 
 
 def s_arp(chord, denominator, mut_list):

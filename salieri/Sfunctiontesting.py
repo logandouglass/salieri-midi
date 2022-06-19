@@ -20,7 +20,52 @@ from Snewfunctions import *
 
 ####==================================================================
 
-# def st_arpup(chord, denominator):
+def arpeggio(chord, denominator, mutators=[]):
+    ...
+
+def strummer():
+    ...
+
+#######################################
+
+def arpeggio_X(chord=["E", "B", "G"], denominator=16, mut_list=[]):
+    bar = Bar()
+    chord_adj_triad = octave_ascend(chord)
+    # chord_adj_full = chord_adj_triad.copy()
+    
+
+    ## make the arpeggio full
+    # tonic_octave = Note()
+    # tonic_octave.name = chord_adj_triad[0].name
+    # tonic_octave.octave = chord_adj_triad[0].octave
+    # tonic_octave.octave_up()
+    # chord_adj_full.append(tonic_octave)
+    
+    
+    ## first test of double octave
+    num_octaves = 1
+    
+    expanded_set = []
+    expanded_set.append(chord_adj_triad)
+    for _ in range(num_octaves):
+        counter = 1
+        # expanded_set = []
+        new_octave = []
+        for degree in chord_adj_triad:
+            note = Note()
+            note.name = degree.name
+            note.octave = (degree.octave + 1)
+            new_octave.append(note)
+        for new_note in new_octave:
+            expanded_set.append(new_note)
+        counter +=1
+
+
+
+
+
+
+# def st_arpup(chord, denominator,):
 #     bar = Bar()
 #     chord_adj = octave_ascend(chord)
 #     print(chord_adj)
@@ -36,11 +81,13 @@ from Snewfunctions import *
 
 
 ####==================================================================
+
+
 ### Testing 
-# test =
+test = None
 
+print_test = print("loud and clear")
 
+# test = s_arpup(['E', 'G', 'B'], 16)
 
-test = s_arpup(['E', 'G', 'B'], 16)
-
-midi_file_out.write_Bar("stests/debug4.mid", test, 120, 4)
+# midi_file_out.write_Bar("stests/debug4.mid", test, 120, 4)

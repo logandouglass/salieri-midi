@@ -41,7 +41,7 @@
 
     </style>
 </head>
-<body>
+<body class = "h-100">
 
     <!-- Sal image div -->
 
@@ -435,12 +435,17 @@
 
             _________________________<br><br>
             
+            <span v-show="noneAdded">
+                <i>None</i><br>
+
+            </span>
+            
             <span class = "pointer" @click.prevent="toChord1()" v-show="chord1Added">    
             <b>Chord 1</b> <br>
             [[chord1Tonic]] [[chord1Quality]] [[chord1Bars]] bar(s)
             <br>
             <span id="styleupdate"> + </span><br>
-            -----<br>
+            <br>
           </span>
 
           <span class = "pointer" @click.prevent="toChord2()" v-show="chord2Added">    
@@ -448,7 +453,7 @@
             [[chord2Tonic]] [[chord2Quality]] [[chord2Bars]] bar(s)
             <br>
             <span id="styleupdate"> + </span><br>
-            -----<br>
+            <br>
           </span>
 
           <span class = "pointer" @click.prevent="toChord3()" v-show="chord3Added">    
@@ -456,7 +461,7 @@
             [[chord3Tonic]] [[chord3Quality]] [[chord3Bars]] bar(s)
             <br>
             <span id="styleupdate"> + </span><br>
-            -----<br>
+            <br>
           </span>
 
           <span class = "pointer" @click.prevent="toChord4()" v-show="chord4Added">    
@@ -464,7 +469,7 @@
             [[chord4Tonic]] [[chord4Quality]] [[chord4Bars]] bar(s)
             <br>
             <span id="styleupdate"> + </span><br>
-            -----<br>
+            <br>
           </span>
 
           <span class = "pointer" @click.prevent="toChord5()" v-show="chord5Added">    
@@ -472,7 +477,7 @@
             [[chord5Tonic]] [[chord5Quality]] [[chord5Bars]] bar(s)
             <br>
             <!-- <span id="styleupdate"> + </span><br> -->
-            -----<br>
+            <br>
           </span>
             
             
@@ -566,6 +571,7 @@
               chord3Added: false,
               chord4Added: false,
               chord5Added: false,
+              noneAdded: true,
 
 
 
@@ -636,6 +642,8 @@
                 //console.log("here2")
                 this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
                 this.chord1Added = true
+                this.noneAdded = false
+                
               }
               
               else if (this.chordCurrent == 2){
