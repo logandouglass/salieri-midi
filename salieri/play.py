@@ -58,9 +58,15 @@ print(scales.NaturalMinor("G"))
 ## Climb a ladder, throw it away...
 
 
+print(listify_mutators("waffle cone.messiah hummus"))
+print(listify_compound_mutators(listify_mutators("waffle cone.messiah hummus")))
 
+number = 1
 
+print(number[0])
 
+if number[0] == "frog":
+    print("frog")
 
 
 
