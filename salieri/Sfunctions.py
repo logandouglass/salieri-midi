@@ -22,7 +22,7 @@ from mingus.midi import midi_file_out
 
 #####==========================================================================
 #### Logistical
-def tuple_cleaner(tuple_list):
+def tuple_cleaner(tuple_list): # currently essential to automation
     """
     Weeds out any incomplete or invalid tuples when making the feed progression for the magic function in generation/views.py
     """
@@ -32,7 +32,7 @@ def tuple_cleaner(tuple_list):
             cleaned_list.append(tuple)
     return cleaned_list
 
-def bar_adder(barr_list, Mtrackk):
+def bar_adder(barr_list, Mtrackk): # no longer necessary, but currently in use.  Candidate for revision
     """
     Adds bars to a MTrack, and returns the updated MTrack.  Use during the automated composition portion of the magic function in generation/views.py
     """
@@ -41,14 +41,17 @@ def bar_adder(barr_list, Mtrackk):
     
     return Mtrackk
 
-def listify_mutators(mutator_string):
+def listify_mutators(mutator_string): # currently essential to automation
+    """
+    converts mutators gather by the frontend into a list that can be easily scanned to activate mutators in note-writing functions.
+    """
     if mutator_string == ("" or None):
         return []
     else:
         mutator_list = mutator_string.split(" ")
         return (mutator_list)
 
-def listify_compound_mutators(mutator_list): # not in use, candidate for scrapping
+def listify_compound_mutators(mutator_list): # not in use, went with a different mutator system, candidate for scrapping
     new_list = mutator_list.copy()
     for item in mutator_list:
         if "." in item:
@@ -77,7 +80,7 @@ def octave_ascend(scale):
         corrected_scale.append(note) ##
     return corrected_scale ##
 
-def octave_descend(scale):
+def octave_descend(scale): # not currently in use, but may have its advantages eventually...
     """
     Returns list of classed notes descending from the tonic in the octave.
     
@@ -98,7 +101,7 @@ def octave_descend(scale):
         corrected_scale.append(note)
     return corrected_scale
 
-def chordbuild(tonic, quality):
+def chordbuild(tonic, quality): # currently essential to automation
     """
     Returns an unclassed list of the notes in a chord.
     No inversion support yet.
@@ -144,7 +147,7 @@ def chordbuild(tonic, quality):
 
         return note_list
 
-def bassify_old(classed_note_list): # not currently in use, found alternative
+def bassify_old(classed_note_list): # not currently in use, may move to legacy or scrap
     """
     Input unclassed note list, returns a classed list of every note in the input list an octave down.
     Good for writing basslines.
@@ -160,94 +163,9 @@ def bassify_old(classed_note_list): # not currently in use, found alternative
 #### Legacy Note & Rest-placing Functions
 ## The original functions from Project Purple
 
-
-def simpline_legacy(chord, denominator):
-    "Writes simple steady figures"
-    bar = Bar()
-    note = chord[0]
-    note = Note(note) # do I need these even?
-    note.octave_down()
-    for _ in range(denominator):
-        bar.place_notes(note, denominator)
-    return bar
-
-def gallopline(chord):
-    "Writes galloping lines a la Iron Maiden"
-    bar = Bar()
-    note = chord[0]
-    note = Note(note)    
-    note.octave_down()
-    for _ in range(4):
-        bar.place_notes(note, 8)
-        bar.place_notes(note, 16)
-        bar.place_notes(note, 16)
-    return bar
-
-def reverse_gallopline(chord):
-    "Writes reverse galloping lines...also a la Iron Maiden"
-    bar = Bar()
-    note = chord[0]
-    note = Note(note)    
-    note.octave_down()
-    for _ in range(4):
-        bar.place_notes(note, 16)
-        bar.place_notes(note, 16)
-        bar.place_notes(note, 8)
-    return bar
-
-def simprhythm(chord, denominator):
-    "Writes simple steady harmony like a hard rock rhythm guitar"
-    bar = Bar()
-    notes = NoteContainer()
-    notes.add_notes(chord)
-    for _ in range(denominator):
-        bar.place_notes(notes, denominator)
-    return bar
-
-def arp(chord, denominator):
-    """
-    Writes simple steady ascending arpeggios
-    
-    if the 10 in the 2nd for-loop seems arbitrary, it's because it sorta is.  
-    there's no penalty for overflowing notes in a bar - it just stops adding.
-    This makes sure the bar is filled for most common note denominations
-    """
-    bar = Bar()
-    for note in chord:
-        note = Note()
-    for _ in range(10):
-        for note in chord:
-            bar.place_notes(note, denominator)
-    return bar
-
-def arpreturn(chord, denominator):
-    "Writes steady up and down arpeggios, like a classical pianist or sweep-picking guitarist would play"
-    bar = Bar()
-    for note in chord:
-        note = Note()
-    chord_r = []
-    for note in chord:
-        chord_r.append(note)
-    chord_r.reverse()
-    for _ in range(10):
-        for note in chord:
-            bar.place_notes(note, denominator)
-        for note in chord_r:
-            bar.place_notes(note, denominator)
-    return bar
-
-def silence_legacy(duration):
-    """
-    initial remaster 6/20
-    """
-    bar = Bar()
-    bar.set_meter(((4 * duration), 4))
-    for _ in range(4 * duration):
-        bar.place_rest(4)
-    return bar
-
 #####===============================================================================================
-#### Salieri Functions Note & Rest-placing Functions
+#### Salieri Note & Rest-placing Functions
+### These are presently used to actually populate the MIDI with notes and rests.
 
 def silence(duration):
     """
@@ -455,31 +373,12 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
         
     return bar
 
-
-## reworking
-def s_arpup(chord, denominator):
-    bar = Bar()
-    chord_adj = octave_ascend(chord)
-    
-    #$ For adding another tonic note an octave up
-    tonic_octave = Note()
-    tonic_octave.name = chord_adj[0].name
-    tonic_octave.octave = chord_adj[0].octave
-    tonic_octave.octave_up()
-    chord_adj.append(tonic_octave)
-    #$
-
-    for _ in range(10):
-        for note in chord_adj:
-            bar.place_notes(note, denominator)
-    return bar
-
-
 #####===============================================================================================
 #### == MASTER COMBINATORIAL FUNCTION ==
 
 def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
     """
+    Takes the data gathered by the front-end and turns it into music as MIDI
     """
     bar_list = []
     
@@ -500,6 +399,10 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
     return bar_list
 
 
+
+#####================================================================================================================
+#### Legacy Functions -- no longer in use
+# 
 def musicorum_ex_machina_legacy(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
     """
     """
@@ -523,7 +426,7 @@ def musicorum_ex_machina_legacy(chord, duration, style, denom, mutator_list=[]):
     for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
         ## These conditionals will eventually nest every note and silence writer, so it will become massive.
         if style == "arpeggio":
-            bar = s_arpup(chord, denom)
+            bar = arpup_legacy(chord, denom)
             bar_list.append(bar)
         elif style == "simpline":
             bar = simpline(chord, denom)
@@ -535,6 +438,108 @@ def musicorum_ex_machina_legacy(chord, duration, style, denom, mutator_list=[]):
     
     return bar_list
 
+
+def simpline_legacy(chord, denominator):
+    "Writes simple steady figures"
+    bar = Bar()
+    note = chord[0]
+    note = Note(note) # do I need these even?
+    note.octave_down()
+    for _ in range(denominator):
+        bar.place_notes(note, denominator)
+    return bar
+
+def gallopline(chord):
+    "Writes galloping lines a la Iron Maiden"
+    bar = Bar()
+    note = chord[0]
+    note = Note(note)    
+    note.octave_down()
+    for _ in range(4):
+        bar.place_notes(note, 8)
+        bar.place_notes(note, 16)
+        bar.place_notes(note, 16)
+    return bar
+
+def reverse_gallopline(chord):
+    "Writes reverse galloping lines...also a la Iron Maiden"
+    bar = Bar()
+    note = chord[0]
+    note = Note(note)    
+    note.octave_down()
+    for _ in range(4):
+        bar.place_notes(note, 16)
+        bar.place_notes(note, 16)
+        bar.place_notes(note, 8)
+    return bar
+
+def simprhythm(chord, denominator):
+    "Writes simple steady harmony like a hard rock rhythm guitar"
+    bar = Bar()
+    notes = NoteContainer()
+    notes.add_notes(chord)
+    for _ in range(denominator):
+        bar.place_notes(notes, denominator)
+    return bar
+
+def arp(chord, denominator):
+    """
+    Writes simple steady ascending arpeggios
+    
+    if the 10 in the 2nd for-loop seems arbitrary, it's because it sorta is.  
+    there's no penalty for overflowing notes in a bar - it just stops adding.
+    This makes sure the bar is filled for most common note denominations
+    """
+    bar = Bar()
+    for note in chord:
+        note = Note()
+    for _ in range(10):
+        for note in chord:
+            bar.place_notes(note, denominator)
+    return bar
+
+def arpreturn(chord, denominator):
+    "Writes steady up and down arpeggios, like a classical pianist or sweep-picking guitarist would play"
+    bar = Bar()
+    for note in chord:
+        note = Note()
+    chord_r = []
+    for note in chord:
+        chord_r.append(note)
+    chord_r.reverse()
+    for _ in range(10):
+        for note in chord:
+            bar.place_notes(note, denominator)
+        for note in chord_r:
+            bar.place_notes(note, denominator)
+    return bar
+
+def arpup_legacy(chord, denominator):
+    bar = Bar()
+    chord_adj = octave_ascend(chord)
+    
+    #$ For adding another tonic note an octave up
+    tonic_octave = Note()
+    tonic_octave.name = chord_adj[0].name
+    tonic_octave.octave = chord_adj[0].octave
+    tonic_octave.octave_up()
+    chord_adj.append(tonic_octave)
+    #$
+
+    for _ in range(10):
+        for note in chord_adj:
+            bar.place_notes(note, denominator)
+    return bar
+
+def silence_legacy(duration):
+    """
+    initial remaster 6/20
+    """
+    bar = Bar()
+    bar.set_meter(((4 * duration), 4))
+    for _ in range(4 * duration):
+        bar.place_rest(4)
+    return bar
 
 
 
