@@ -79,7 +79,7 @@
 
     
       <div class = "flex justify-center mb7">
-          <div id = "downloadcontainer" class = "pa4 mb3 ba bw2 h-100  br4 mr2 flex flex-column" style = "border-color: #E2D8CC">
+          <div id = "downloadcontainer" class = "pa4 mb3 ba bw2 h-100  br4 mr2 flex flex-column justify-center items-center" style = "border-color: #E2D8CC">
 
             <span id="miniheadline1" class = "f2 tc w-100">Your Composition Awaits</span>
                 <span id="miniheadline2" class = "f2 fw1 tc w-100">{{name_harvest}}</span>
@@ -90,7 +90,9 @@
                 class="br4 h5 w5 ba bw2 dib" alt="Salieri"
                 style = "border-color: #E0AB79"> -->
 
+                <a href = {{comp_obj.midi.url}} download>
             <button id="downloadbutton" class="mt2 mb0 dim pointer helvetica ttu ph4 pv4 fw1 br4 f4" style="color: #E2D8CC"> Download</button>
+                </a>
 
         </div>
     </div>

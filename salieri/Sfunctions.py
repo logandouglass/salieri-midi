@@ -24,7 +24,7 @@ from mingus.midi import midi_file_out
 #### Logistical
 def tuple_cleaner(tuple_list):
     """
-    Weeds out any incomplete or invalid tuples
+    Weeds out any incomplete or invalid tuples when making the feed progression for the magic function in generation/views.py
     """
     cleaned_list = []
     for tuple in tuple_list:
@@ -34,7 +34,7 @@ def tuple_cleaner(tuple_list):
 
 def bar_adder(barr_list, Mtrackk):
     """
-    Adds bars to a MTrack, and returns the updated MTrack
+    Adds bars to a MTrack, and returns the updated MTrack.  Use during the automated composition portion of the magic function in generation/views.py
     """
     for barr in barr_list:
         Mtrackk.add_bar(barr)
@@ -48,7 +48,7 @@ def listify_mutators(mutator_string):
         mutator_list = mutator_string.split(" ")
         return (mutator_list)
 
-def listify_compound_mutators(mutator_list):
+def listify_compound_mutators(mutator_list): # not in use, candidate for scrapping
     new_list = mutator_list.copy()
     for item in mutator_list:
         if "." in item:
@@ -112,6 +112,8 @@ def chordbuild(tonic, quality):
             note_list = chords.major_triad(tonic)
         elif quality == "minor":
             note_list = chords.minor_triad(tonic)
+        elif quality == "diminished":
+            note_list = chords.diminished_triad(tonic)
         elif quality == "minor7":
             note_list = chords.minor_seventh(tonic)
         elif quality == "major7":
@@ -142,7 +144,7 @@ def chordbuild(tonic, quality):
 
         return note_list
 
-def bassify(classed_note_list): # may need to adjust it to take in a list of classed items
+def bassify_old(classed_note_list): # not currently in use, found alternative
     """
     Input unclassed note list, returns a classed list of every note in the input list an octave down.
     Good for writing basslines.
@@ -156,9 +158,10 @@ def bassify(classed_note_list): # may need to adjust it to take in a list of cla
 
 #####===============================================================================
 #### Legacy Note & Rest-placing Functions
+## The original functions from Project Purple
 
 
-def simpline(chord, denominator):
+def simpline_legacy(chord, denominator):
     "Writes simple steady figures"
     bar = Bar()
     note = chord[0]
@@ -233,28 +236,40 @@ def arpreturn(chord, denominator):
             bar.place_notes(note, denominator)
     return bar
 
+def silence_legacy(duration):
+    """
+    initial remaster 6/20
+    """
+    bar = Bar()
+    bar.set_meter(((4 * duration), 4))
+    for _ in range(4 * duration):
+        bar.place_rest(4)
+    return bar
+
 #####===============================================================================================
 #### Salieri Functions Note & Rest-placing Functions
 
-def silencio():
+def silence(duration):
     """
-    ===1st draft===
-    Fills a bar with silence...
-    Helpful logistically and musically!
-
-    (only formatted for 4/4 time)
+    initial remaster 6/20
     """
     bar = Bar()
-    bar.place_rest(1)
+    # numerator = 4 * duration
+    # bar.set_meter((numerator, 4))
+    bar.length = duration
+    range_val = 4 * duration
+    for _ in range(range_val):
+        bar.place_rest(4)
     return bar
 
-def arpeggio(duration=1, chord=chords.major_triad("A"), denominator=4, mut_list=[]):
+def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=[]):
     """
-    
+    initial remaster 6/20
     """
     bar = Bar()
     chord_adj = octave_ascend(chord)
     # chord_adj_full = chord_adj.copy()
+
     
     
     ## standard counter -- for more octave correction
@@ -270,7 +285,8 @@ def arpeggio(duration=1, chord=chords.major_triad("A"), denominator=4, mut_list=
         num_octaves = 3
     
     expanded_set = chord_adj.copy()
-    # expanded_set.copy(chord_adj)
+
+    ## determine # of octaves 
     for _ in range(num_octaves):
         counter = 1
         # expanded_set = []
@@ -339,44 +355,8 @@ def arpeggio(duration=1, chord=chords.major_triad("A"), denominator=4, mut_list=
 
 
     ###  Timing
-    ## for 2 bars
-    meter_adj = 4
-    bar.set_meter(((4 * duration), 4))
-
-
-    # # determine reach
-    # if "reach1" in mut_list:
-    #     tonic_cap = Note()
-    #     tonic_cap.name = chord_adj[0].name
-    #     tonic_cap.octave = chord_adj[0].octave + counter
-    #     expanded_set.append(tonic_cap)
-    # ##
-    # elif "reach2" in mut_list:
-    #     tonic_cap = Note()
-    #     tonic_cap.name = chord_adj[0].name
-    #     tonic_cap.octave = chord_adj[0].octave + counter
-    #     expanded_set.append(tonic_cap)
-    #     degree2_cap = Note()
-    #     degree2_cap.name = chord_adj[1].name
-    #     degree2_cap.octave = chord_adj[1].octave + counter
-    #     expanded_set.append(degree2_cap)
-    # elif "reach3" in mut_list:
-    #     tonic_cap = Note()
-    #     tonic_cap.name = chord_adj[0].name
-    #     tonic_cap.octave = chord_adj[0].octave + counter
-    #     expanded_set.append(tonic_cap)
-    #     degree2_cap = Note()
-    #     degree2_cap.name = chord_adj[1].name
-    #     degree2_cap.octave = chord_adj[1].octave + counter
-    #     expanded_set.append(degree2_cap)
-    #     degree3_cap = Note()
-    #     degree3_cap.name = chord_adj[2].name
-    #     degree3_cap.octave = chord_adj[2].octave + counter
-    #     expanded_set.append(degree3_cap)
-
-
-
-    
+    bar.length = duration
+    range_val = 4 * duration
 
 
     if "reverse" in mut_list:
@@ -410,7 +390,70 @@ def arpeggio(duration=1, chord=chords.major_triad("A"), denominator=4, mut_list=
 
     return bar
 
+def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=[]):
+    bar = Bar()
+    chord_adj = octave_ascend(chord)
 
+    tonic = chord_adj[0]
+    
+    ### bassify
+    if "bassify" in mut_list:
+        for note in chord_adj:
+            note.octave_down()
+    
+
+    # numerator = 4 * duration
+    # bar.set_meter((numerator, 4))
+
+    bar.length = duration
+    range_val = 4 * duration
+    
+    if "p1" in mut_list: # they should have real names
+    ### fun pattern 1 - dramatic
+        for _ in range(5):
+             bar.place_notes(tonic, 12) # fix
+             bar.place_notes(tonic, 12)
+             bar.place_notes(tonic, 12)
+             bar.place_notes(tonic, 8)
+             bar.place_notes(tonic, 8)
+             bar.place_notes(tonic, 2)
+    
+
+    else:
+        for _ in range(denominator*duration):
+            bar.place_notes(tonic, denominator)
+
+        
+    return bar
+
+def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=[]):
+    bar = Bar()
+    chord_adj = octave_ascend(chord)
+    note_c = NoteContainer()
+    note_c.add_notes(chord_adj)
+
+    # numerator = 4* duration
+    ranger = denominator * duration # rename range val?
+    # bar.set_meter((numerator, 4)) # need to do trick for if they goof up and put in a denominator > the measure length
+    bar.length = duration
+    # range_val = 4 * duration
+
+    if "p1" in mut_list: # they should have real names
+    ### fun pattern 1 - dramatic
+        for _ in range(5): # 5? wtf lol
+             bar.place_notes(note_c, 12) # fix
+             bar.place_notes(note_c, 12)
+             bar.place_notes(note_c, 12)
+             bar.place_notes(note_c, 8)
+             bar.place_notes(note_c, 8)
+             bar.place_notes(note_c, 2)
+
+    else:
+        for _ in range(ranger):
+            bar.place_notes(note_c, denominator)
+
+        
+    return bar
 
 
 ## reworking
@@ -431,27 +474,33 @@ def s_arpup(chord, denominator):
             bar.place_notes(note, denominator)
     return bar
 
-## why doesn't this work??
-
-# def s_arpup(chord, denominator):
-#     bar = Bar()
-#     chord_adj = octave_ascend(chord)
-#     # chord_adj.append(chord_adj[0].octave_up())
-#     print(chord_adj)
-#     print(type(chord_adj))
-#     print(chord_adj[0])
-#     print(type(chord_adj[0]))
-#     while True:
-#         for note in chord_adj:
-#             bar.place_notes(note, denominator)
-#             if bar.is_full:
-#                 return bar
-
 
 #####===============================================================================================
 #### == MASTER COMBINATORIAL FUNCTION ==
 
 def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
+    """
+    """
+    bar_list = []
+    
+        ## These conditionals will eventually nest every note and silence writer, so it will become massive.
+    if style == "arpeggio":
+        bar = arpeggio(chord, denom, duration, mutator_list)
+        bar_list.append(bar)
+    elif style == "simpline":
+        bar = simpline(chord, denom, duration, mutator_list)
+        bar_list.append(bar)
+    elif style == "strummer":
+        bar = strummer(chord, denom, duration, mutator_list)
+        bar_list.append(bar)
+    else:
+        bar = silence(duration) ## need to remaster
+        bar_list.append(bar)
+    
+    return bar_list
+
+
+def musicorum_ex_machina_legacy(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
     """
     """
     bar_list = []
@@ -473,7 +522,7 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
 
     for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
         ## These conditionals will eventually nest every note and silence writer, so it will become massive.
-        if style == "arpup":
+        if style == "arpeggio":
             bar = s_arpup(chord, denom)
             bar_list.append(bar)
         elif style == "simpline":
@@ -481,16 +530,11 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
             bar_list.append(bar)
 
         else:
-            bar = silencio()
+            bar = silence_legacy()
             bar_list.append(bar)
     
     return bar_list
 
-    # elif duration = 1/2:
-        # meter = 2/4
-
-    # elif duration = 1/4:
-        # meter = 1/4
 
 
 

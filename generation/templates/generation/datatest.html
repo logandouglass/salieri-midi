@@ -74,10 +74,149 @@
 
         </p>
 
-        <a href = {{comp_obj.midi.url}} download>
-        <button class = "mt3 mb3"> Download </button>
-        </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Salieri Datatest </title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <!-- <script src="https://unpkg.com/vue@3"></script> -->
+
+</head>
+
+<body class = "bg-light-gray pl2">
+    
+    <div id = "app">
+
+        <H1 class="calisto dark-blue i f2"> Salieri </H1>
+
+        <hr class = "bg-green">
+
+        <H2 class = "calisto dark-blue f3"> composition data </H2>
+
+        <p class = "roboto f4 dark-green" class = "mt3">
+        
+        
+
+
+            Debug:<br>
+            {{data_test}} <br>
+            {{data_test_3}} <br>
+            <!-- {{type_test}} <br> -->
+            <!-- {{track_obj_length}} <br> -->
+            <br><br>
+
+
+            Comp name:<br>
+            {{name_harvest}} <br>
+            <br><br>
+
+            Comp data:<br>
+            {{chord1_tonic_harvest}} <br> 
+            {{chord1_quality_harvest}} <br>
+            {{chord1_bars_harvest}} <br>
+            <br><br>
+
+            {{chord2_tonic_harvest}} <br>
+            {{chord2_quality_harvest}} <br>
+            {{chord2_bars_harvest}} <br>
+            <br><br>
+
+            {{chord3_tonic_harvest}} <br>
+            {{chord3_quality_harvest}} <br>
+            {{chord3_bars_harvest}} <br>
+            <br><br>
+
+            {{chord4_tonic_harvest}} <br>
+            {{chord4_quality_harvest}} <br>
+            {{chord4_bars_harvest}} <br>
+            <br><br>
+
+            {{chord5_tonic_harvest}} <br>
+            {{chord5_quality_harvest}} <br>
+            {{chord5_bars_harvest}} <br>
+            <br><br>
+
+            Track names:<br>     
+
+            {% for track in track_objs %}    
+            {{track.trackname}}<br>
+            {% endfor %}
+
+
+
+        </p>
+
+
+        <a href = {{comp_obj.midi.url}} download>
+          <button class = "mt3 mb3"> Download </button>
+          </a>
+
+
+    </div>
+
+    <!-- <script>
+
+
+        const App = {
+            // the data property is a function that returns an object
+            data() {
+              return {
+        
+              }
+            },
+        
+            methods: {
+        
+        
+        
+        
+        
+               
+            },
+        }
+
+        Vue.createApp(App).mount('#app')
+        
+        //////////////////////////////////////////////////
+
+
+
+        // code from mdn wed docs
+        
+        
+        function onStartedDownload(id) {
+            console.log(`Started downloading: ${id}`);
+          }
+          
+          function onFailed(error) {
+            console.log(`Download failed: ${error}`);
+          }
+          
+          let downloadUrl = "";
+          
+          let downloading = browser.downloads.download({
+            url : downloadUrl,
+            filename : 'my-image-again.png',
+            conflictAction : 'uniquify'
+          });
+          
+          downloading.then(onStartedDownload, onFailed);
+    
+    
+    
+    
+        </script> -->
+
+
+
+
+</body>
+
+</html>
 
     </div>
 

@@ -114,3 +114,20 @@
 #     return bassified_classed_note_list
 
 # ## notewriters
+
+
+## why doesn't this work??
+
+# def s_arpup(chord, denominator):
+#     bar = Bar()
+#     chord_adj = octave_ascend(chord)
+#     # chord_adj.append(chord_adj[0].octave_up())
+#     print(chord_adj)
+#     print(type(chord_adj))
+#     print(chord_adj[0])
+#     print(type(chord_adj[0]))
+#     while True:
+#         for note in chord_adj:
+#             bar.place_notes(note, denominator)
+#             if bar.is_full:
+#                 return bar

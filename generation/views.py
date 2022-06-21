@@ -212,6 +212,9 @@ def magic(request, id):
 
     ## for testing
     # midi_file_out.write_Composition("debuggg.mid", final_comp)  
+
+
+    ## HERE
     path = f"{name_harvest} (id{comp_obj.id}).mid"     
     midi_file_out.write_Composition(path, final_comp)
     
@@ -219,6 +222,9 @@ def magic(request, id):
     # midi_file_out.write_Composition(f"generation/dtmidi/{name_harvest}.mid", final_comp)
     # comp_obj.__setattr__(midi, f"media/{name_harvest} (id{comp_obj.id}).mid") ## Doesn't work?
     # comp_obj.midi.name = path
+
+
+    ## HERE
     with open(path, "rb") as f: ## rb is write binary, need for opening the midi
         comp_obj.midi = File(f) # import from django
         comp_obj.save()
@@ -251,10 +257,10 @@ def magic(request, id):
 
     test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
-    data_test = tracknames
+    data_test = track_dict_list
     # data_test = track_dict_list[0]
     data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
-    data_test_3 = track_objs
+    data_test_3 = feed_progression
 
 
 
@@ -316,6 +322,7 @@ def magic(request, id):
 
     ###########################
 
+    # return render(request, "generation/finalpage.html", context)
     return render(request, "generation/finalpage.html", context)
     ###=================================================================================
     ##py debugging

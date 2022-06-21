@@ -235,9 +235,24 @@ def track(request, id):
     }
     return render(request, "userinput/track-remaster-2.html", context) ####@@@
     
-def trackadd(request, id):
+def trackadd(request, id): ## fix!!!
     trackname = request.POST.get('trackname')
     chord1_style = request.POST.get('chord1_style')
+    chord2_style = request.POST.get('chord2_style')
+    chord3_style = request.POST.get('chord3_style')
+    chord4_style = request.POST.get('chord4_style')
+    chord5_style = request.POST.get('chord5_style')
+    
+
+    chord1_mutators = request.POST.get('chord1_mutators')
+    chord2_mutators = request.POST.get('chord2_mutators')
+    chord3_mutators = request.POST.get('chord3_mutators')
+    chord4_mutators = request.POST.get('chord4_mutators')
+    chord5_mutators = request.POST.get('chord5_mutators')
+    
+    
+    
+    
     chord1_denom = 0
     chord2_denom = 0
     chord3_denom = 0
@@ -272,6 +287,12 @@ def trackadd(request, id):
             chord4_denom = chord4_denom,
             chord5_style = chord5_style, 
             chord5_denom = chord5_denom,
+
+            chord1_mutators = chord1_mutators,
+            chord2_mutators = chord2_mutators,
+            chord3_mutators = chord3_mutators,
+            chord4_mutators = chord4_mutators,
+            chord5_mutators = chord5_mutators,
     )    
 
     # context = {}
