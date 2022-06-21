@@ -117,7 +117,7 @@ def magic(request, id):
     for i in range(len(track_objs)):
         new_dict = {}
         for ii in range (len(track_params)):
-            new_dict.update({track_params[ii]:list(list(all_tracks.filter(comp=comp_obj).values_list())[i])[ii]}) # I can't belive this works
+            new_dict.update({track_params[ii]:list(list(all_tracks.filter(comp=comp_obj).values_list())[i])[ii]}) # I can't believe this works
         track_dict_list.append(new_dict)
 
     # for i in track_obj_length:
