@@ -40,6 +40,7 @@
       #currchord{color:#22731D}
       #finish{background-color: crimson;}
       #addtrack{background-color:#590743}
+      #minib{background-color: #333333;}
 
     </style>
 </head>
@@ -91,7 +92,7 @@
             <!-- Comp mini-headlines div -->
             
               <div id = "miniheadline div" class = "flex flex-column justify-center">
-              <span id="miniheadline1" class = "f3 tc w-100">MIDI Composition</span>
+              <span id="miniheadline1" class = "f2 tc w-100">MIDI Composition</span>
               <span id="miniheadline2" class = "f3 tc w-100">Part II: Tracks</span>
               <br>
               <!-- <span id="miniheadline3" class = "f4 tc w-100">Add Tracks</span> -->
@@ -102,7 +103,7 @@
               <!--  -->
     
               <label for="trackname" class="f4 calisto  db mb2"> Track Name <span class="normal black-60"></span></label>
-              <input id="trackname" class="f3 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="trackname-desc" name="trackname">
+              <input id="trackname" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="trackname-desc" name="trackname">
               <small id="trackname-desc" class="f5 db mb2"></small>
     
             <br><hr class = " "><br>
@@ -112,10 +113,11 @@
             {% if chord1_works %}
             <div id = "chord1-data" v-show="chord1Vis">
                 <label for="chord-1-style" class="f4 calisto  db mb2"> Chord 1 Style <span class="normal black-60"></span></label>
-                <select v-model="chord1Style" ref= "chord1style" id="chord-1-style" name="chord1_style" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-1-style-desc" >
-                        <option value="arpeggio"> arpeggios </option>
+                <select v-model="chord1Style" ref= "chord1style" id="chord-1-style" name="chord1_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-1-style-desc" >
+                        <option value="arpeggio"> arpeggio </option>
                         <option value="simpline"> simple line </option>
                         <option value="strummer"> strummer </option>
+                        <option value="silence"> silence (all rests)  </option>
                     </select>
                 <small id="chord-1-style-desc" class="f5 db mb2"></small>
                 <br>
@@ -123,7 +125,7 @@
                 <label for="chord-1-denom" class="f4 calisto  db mb2"> Chord 1 Denominator <span class="normal black-60"></span></label>
                 
                 <!-- fix XX-->
-                <select v-model="chord1Denom" id="chord-1-denom" name="chord1_denom" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-1-denom-desc" >
+                <select v-model="chord1Denom" id="chord-1-denom" name="chord1_denom" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-1-denom-desc" >
                         <!--  -->
                         <option value="1" > 1 (whole) </option>
                         <option value="2" > 2 (half) </option>                        
@@ -142,7 +144,7 @@
                 
                 <!-- fix  XX-->
                 <label for="chord-1-mutators" class="f4 calisto  db mb2"> Chord 1 Mutators <span class="normal black-60"></span></label>
-                <input v-model="chord1Mut" id="chord-1-mutators" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-mutators-desc" name="chord1_mutators" >
+                <input v-model="chord1Mut" id="chord-1-mutators" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-mutators-desc" name="chord1_mutators" >
 
                 <small id="chord-1-mutators-desc" class="f5 db mb2"></small>
               
@@ -154,11 +156,12 @@
               {% if chord2_works %}
               <div id = "chord2-data" v-show="chord2Vis">
                 <label  for="chord-2-style" class="f4 calisto  db mb2"> Chord 2 Style <span class="normal black-60"></span></label>
-                <select v-model="chord2Style" ref= "chord2style" id="chord-2-style" name="chord2_style" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-2-style-desc" >
+                <select v-model="chord2Style" ref= "chord2style" id="chord-2-style" name="chord2_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-2-style-desc" >
                         
-                        <option value="arpeggio"> arpeggios </option>
+                        <option value="arpeggio"> arpeggio </option>
                         <option value="simpline"> simple line </option>
                         <option value="strummer"> strummer </option>
+                        <option value="silence"> silence (all rests)  </option>
                 </select>
                 <small id="chord-2-style-desc" class="f5 db mb2"></small>
                 <br>
@@ -166,7 +169,7 @@
                 <label for="chord-2-denom" class="f4 calisto  db mb2"> Chord 2 Denominator <span class="normal black-60"></span></label>
                 
                 <!-- fix XX-->
-                <select v-model="chord2Denom" id="chord-2-denom" name="chord2_denom" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-2-denom-desc" >
+                <select v-model="chord2Denom" id="chord-2-denom" name="chord2_denom" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-2-denom-desc" >
                         <!--  -->
                         <option value="1" > 1 (whole) </option>
                         <option value="2" > 2 (half) </option>
@@ -185,7 +188,7 @@
                 
                 <!-- fix  XX-->
                 <label for="chord-2-mutators" class="f4 calisto  db mb2"> Chord 2 Mutators <span class="normal black-60"></span></label>
-                <input v-model="chord2Mut" id="chord-2-mutators" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-mutators-desc" name="chord2_mutators" >
+                <input v-model="chord2Mut" id="chord-2-mutators" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-mutators-desc" name="chord2_mutators" >
           
                 <small id="chord-2-mutators-desc" class="f5 db mb2"></small>
               
@@ -197,11 +200,12 @@
               {% if chord3_works %}
               <div id = "chord3-data" v-show="chord3Vis">
                 <label for="chord-3-style" class="f4 calisto  db mb2"> Chord 3 Style <span class="normal black-60"></span></label>
-                <select v-model="chord3Style" ref= "chord3style" id="chord-3-style" name="chord3_style" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-3-style-desc" >
+                <select v-model="chord3Style" ref= "chord3style" id="chord-3-style" name="chord3_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-3-style-desc" >
                         
-                        <option value="arpeggio"> arpeggios </option>
+                        <option value="arpeggio"> arpeggio </option>
                         <option value="simpline"> simple line </option>
                         <option value="strummer"> strummer </option>
+                        <option value="silence"> silence (all rests)  </option>
                     </select>
                 <small id="chord-3-style-desc" class="f5 db mb2"></small>
                 <br>
@@ -209,7 +213,7 @@
                 <label for="chord-3-denom" class="f4 calisto  db mb2"> Chord 3 Denominator <span class="normal black-60"></span></label>
                 
                 <!-- fix XX-->
-                <select v-model="chord3Denom" id="chord-3-denom" name="chord3_denom" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-3-denom-desc" >
+                <select v-model="chord3Denom" id="chord-3-denom" name="chord3_denom" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-3-denom-desc" >
                         <!--  -->
                         <option value="1" > 1 (whole) </option>
                         <option value="2" > 2 (half) </option>
@@ -228,7 +232,7 @@
                 
                 <!-- fix  XX-->
                 <label for="chord-3-mutators" class="f4 calisto  db mb2"> Chord 3 Mutators <span class="normal black-60"></span></label>
-                <input v-model="chord3Mut" id="chord-3-mutators" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-mutators-desc" name="chord3_mutators" >
+                <input v-model="chord3Mut" id="chord-3-mutators" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-mutators-desc" name="chord3_mutators" >
           
                 <small id="chord-3-mutators-desc" class="f5 db mb2"></small>
               
@@ -240,11 +244,12 @@
               {% if chord4_works %}
               <div id = "chord4-data" v-show="chord4Vis">
                 <label for="chord-4-style" class="f4 calisto  db mb2"> Chord 4 Style <span class="normal black-60"></span></label>
-                <select v-model="chord4Style" ref= "chord4style" id="chord-4-style" name="chord4_style" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-4-style-desc" >
+                <select v-model="chord4Style" ref= "chord4style" id="chord-4-style" name="chord4_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-4-style-desc" >
                         
-                        <option value="arpeggio"> arpeggios </option>
+                        <option value="arpeggio"> arpeggio </option>
                         <option value="simpline"> simple line </option>
                         <option value="strummer"> strummer </option>
+                        <option value="silence"> silence (all rests)  </option>
                     </select>
                 <small id="chord-4-style-desc" class="f5 db mb2"></small>
                 <br>
@@ -252,7 +257,7 @@
                 <label for="chord-4-denom" class="f4 calisto  db mb2"> Chord 4 Denominator <span class="normal black-60"></span></label>
                 
                 <!-- fix XX-->
-                <select v-model="chord4Denom" id="chord-4-denom" name="chord4_denom" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-4-denom-desc" >
+                <select v-model="chord4Denom" id="chord-4-denom" name="chord4_denom" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-4-denom-desc" >
                         <!--  -->
                         <option value="1" > 1 (whole) </option>
                         <option value="2" > 2 (half) </option>
@@ -271,7 +276,7 @@
                 
                 <!-- fix  XX-->
                 <label for="chord-4-mutators" class="f4 calisto  db mb2"> Chord 4 Mutators <span class="normal black-60"></span></label>
-                <input v-model="chord4Mut" id="chord-4-mutators" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-mutators-desc" name="chord4_mutators" >
+                <input v-model="chord4Mut" id="chord-4-mutators" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-mutators-desc" name="chord4_mutators" >
           
                 <small id="chord-4-mutators-desc" class="f5 db mb2"></small>
               
@@ -283,11 +288,12 @@
             {% if chord5_works %}
               <div id = "chord5-data" v-show="chord5Vis">
                 <label for="chord-5-style" class="f4 calisto  db mb2"> Chord 5 Style <span class="normal black-60"></span></label>
-                <select v-model="chord5Style" ref= "chord5style" id="chord-5-style" name="chord5_style" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-style-desc" >
+                <select v-model="chord5Style" ref= "chord5style" id="chord-5-style" name="chord5_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-style-desc" >
                         
-                        <option value="arpeggio"> arpeggios </option>
+                        <option value="arpeggio"> arpeggio </option>
                         <option value="simpline"> simple line </option>
                         <option value="strummer"> strummer </option>
+                        <option value="silence"> silence (all rests) </option>
                     </select>
                 <small id="chord-5-style-desc" class="f5 db mb2"></small>
                 <br>
@@ -295,7 +301,7 @@
                 <label for="chord-5-denom" class="f4 calisto  db mb2"> Chord 5 Denominator <span class="normal black-60"></span></label>
                 
                 <!-- fix XX-->
-                <select v-model="chord5Denom" id="chord-5-denom" name="chord5_denom" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-denom-desc" >
+                <select v-model="chord5Denom" id="chord-5-denom" name="chord5_denom" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" aria-describedby="chord-5-denom-desc" >
                         <!--  -->
                         <option value="1" > 1 (whole) </option>
                         <option value="2" > 2 (half) </option>
@@ -314,7 +320,7 @@
                 
                 <!-- fix  XX-->
                 <label for="chord-5-mutators" class="f4 calisto  db mb2"> Chord 5 Mutators <span class="normal black-60"></span></label>
-                <input v-model="chord5Mut" id="chord-5-mutators" class="f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-mutators-desc" name="chord5_mutators" >
+                <input v-model="chord5Mut" id="chord-5-mutators" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-mutators-desc" name="chord5_mutators" >
           
                 <small id="chord-5-mutators-desc" class="f5 db mb2"></small>
               
@@ -324,17 +330,22 @@
             {% endif %}
             
     
-            <div id="button-div" class = "flex justify-center">
-            <button @click.prevent = "updatePage" class = " pointer mr1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type = "button"> style bar </button>  
+            <div id="button-div" class = "flex flex-wrap justify-center w-100">
+            
+            <!-- <div id="button-row-1" class ="flex flex-wrap w-100"> -->
+                <button id="minib" @click.prevent = "copyLast" class = "pointer dim mb2 f4 calisto no-underline br-pill ph4 pv2 dib white" type = "button"> copy last </button>
+                <button id="minib" @click.prevent = "copyAll" class = " pointer dim  mb2 f4 calisto no-underline br-pill pv2 ph4 dib white" type = "button"> style all </button>
+                <button @click.prevent = "updatePage" class = " pointer dim f4 calisto no-underline br-pill ph4 pv2 mb2 dib white" type = "button"> style bar </button>
+                  
             <!-- <a href = "{% url 'generation:magic' composition.id %}"></a> -->
-            <input id="submit" class = " pointer ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="submit" value="add track"/>
+                <input id="submit" class = " pointer dim f4 calisto no-underline br-pill ph4 pv2 mb2 dib white" type="submit" value="add track"/>
 
-            <a href = "{% url 'generation:magic' composition.id %}">
-              <button id="finish" class = "pointer ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="button" method="post">
+                <a href = "{% url 'generation:magic' composition.id %}" class = "w-100">
+                <button id="finish" class = "w-100 pointer dim ml1 f4 calisto no-underline br-pill ph3 pv2 mb2 dib white" type="button" method="post">
                   finish composition
-              </button>
-            </a>
-
+                </button>
+                </a>
+            <!-- </div> -->
               <!-- false finish button -->
 
 
@@ -351,7 +362,7 @@
             src="{% static 'userinput/coolsal.png' %}"
             class="br4 h5 w5 ba bw2 dib" alt="avatar"
             style = "border-color: #E2D8CC"> -->
-          <span id="miniheadline1" class = "f3 tc w-100"> Composition Data </span>
+          <span id="miniheadline1" class = "f2 tc w-100"> Composition Data </span>
           <!-- <br> -->
           <span id="miniheadline2" class = "f3 tc w-100">{{composition.name}}</span>
           <br>
@@ -418,8 +429,8 @@
             {{chord1_tonic}}
             {{chord1_quality}}
             {{chord1_bars}} {{chord1_bars_u}}<br>
-            <span id="styleupdate"> + [[chord1Style]] [[chord1Denom]]</span><br>
-            <br><br>
+            <span id="styleupdate"> + [[chord1Style]] [[chord1Denom]]<br>[[chord1Mut]]</span><br>
+            <br>
           </span>
             {% endif %}
           
@@ -432,8 +443,8 @@
             {{chord2_tonic}}
             {{chord2_quality}}
             {{chord2_bars}} {{chord2_bars_u}}<br>
-            <span id="styleupdate"> + [[chord2Style]] [[chord2Denom]]</span><br>
-            <br><br>
+            <span id="styleupdate"> + [[chord2Style]] [[chord2Denom]]<br>[[chord2Mut]]</span><br>
+            <br>
           </span>
             {% endif %}
             
@@ -444,8 +455,8 @@
             {{chord3_tonic}}
             {{chord3_quality}}
             {{chord3_bars}} {{chord3_bars_u}}<br>
-            <span id="styleupdate"> + [[chord3Style]] [[chord3Denom]]</span><br>
-            <br><br>
+            <span id="styleupdate"> + [[chord3Style]] [[chord3Denom]]<br>[[chord3Mut]]</span><br>
+            <br>
           </span>
             {% endif %}
       
@@ -456,8 +467,8 @@
             {{chord4_tonic}}
             {{chord4_quality}}
             {{chord4_bars}} {{chord4_bars_u}}<br>
-            <span id="styleupdate"> + [[chord4Style]] [[chord4Denom]]</span><br>
-            <br><br>
+            <span id="styleupdate"> + [[chord4Style]] [[chord4Denom]]<br>[[chord4Mut]]</span><br>
+            <br>
           </span>
             {% endif %}
           
@@ -468,8 +479,8 @@
             {{chord5_tonic}}
             {{chord5_quality}}
             {{chord5_bars}} {{chord5_bars_u}}<br>
-            <span id="styleupdate"> + [[chord5Style]] [[chord5Denom]]</span><br>
-            <br><br>
+            <span id="styleupdate"> + [[chord5Style]] [[chord5Denom]]<br>[[chord5Mut]]</span><br>
+            <br>
             </span>
             {% endif %}
             
@@ -516,22 +527,34 @@
               chord4Vis: false,
               chord5Vis: false,
               obliterate: false,
+
+              // begins on chord1
               chordCurrent: 1,
+
+
               chord1Style: "",
               chord1Denom: "",
               chord1Mut: undefined,
+
+
               chord2Style: "",
               chord2Denom: "",
               chord2Mut: undefined,
+
               chord3Style: "",
               chord3Denom: "",
               chord3Mut: undefined,
+
               chord4Style: "",
               chord4Denom: "",
               chord4Mut: undefined,
+
+
               chord5Style: "",
               chord5Denom: "",
               chord5Mut: undefined,
+
+
               currentChordDict: 
                 {
                 1: `"f${this.chord1Style} ${this.chord1Denom}"`,
@@ -542,6 +565,7 @@
                               
 
               },
+
               currentChordDisplay: undefined,
 
               //chord1StyleLabel: undefined,
@@ -682,10 +706,169 @@
         
 
       },
-      
-      }
 
-    }
+      copyAll()  {
+        if (this.chordCurrent == 1) {
+            
+            this.chord1Style = this.chord1Style
+            this.chord1Denom = this.chord1Denom
+            this.chord1Mut = this.chord1Mut
+
+            
+            this.chord2Style = this.chord1Style
+            this.chord2Denom = this.chord1Denom
+            this.chord2Mut = this.chord1Mut
+
+            this.chord3Style = this.chord1Style
+            this.chord3Denom = this.chord1Denom
+            this.chord3Mut = this.chord1Mut
+
+            this.chord4Style = this.chord1Style
+            this.chord4Denom = this.chord1Denom
+            this.chord4Mut = this.chord1Mut
+
+            this.chord5Style = this.chord1Style
+            this.chord5Denom = this.chord1Denom
+            this.chord5Mut = this.chord1Mut
+        }
+
+        else if (this.chordCurrent == 2){
+            this.chord1Style = this.chord2Style
+            this.chord1Denom = this.chord2Denom
+            this.chord1Mut = this.chord2Mut
+
+            
+            this.chord2Style = this.chord2Style
+            this.chord2Denom = this.chord2Denom
+            this.chord2Mut = this.chord2Mut
+
+            this.chord3Style = this.chord2Style
+            this.chord3Denom = this.chord2Denom
+            this.chord3Mut = this.chord2Mut
+
+            this.chord4Style = this.chord2Style
+            this.chord4Denom = this.chord2Denom
+            this.chord4Mut = this.chord2Mut
+
+            this.chord5Style = this.chord2Style
+            this.chord5Denom = this.chord2Denom
+            this.chord5Mut = this.chord2Mut
+
+        }
+        else if (this.chordCurrent == 3){
+
+                this.chord1Style = this.chord3Style
+                this.chord1Denom = this.chord3Denom
+                this.chord1Mut = this.chord3Mut
+    
+                
+                this.chord2Style = this.chord3Style
+                this.chord2Denom = this.chord3Denom
+                this.chord2Mut = this.chord3Mut
+    
+                this.chord3Style = this.chord3Style
+                this.chord3Denom = this.chord3Denom
+                this.chord3Mut = this.chord3Mut
+    
+                this.chord4Style = this.chord3Style
+                this.chord4Denom = this.chord3Denom
+                this.chord4Mut = this.chord3Mut
+    
+                this.chord5Style = this.chord3Style
+                this.chord5Denom = this.chord3Denom
+                this.chord5Mut = this.chord3Mut
+    
+            }
+
+
+        else if (this.chordCurrent == 4){
+
+            this.chord1Style = this.chord4Style
+            this.chord1Denom = this.chord4Denom
+            this.chord1Mut = this.chord4Mut
+
+            
+            this.chord2Style = this.chord4Style
+            this.chord2Denom = this.chord4Denom
+            this.chord2Mut = this.chord4Mut
+
+            this.chord3Style = this.chord4Style
+            this.chord3Denom = this.chord4Denom
+            this.chord3Mut = this.chord4Mut
+
+            this.chord4Style = this.chord4Style
+            this.chord4Denom = this.chord4Denom
+            this.chord4Mut = this.chord4Mut
+
+            this.chord5Style = this.chord4Style
+            this.chord5Denom = this.chord4Denom
+            this.chord5Mut = this.chord4Mut
+
+
+        }
+        else if (this.chordCurrent == 5){
+
+            this.chord1Style = this.chord5Style
+            this.chord1Denom = this.chord5Denom
+            this.chord1Mut = this.chord5Mut
+
+            
+            this.chord2Style = this.chord5Style
+            this.chord2Denom = this.chord5Denom
+            this.chord2Mut = this.chord5Mut
+
+            this.chord3Style = this.chord5Style
+            this.chord3Denom = this.chord5Denom
+            this.chord3Mut = this.chord4Mut
+
+            this.chord4Style = this.chord5Style
+            this.chord4Denom = this.chord5Denom
+            this.chord4Mut = this.chord5Mut
+
+            this.chord5Style = this.chord5Style
+            this.chord5Denom = this.chord5Denom
+            this.chord5Mut = this.chord5Mut
+
+
+        }
+        
+        
+
+
+
+
+
+      },
+
+      copyLast()  {
+
+        if (this.chordCurrent == 2){
+            this.chord2Style = this.chord1Style
+            this.chord2Denom = this.chord1Denom
+            this.chord2Mut = this.chord1Mut
+        }
+        else if(this.chordCurrent == 3){ 
+            this.chord3Style = this.chord2Style
+            this.chord3Denom = this.chord2Denom
+            this.chord3Mut = this.chord2Mut
+        }
+        else if(this.chordCurrent == 4){ 
+            this.chord4Style = this.chord3Style
+            this.chord4Denom = this.chord3Denom
+            this.chord4Mut = this.chord3Mut
+        }
+        else if(this.chordCurrent == 5){ 
+            this.chord5Style = this.chord4Style
+            this.chord5Denom = this.chord4Denom
+            this.chord5Mut = this.chord4Mut
+        }
+
+    }, 
+
+      
+      } // methods close
+    } // app close
+
     
     const app = Vue.createApp(App)
     app.mount('#app')

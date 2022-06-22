@@ -20,7 +20,7 @@
       body {background-image: linear-gradient(#0F0B26, #8C2641);}
       button {background-color: #0D0D0D
         ; border-color: #E2D8CC}
-      #submit {background-color: #0D0D0D; border-color: #E2D8CC
+      #submit {background-color:#8C2641; border-color: #E2D8CC
       }
       #miniheadline {color: #E2D8CC}
       #sig {color: #E2D8CC}
@@ -89,8 +89,8 @@
             <!-- Comp mini-headlines div -->
 
             <div class = "flex flex-column justify-center">
-                <span id="miniheadline1" class = "f3 tc w-100">MIDI Composition</span>
-                <span id="miniheadline2" class = "f4 fw1 tc w-100">Part I: Progression</span>
+                <span id="miniheadline1" class = "f2 tc w-100">MIDI Composition</span>
+                <span id="miniheadline2" class = "f3 fw1 tc w-100">Part I: Progression</span>
                 <br>
                 <!-- <span id="miniheadline3" class = "f4 tc w-100">Add Tracks</span> -->
                 
@@ -116,7 +116,7 @@
                       <option value="D"> D </option>
                       <option value="D#" > D#/Eb </option>
                       <option value="E"> E </option>
-                      <option value="D#" > D#/Eb </option>
+
                       <option value="F"> F </option>
                       <option value="F#" > F#/Gb </option>
                       <option value="G"> G </option>
@@ -128,19 +128,22 @@
                     <label for="name" class="f4 calisto  db mb2"> Chord 1 Quality <span class="normal black-60"></span></label>
                     <!-- <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" name="chord1_quality" > -->
                     
+
+                    <!-- Ugly, make it look better -->
                     <select id="chord-1-quality" v-model="chord1Quality" name="chord1_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-1-quality-desc" >
                           <!-- <option value=""> </option> -->
-                          <option value="major"> major (common) </option>
-                          <option value="minor" > minor (common) </option>
-                          <option value="diminished" > diminished </option>
-                          <option value="augmented major7" > augmented major7 </option>
-                          <option value="diminished7"> diminished7 </option>
-                          <option value="dominant7" > dominant7 </option>
-                          <option value="half-diminished7"> half-diminished7 </option>
-                          <!-- <option value="major"> major </option> -->
-                          <option value="major7"> major7 </option>
-                          <option value="minor-major7"> minor-major7 </option>
-                          <option value="minor7" > minor7 </option>
+                          <option value="major"> major (common triad) </option>
+                          <option value="minor" > minor (common triad)</option>
+                          <option value="diminished" > diminished (triad) </option>
+                          <option value="augmented" > augmented (triad) </option>
+                          <option value="major7"> major7 (common extended) </option>
+                          <option value="minor7" > minor7 (common extended) </option>
+                          <option value="dominant7" > dominant7 (common extended) </option>
+                          <option value="minor-major7" > minor-major7(extended) </option>
+                          <option value="augmented major7" > augmented major7 (extended) </option>
+                          <option value="diminished7"> diminished7 (extended) </option>    
+                          <option value="half-diminished7"> half-diminished7 (extended) </option>
+                          
                     </select>
                     <small id="chord-1-quality-desc" class="f5 db mb2"></small>
                       <br>
@@ -173,7 +176,7 @@
                           <option value="D"> D </option>
                           <option value="D#" > D#/Eb </option>
                           <option value="E"> E </option>
-                          <option value="D#" > D#/Eb </option>
+                         
                           <option value="F"> F </option>
                           <option value="F#" > F#/Gb </option>
                           <option value="G"> G </option>
@@ -184,19 +187,17 @@
                     <label for="name" class="f4 calisto  db mb2"> Chord 2 Quality <span class="normal black-60"></span></label>
                     <small id="chord-2-quality-desc" class="f5 db mb2"></small>
                     <select id="chord-2-quality" v-model="chord2Quality" name="chord2_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-2-quality-desc" >
-                          <!-- <option value=""> </option> -->
-                          <!-- <option value=""> </option> -->
-                          <option value="major"> major (common) </option>
-                          <option value="minor" > minor (common) </option>
-                          <option value="diminished" > diminished </option>
-                          <option value="augmented major7" > augmented major7 </option>
-                          <option value="diminished7"> diminished7 </option>
-                          <option value="dominant7" > dominant7 </option>
-                          <option value="half-diminished7"> half-diminished7 </option>
-                          <!-- <option value="major"> major </option> -->
-                          <option value="major7"> major7 </option>
-                          <option value="minor-major7"> minor-major7 </option>
-                          <option value="minor7" > minor7 </option>
+                          <option value="major"> major (common triad) </option>
+                          <option value="minor" > minor (common triad)</option>
+                          <option value="diminished" > diminished (triad) </option>
+                          <option value="augmented" > augmented (triad) </option>
+                          <option value="major7"> major7 (common extended) </option>
+                          <option value="minor7" > minor7 (common extended) </option>
+                          <option value="dominant7" > dominant7 (common extended) </option>
+                          <option value="minor-major7" > minor-major7(extended) </option>
+                          <option value="augmented major7" > augmented major7 (extended) </option>
+                          <option value="diminished7"> diminished7 (extended) </option>    
+                          <option value="half-diminished7"> half-diminished7 (extended) </option>
                     </select>
                     <br>
           
@@ -226,7 +227,7 @@
                           <option value="D"> D </option>
                           <option value="D#" > D#/Eb </option>
                           <option value="E"> E </option>
-                          <option value="D#" > D#/Eb </option>
+                          
                           <option value="F"> F </option>
                           <option value="F#" > F#/Gb </option>
                           <option value="G"> G </option>
@@ -237,19 +238,17 @@
           
                     <label for="name" class="f4 calisto  db mb2"> Chord 3 Quality <span class="normal black-60"></span></label>         
                     <select id="chord-3-quality" v-model="chord3Quality" name="chord3_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-3-quality-desc" >
-                          <!-- <option value=""> </option> -->
-                          <!-- <option value=""> </option> -->
-                          <option value="major"> major (common) </option>
-                          <option value="minor" > minor (common) </option>
-                          <option value="diminished" > diminished </option>
-                          <option value="augmented major7" > augmented major7 </option>
-                          <option value="diminished7"> diminished7 </option>
-                          <option value="dominant7" > dominant7 </option>
-                          <option value="half-diminished7"> half-diminished7 </option>
-                          <!-- <option value="major"> major </option> -->
-                          <option value="major7"> major7 </option>
-                          <option value="minor-major7"> minor-major7 </option>
-                          <option value="minor7" > minor7 </option>
+                          <option value="major"> major (common triad) </option>
+                          <option value="minor" > minor (common triad)</option>
+                          <option value="diminished" > diminished (triad) </option>
+                          <option value="augmented" > augmented (triad) </option>
+                          <option value="major7"> major7 (common extended) </option>
+                          <option value="minor7" > minor7 (common extended) </option>
+                          <option value="dominant7" > dominant7 (common extended) </option>
+                          <option value="minor-major7" > minor-major7(extended) </option>
+                          <option value="augmented major7" > augmented major7 (extended) </option>
+                          <option value="diminished7"> diminished7 (extended) </option>    
+                          <option value="half-diminished7"> half-diminished7 (extended) </option>
                     </select>
                     <small id="chord-3-quality-desc" class="f5 db mb2"></small>
                     <br>
@@ -280,7 +279,7 @@
                           <option value="D"> D </option>
                           <option value="D#" > D#/Eb </option>
                           <option value="E"> E </option>
-                          <option value="D#" > D#/Eb </option>
+                          
                           <option value="F"> F </option>
                           <option value="F#" > F#/Gb </option>
                           <option value="G"> G </option>
@@ -291,19 +290,17 @@
           
                     <label for="name" class="f4 calisto  db mb2"> Chord 4 Quality <span class="normal black-60"></span></label>
                     <select id="chord-4-quality" v-model="chord4Quality" name="chord4_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-4-quality-desc" >
-                          <!-- <option value=""> </option> -->
-                          <!-- <option value=""> </option> -->
-                          <option value="major"> major (common) </option>
-                          <option value="minor" > minor (common) </option>
-                          <option value="diminished" > diminished </option>
-                          <option value="augmented major7" > augmented major7 </option>
-                          <option value="diminished7"> diminished7 </option>
-                          <option value="dominant7" > dominant7 </option>
-                          <option value="half-diminished7"> half-diminished7 </option>
-                          <!-- <option value="major"> major </option> -->
-                          <option value="major7"> major7 </option>
-                          <option value="minor-major7"> minor-major7 </option>
-                          <option value="minor7" > minor7 </option>
+                          <option value="major"> major (common triad) </option>
+                          <option value="minor" > minor (common triad)</option>
+                          <option value="diminished" > diminished (triad) </option>
+                          <option value="augmented" > augmented (triad) </option>
+                          <option value="major7"> major7 (common extended) </option>
+                          <option value="minor7" > minor7 (common extended) </option>
+                          <option value="dominant7" > dominant7 (common extended) </option>
+                          <option value="minor-major7" > minor-major7(extended) </option>
+                          <option value="augmented major7" > augmented major7 (extended) </option>
+                          <option value="diminished7"> diminished7 (extended) </option>    
+                          <option value="half-diminished7"> half-diminished7 (extended) </option>
                       </select>
                       <small id="chord-4-quality-desc" class="f5 db mb2"></small>
                       <br>
@@ -334,7 +331,7 @@
                           <option value="D"> D </option>
                           <option value="D#" > D#/Eb </option>
                           <option value="E"> E </option>
-                          <option value="D#" > D#/Eb </option>
+                          
                           <option value="F"> F </option>
                           <option value="F#" > F#/Gb </option>
                           <option value="G"> G </option>
@@ -345,19 +342,17 @@
           
                     <label for="name" class="f4 calisto  db mb2"> Chord 5 Quality <span class="normal black-60"></span></label>
                     <select id="chord-5-quality" v-model="chord5Quality" name="chord5_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="chord-5-quality-desc" >
-                          <!-- <option value=""> </option> -->
-                          <!-- <option value=""> </option> -->
-                          <option value="major"> major (common) </option>
-                          <option value="minor" > minor (common) </option>
-                          <option value="diminished" > diminished </option>
-                          <option value="augmented major7" > augmented major7 </option>
-                          <option value="diminished7"> diminished7 </option>
-                          <option value="dominant7" > dominant7 </option>
-                          <option value="half-diminished7"> half-diminished7 </option>
-                          <!-- <option value="major"> major </option> -->
-                          <option value="major7"> major7 </option>
-                          <option value="minor-major7"> minor-major7 </option>
-                          <option value="minor7" > minor7 </option>
+                          <option value="major"> major (common triad) </option>
+                          <option value="minor" > minor (common triad)</option>
+                          <option value="diminished" > diminished (triad) </option>
+                          <option value="augmented" > augmented (triad) </option>
+                          <option value="major7"> major7 (common extended) </option>
+                          <option value="minor7" > minor7 (common extended) </option>
+                          <option value="dominant7" > dominant7 (common extended) </option>
+                          <option value="minor-major7" > minor-major7(extended) </option>
+                          <option value="augmented major7" > augmented major7 (extended) </option>
+                          <option value="diminished7"> diminished7 (extended) </option>    
+                          <option value="half-diminished7"> half-diminished7 (extended) </option>
                       </select>
                       <small id="chord-5-quality-desc" class="f5 db mb2"></small>
                       <br>
@@ -397,7 +392,7 @@
             src="{% static 'userinput/coolsal.png' %}"
             class="br4 h5 w5 ba bw2 dib" alt="avatar"
             style = "border-color: #E2D8CC"> -->
-          <span id="miniheadline1" class = "f3 tc w-100"> Progression Data </span>
+          <span id="miniheadline1" class = "f2 tc w-100"> Progression </span>
           <!-- <br> -->
           <span id="miniheadline2" class = "f3 tc w-100">{{composition.name}}</span>
           <br>
@@ -413,27 +408,27 @@
             _________________________<br><br>
             <span id = "currchord" v-show="chord1Vis">
             <b>Chord [[chordCurrent]]</b> <br>
-            [[chord1Tonic]] [[chord1Quality]] [[chord1Bars]]
+            [[chord1Tonic]] [[chord1Quality]] [[chord1Bars]] bar(s)
             </span>
 
             <span id = "currchord" v-show="chord2Vis">
               <b>Chord [[chordCurrent]]</b> <br>
-              [[chord2Tonic]] [[chord2Quality]] [[chord2Bars]]
+              [[chord2Tonic]] [[chord2Quality]] [[chord2Bars]] bar(s)
             </span>
 
             <span id = "currchord" v-show="chord3Vis">
               <b>Chord [[chordCurrent]]</b> <br>
-              [[chord3Tonic]] [[chord3Quality]] [[chord3Bars]]
+              [[chord3Tonic]] [[chord3Quality]] [[chord3Bars]] bar(s)
             </span>
 
             <span id = "currchord" v-show="chord4Vis">
               <b>Chord [[chordCurrent]]</b> <br>
-              [[chord4Tonic]] [[chord4Quality]] [[chord4Bars]]
+              [[chord4Tonic]] [[chord4Quality]] [[chord4Bars]] bar(s)
             </span>
 
             <span id = "currchord" v-show="chord5Vis">
               <b>Chord [[chordCurrent]]</b> <br>
-              [[chord5Tonic]] [[chord5Quality]] [[chord5Bars]]
+              [[chord5Tonic]] [[chord5Quality]] [[chord5Bars]] bar(s)
             </span>
             
             <br><br>
@@ -567,25 +562,26 @@
 
               chord1Tonic:"",
               chord1Quality:"",
-              chord1Bars:"",
+              chord1Bars:0,
               chord2Tonic:"",
               chord2Quality:"",
-              chord2Bars:"",
+              chord2Bars:0,
               chord3Tonic:"",
               chord3Quality:"",
-              chord3Bars:"",
+              chord3Bars:0,
               chord4Tonic:"",
               chord4Quality:"",
-              chord4Bars:"",
+              chord4Bars:0,
               chord5Tonic:"",
               chord5Quality:"",
-              chord5Bars:"",
+              chord5Bars:0,
               chord1Added: false,
               chord2Added: false,
               chord3Added: false,
               chord4Added: false,
               chord5Added: false,
               noneAdded: true,
+
 
 
 

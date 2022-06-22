@@ -15,6 +15,9 @@ from mingus.containers import Track as Mtrack
 ## For improvisation and randomized generation
 # import random
 
+## for MATH
+import math
+
 ## For writing MIDI
 from mingus.midi import midi_file_out
 
@@ -133,6 +136,8 @@ def chordbuild(tonic, quality): # currently essential to automation
             note_list = chords.augmented_major_seventh(tonic)
         elif quality == "minor-major7":
             note_list = chords.minor_major_seventh(tonic)
+        elif quality == "augmented":
+            note_list = chords.augmented_triad(tonic)
 
         
         
@@ -218,7 +223,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
             expanded_set.append(new_note)
         counter +=1
 
-    # capping
+    # reach -- these allow the arpeggio to overflow into the next octave
     if "reach1" in mut_list:
         tonic_cap = Note()
         tonic_cap.name = chord_adj[0].name
@@ -274,12 +279,14 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     ###  Timing
     bar.length = duration
-    range_val = 4 * duration
+    range_val = 4 * duration # ? What was I thinking of?
+    loop_value = math.ceil((denominator * duration) / len(expanded_set))
+
 
 
     if "reverse" in mut_list:
         # descending
-        for _ in range(5):
+        for _ in range(loop_value): # the 5 value is currently arbitrary but effective
             for note in reverse_set:
                 for __ in range(linger_value):    
                     bar.place_notes(note, denominator)
@@ -288,7 +295,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         ## returning
         print(expanded_set)
         print(reverse_set)
-        for _ in range(5):
+        for _ in range(loop_value): # the 5 value is currently arbitrary but effective // could be made more efficient 6/21
             for note in expanded_set:
                  for __ in range(linger_value):
                     # print(note)
@@ -301,7 +308,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     ## ascending
     else:
-        for _ in range(5):
+        for _ in range(loop_value): # the 5 value is currently arbitrary but effective
             for note in expanded_set:
                 for __ in range(linger_value):
                     bar.place_notes(note, denominator)
@@ -325,10 +332,11 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
     bar.length = duration
     range_val = 4 * duration
+    loop_value = math.ceil(denominator * duration)
     
     if "p1" in mut_list: # they should have real names
     ### fun pattern 1 - dramatic
-        for _ in range(5):
+        for _ in range(loop_value):
              bar.place_notes(tonic, 12) # fix
              bar.place_notes(tonic, 12)
              bar.place_notes(tonic, 12)
@@ -338,7 +346,7 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     
 
     else:
-        for _ in range(denominator*duration):
+        for _ in range(loop_value):
             bar.place_notes(tonic, denominator)
 
         
@@ -351,14 +359,14 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     note_c.add_notes(chord_adj)
 
     # numerator = 4* duration
-    ranger = denominator * duration # rename range val?
+    loop_value = denominator * duration # rename range val?
     # bar.set_meter((numerator, 4)) # need to do trick for if they goof up and put in a denominator > the measure length
     bar.length = duration
     # range_val = 4 * duration
 
     if "p1" in mut_list: # they should have real names
     ### fun pattern 1 - dramatic
-        for _ in range(5): # 5? wtf lol
+        for _ in range(loop_value): # 5? wtf lol
              bar.place_notes(note_c, 12) # fix
              bar.place_notes(note_c, 12)
              bar.place_notes(note_c, 12)
@@ -367,7 +375,7 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
              bar.place_notes(note_c, 2)
 
     else:
-        for _ in range(ranger):
+        for _ in range(loop_value):
             bar.place_notes(note_c, denominator)
 
         

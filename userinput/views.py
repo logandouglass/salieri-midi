@@ -12,30 +12,82 @@ def index(request):
         ######################
         name = request.POST.get('name')
         chord1_tonic = request.POST.get('chord1_tonic')
+        if chord1_tonic == "A#/Bb":
+            chord1_tonic = "A#"
+        elif chord1_tonic == "C#/Db":
+            chord1_tonic = "C#"
+        elif chord1_tonic == "D#/Eb":
+            chord1_tonic = "D#"
+        elif chord1_tonic == "F#/Eb":
+            chord1_tonic = "F#"
+        elif chord1_tonic == "G#/Ab":
+            chord1_tonic = "G#"    
+
         chord1_quality = request.POST.get('chord1_quality')
         if request.POST.get('chord1_bars') == ("" or None):
             chord1_bars = 0
         else: chord1_bars = int(request.POST.get('chord1_bars'))
 
         chord2_tonic = request.POST.get('chord2_tonic')
+        if chord2_tonic == "A#/Bb":
+            chord2_tonic = "A#"
+        elif chord2_tonic == "C#/Db":
+            chord2_tonic = "C#"
+        elif chord2_tonic == "D#/Eb":
+            chord2_tonic = "D#"
+        elif chord2_tonic == "F#/Eb":
+            chord2_tonic = "F#"
+        elif chord2_tonic == "G#/Ab":
+                chord2_tonic = "G#"
+
         chord2_quality = request.POST.get('chord2_quality')
         if request.POST.get('chord2_bars') == ("" or None):
             chord2_bars = 0
         else: chord2_bars = int(request.POST.get('chord2_bars'))
 
         chord3_tonic = request.POST.get('chord3_tonic')
+        if chord3_tonic == "A#/Bb":
+            chord3_tonic = "A#"
+        elif chord3_tonic == "C#/Db":
+            chord3_tonic = "C#"
+        elif chord3_tonic == "D#/Eb":
+            chord3_tonic = "D#"
+        elif chord3_tonic == "F#/Eb":
+            chord3_tonic = "F#"
+        elif chord3_tonic == "G#/Ab":
+                chord3_tonic = "G#"
         chord3_quality = request.POST.get('chord3_quality')
         if request.POST.get('chord3_bars') == ("" or None):
             chord3_bars = 0
         else: chord3_bars = int(request.POST.get('chord3_bars'))
 
         chord4_tonic = request.POST.get('chord4_tonic')
+        if chord4_tonic == "A#/Bb":
+            chord4_tonic = "A#"
+        elif chord4_tonic == "C#/Db":
+            chord4_tonic = "C#"
+        elif chord4_tonic == "D#/Eb":
+            chord4_tonic = "D#"
+        elif chord4_tonic == "F#/Eb":
+            chord4_tonic = "F#"
+        elif chord4_tonic == "G#/Ab":
+                chord4_tonic = "G#"
         chord4_quality = request.POST.get('chord4_quality')
         if request.POST.get('chord4_bars') == ("" or None):
             chord4_bars = 0
         else: chord4_bars = int(request.POST.get('chord4_bars'))
 
         chord5_tonic = request.POST.get('chord5_tonic')
+        if chord5_tonic == "A#/Bb":
+            chord5_tonic = "A#"
+        elif chord5_tonic == "C#/Db":
+            chord5_tonic = "C#"
+        elif chord5_tonic == "D#/Eb":
+            chord5_tonic = "D#"
+        elif chord5_tonic == "F#/Eb":
+            chord5_tonic = "F#"
+        elif chord5_tonic == "G#/Ab":
+                chord5_tonic = "G#"
         chord5_quality = request.POST.get('chord5_quality')
         if request.POST.get('chord5_bars') == ("" or None):
             chord5_bars = 0
@@ -233,7 +285,7 @@ def track(request, id):
     
     
     }
-    return render(request, "userinput/track-remaster-2.html", context) ####@@@
+    return render(request, "userinput/track-remaster-2b.html", context) ####@@@
     
 def trackadd(request, id): ## fix!!!
     trackname = request.POST.get('trackname')
