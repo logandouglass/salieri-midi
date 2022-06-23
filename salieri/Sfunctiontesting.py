@@ -20,10 +20,10 @@ from Snewfunctions import *
 
 ####==================================================================
 
-def arpeggio(chord, denominator, mutators=[]):
+def arpeggio_draft(chord, denominator, mutators=[]):
     ...
 
-def strummer(chord=["E", "G", "B"], denominator=16, mut_list=[]):
+def strummer_draft(chord=["E", "G", "B"], denominator=16, mut_list=[]):
     bar = Bar()
     notes = NoteContainer()
     notes.add_notes(chord)

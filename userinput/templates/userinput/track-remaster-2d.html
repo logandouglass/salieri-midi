@@ -30,7 +30,7 @@
       #miniheadline2 {color:#E2D8CC}
       #miniheadline3 {color:#E2D8CC}
       #formcontainer {background-color: #130B23
-        ; border-color: #E2D8CC;}
+        ; border-color: #E2D8CC}
       #datacontainer {background-color: #130B23
 
         ; border-color: #E2D8CC}
@@ -90,10 +90,10 @@
         
       <div id = "containersdiv" class = "flex flex-wrap justify-center">
   
-        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100  br4 mr2" style = "border-color: #E2D8CC;">
+        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100  br4 mr2" style = "border-color: #E2D8CC">
           <form class="" action= "{% url 'userinput:trackadd' composition.id %}" style = 'border-color: #E2D8CC' method="POST">
           {% csrf_token %}
-            <div class="measure-narrow">
+           
     
             <!-- Comp mini-headlines div -->
             
@@ -379,8 +379,8 @@
             </div>
             {% endif %}
             
-        
-            <div id="button-div" class = "flex flex-wrap justify-center w-100">
+        </form>
+            <div id="button-div" class = "flex flex-wrap justify-center w-100 pt2">
             
                 <button id="minib" @click.prevent = "prevPage" class = "w-45 b pointer dim  mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> < </button>
                 <button id="minib" @click.prevent = "nextPage" class = "w-45 b pointer dim  mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> > </button>
@@ -401,8 +401,8 @@
 
 
             </div> <!-- closes button div -->
-        </div> <!-- closes narrow measure -->
-        </form>
+       <!-- closes narrow measure -->
+        
         </div> <!-- closes formcontainer -->
 
     

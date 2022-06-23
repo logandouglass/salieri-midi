@@ -211,13 +211,12 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     ## determine # of octaves 
     for _ in range(num_octaves):
-        counter = 1
         # expanded_set = []
         new_octave = []
         for degree in chord_adj:
             note = Note()
             note.name = degree.name
-            note.octave = (degree.octave + 1)
+            note.octave = (degree.octave + counter)
             new_octave.append(note)
         for new_note in new_octave:
             expanded_set.append(new_note)
@@ -293,18 +292,28 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     
     elif "return" in mut_list:
         ## returning
-        print(expanded_set)
-        print(reverse_set)
+        # print(expanded_set)
+        # print(reverse_set)
+
+        return_counter = 1
         for _ in range(loop_value): # the 5 value is currently arbitrary but effective // could be made more efficient 6/21
-            for note in expanded_set:
-                 for __ in range(linger_value):
-                    # print(note)
-                    bar.place_notes(note, denominator)
+            if return_counter == 1:
+                for note in expanded_set:
+                    for __ in range(linger_value):
+                        # print(note)
+                        bar.place_notes(note, denominator)
+            else:
+                for note in expanded_set:
+                    if expanded_set.index(note) != 0:  
+                        for __ in range(linger_value):
+                            # print(note)
+                            bar.place_notes(note, denominator)
             for note in reverse_set:
                  if reverse_set.index(note) != 0:
                     for __ in range(linger_value):
                         # print(note)
                         bar.place_notes(note, denominator)
+            return_counter += 1
 
     ## ascending
     else:
@@ -331,7 +340,7 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     # bar.set_meter((numerator, 4))
 
     bar.length = duration
-    range_val = 4 * duration
+    # range_val = 4 * duration
     loop_value = math.ceil(denominator * duration)
     
     if "p1" in mut_list: # they should have real names

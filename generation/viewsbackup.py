@@ -108,34 +108,6 @@ def magic(request, id):
     track_obj_length = len(track_objs)
     track_params = list(Track.objects.values()[0].keys()) # investigate rube goldbergy way?
 
-    ## Trying to prevent error if no tracks (work in progress)
-    
-    # if track_obj_length == (0 or None):
-    #     Track.objects.create(
-    #         # comp = Composition.objects.get(id=id),
-    #         comp = comp_obj,    
-    #         trackname = "default", 
-
-    #         chord1_style = "simpline", 
-    #         chord1_denom = "4", 
-    #         chord2_style = None,
-    #         chord2_denom = None,
-    #         chord3_style =  None,
-    #         chord3_denom = None,
-    #         chord4_style = None,
-    #         chord4_denom = None,
-    #         chord5_style = None,
-    #         chord5_denom = None,
-
-    #         chord1_mutators = [],
-    #         chord2_mutators = None,
-    #         chord3_mutators = None,
-    #         chord4_mutators = None,
-    #         chord5_mutators = None,
-    #     )
-    #     track_objs = all_tracks.filter(comp=comp_obj)
-    #     track_obj_length = len(track_objs)
-
     
     ###=======================================================
     
@@ -283,7 +255,7 @@ def magic(request, id):
         tracknames.append(track_dict["trackname"])
 
 
-    test_track = None
+    test_track = track_objs[0]
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
     data_test = track_dict_list
     # data_test = track_dict_list[0]
