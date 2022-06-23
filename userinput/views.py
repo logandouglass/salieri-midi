@@ -18,7 +18,7 @@ def index(request):
             chord1_tonic = "C#"
         elif chord1_tonic == "D#/Eb":
             chord1_tonic = "D#"
-        elif chord1_tonic == "F#/Eb":
+        elif chord1_tonic == "F#/Gb":
             chord1_tonic = "F#"
         elif chord1_tonic == "G#/Ab":
             chord1_tonic = "G#"    
@@ -39,7 +39,7 @@ def index(request):
             chord2_tonic = "C#"
         elif chord2_tonic == "D#/Eb":
             chord2_tonic = "D#"
-        elif chord2_tonic == "F#/Eb":
+        elif chord2_tonic == "F#/Gb":
             chord2_tonic = "F#"
         elif chord2_tonic == "G#/Ab":
                 chord2_tonic = "G#"
@@ -61,7 +61,7 @@ def index(request):
             chord3_tonic = "C#"
         elif chord3_tonic == "D#/Eb":
             chord3_tonic = "D#"
-        elif chord3_tonic == "F#/Eb":
+        elif chord3_tonic == "F#/Gb":
             chord3_tonic = "F#"
         elif chord3_tonic == "G#/Ab":
                 chord3_tonic = "G#"
@@ -81,7 +81,7 @@ def index(request):
             chord4_tonic = "C#"
         elif chord4_tonic == "D#/Eb":
             chord4_tonic = "D#"
-        elif chord4_tonic == "F#/Eb":
+        elif chord4_tonic == "F#/Gb":
             chord4_tonic = "F#"
         elif chord4_tonic == "G#/Ab":
                 chord4_tonic = "G#"
@@ -101,7 +101,7 @@ def index(request):
             chord5_tonic = "C#"
         elif chord5_tonic == "D#/Eb":
             chord5_tonic = "D#"
-        elif chord5_tonic == "F#/Eb":
+        elif chord5_tonic == "F#/Gb":
             chord5_tonic = "F#"
         elif chord5_tonic == "G#/Ab":
                 chord5_tonic = "G#"

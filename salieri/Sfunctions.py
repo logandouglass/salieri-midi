@@ -125,7 +125,11 @@ def chordbuild(tonic, quality): # currently essential to automation
         elif quality == "major7":
             note_list = chords.major_seventh(tonic)
         elif quality == "dominant7":
-            note_list = chords.dominant7(tonic)
+            # note_list = chords.dominant7(tonic)  ## YOU WOULD THINK, they messed it up
+            note_list = chords.major_triad(tonic)
+            minor_7 = intervals.minor_seventh(tonic)
+            note_list.append(minor_7)
+
         elif quality == "diminished7":
             note_list = chords.diminished_seventh(tonic)
         elif quality == "half-diminished7":
@@ -190,15 +194,44 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     initial remaster 6/20
     """
     bar = Bar()
+    
+    # if "reverse" in mut_list:
+    #     chord_adj = octave_descend(chord)
+    # else:
+    #     chord_adj = octave_ascend(chord)
     chord_adj = octave_ascend(chord)
-    # chord_adj_full = chord_adj.copy()
+    chord_adj_d = octave_descend(chord) ## use to clean up code and do inversions/reaches
+
+
+    
+    
+    
+    
+    ## inversions -- 
+    if "invert1" in mut_list:
+        inverted_list = []
+        for note in chord_adj_d[-1:-2:-1]:
+            inverted_list.append(note)
+        for note in chord_adj_d[0:-1]:
+            inverted_list.append(note)
+        chord_adj_d.clear()
+        chord_adj_d = inverted_list
+    if "invert2" in mut_list:
+        inverted_list = []
+        for note in chord_adj_d[-1:-3:-1]:
+            inverted_list.append(note)
+        for note in chord_adj_d[0:-2]:
+            inverted_list.append(note)
+        chord_adj_d.clear()
+        chord_adj_d = inverted_list
+
 
     
     
     ## standard counter -- for more octave correction
     counter = 1
 
-    ## first test of double octave
+    ## parsing mutators for octave extension
     num_octaves = 0
     if "o1" in mut_list:
         num_octaves = 1
@@ -222,38 +255,86 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
             expanded_set.append(new_note)
         counter +=1
 
-    # reach -- these allow the arpeggio to overflow into the next octave
+    
+
+    ## for inversions
+
+    ### reach -- these allow the arpeggio to overflow into the next octave -- use only on non-reverse figures s of 6/23
+
+
+    ## doesn't work on reverses, need to investigate
     if "reach1" in mut_list:
-        tonic_cap = Note()
-        tonic_cap.name = chord_adj[0].name
-        tonic_cap.octave = chord_adj[0].octave + counter
-        expanded_set.append(tonic_cap)
+        tonic_cap = Note() # rename this, it's misleading on the reverse ones
+        tonic_cap.name = chord_adj[0].name   
+        # tonic_cap.octave = chord_adj[0].octave + counter
+        if "reverse" in mut_list:
+            tonic_cap.octave = chord_adj[0].octave + counter
+            expanded_set.insert(0, tonic_cap)
+        else:
+            tonic_cap.octave = chord_adj[0].octave - counter    
+            expanded_set.append(tonic_cap)
+        # expanded_set.append(tonic_cap)
     ##
     elif "reach2" in mut_list:
         tonic_cap = Note()
         tonic_cap.name = chord_adj[0].name
-        tonic_cap.octave = chord_adj[0].octave + counter
-        expanded_set.append(tonic_cap)
+
+        # tonic_cap.octave = chord_adj[0].octave + counter
+        if "reverse" in mut_list:
+            tonic_cap.octave = chord_adj[0].octave + counter
+            expanded_set.insert(0, tonic_cap)
+        else:
+            tonic_cap.octave = chord_adj[0].octave - counter    
+            expanded_set.append(tonic_cap)
+        # expanded_set.append(tonic_cap)
         degree2_cap = Note()
         degree2_cap.name = chord_adj[1].name
-        degree2_cap.octave = chord_adj[1].octave + counter
-        expanded_set.append(degree2_cap)
+
+        # degree2_cap.octave = chord_adj[1].octave + counter
+        if "reverse" in mut_list:
+            degree2_cap.octave = chord_adj[1].octave - counter
+            expanded_set.insert(1, degree2_cap)
+        else:
+            degree2_cap.octave = chord_adj[1].octave + counter    
+            expanded_set.append(degree2_cap)
+        # expanded_set.append(degree2_cap)
     elif "reach3" in mut_list:
         tonic_cap = Note()
         tonic_cap.name = chord_adj[0].name
-        tonic_cap.octave = chord_adj[0].octave + counter
-        expanded_set.append(tonic_cap)
+        # tonic_cap.octave = chord_adj[0].octave + counter
+        if "reverse" in mut_list:
+            tonic_cap.octave = chord_adj[0].octave + counter
+            expanded_set.insert(0, tonic_cap)
+        else:
+            tonic_cap.octave = chord_adj[0].octave - counter    
+            expanded_set.append(tonic_cap)
+        # expanded_set.append(tonic_cap)
         degree2_cap = Note()
         degree2_cap.name = chord_adj[1].name
-        degree2_cap.octave = chord_adj[1].octave + counter
-        expanded_set.append(degree2_cap)
+
+        # degree2_cap.octave = chord_adj[1].octave + counter
+        if "reverse" in mut_list:
+            degree2_cap.octave = chord_adj[1].octave - counter
+            expanded_set.insert(1, degree2_cap)
+        else:
+            degree2_cap.octave = chord_adj[1].octave + counter    
+            expanded_set.append(degree2_cap)
+        # expanded_set.append(degree2_cap)
         degree3_cap = Note()
         degree3_cap.name = chord_adj[2].name
-        degree3_cap.octave = chord_adj[2].octave + counter
-        expanded_set.append(degree3_cap)
+
+        # degree3_cap.octave = chord_adj[2].octave + counter
+        if "reverse" in mut_list:
+            degree3_cap.octave = chord_adj[1].octave - counter
+            expanded_set.insert(1, degree3_cap)
+        else:
+            degree3_cap.octave = chord_adj[1].octave + counter    
+            expanded_set.append(degree3_cap)
+        # expanded_set.append(degree3_cap)
 
     reverse_set = expanded_set.copy()
     reverse_set.reverse()
+    
 
 
 
@@ -281,6 +362,22 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     range_val = 4 * duration # ? What was I thinking of?
     loop_value = math.ceil((denominator * duration) / len(expanded_set))
 
+    ##delays
+    if "delay1" in mut_list:
+        bar.place_rest(4)
+    if "delay2" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay3" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay4" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+
 
 
     if "reverse" in mut_list:
@@ -288,8 +385,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         for _ in range(loop_value): # the 5 value is currently arbitrary but effective
             for note in reverse_set:
                 for __ in range(linger_value):    
-                    bar.place_notes(note, denominator)
-    
+                    bar.place_notes(note, denominator) 
     elif "return" in mut_list:
         ## returning
         # print(expanded_set)
@@ -342,6 +438,22 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     bar.length = duration
     # range_val = 4 * duration
     loop_value = math.ceil(denominator * duration)
+
+    ##delays
+    if "delay1" in mut_list:
+        bar.place_rest(4)
+    if "delay2" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay3" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay4" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
     
     if "p1" in mut_list: # they should have real names
     ### fun pattern 1 - dramatic
@@ -372,6 +484,22 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     # bar.set_meter((numerator, 4)) # need to do trick for if they goof up and put in a denominator > the measure length
     bar.length = duration
     # range_val = 4 * duration
+
+    ##delays
+    if "delay1" in mut_list:
+        bar.place_rest(4)
+    if "delay2" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay3" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay4" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
 
     if "p1" in mut_list: # they should have real names
     ### fun pattern 1 - dramatic

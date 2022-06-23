@@ -21,52 +21,21 @@
 from Sfunctions import *
 tonic = "C"
 
-# print(chords.dominant7(tonic))
-# print(chords.major_seventh(tonic))
-# print(chords.minor_seventh(tonic))
-# print(chords.augmented_triad(tonic))
-# print(chords.minor_major_seventh(tonic))
+# print(chords.seventh(tonic)) ## gives Cdom7???
+# print(chords.dominant7("C"))  ## Gmaj7!?
+# print(chords.major_seventh("G"))
 
-print(scales.NaturalMinor("G#/Ab"))
+tonic = "D"
+# note = Note(tonic)
+# print(note)
+# note.transpose("1", False)
+# print(intervals.minor_seventh("D"))
+# print(type(intervals.minor_seventh("D")))
+chord = chords.major_triad(tonic)
+minor_7 = intervals.minor_seventh(tonic)
+chord.append(minor_7)
+print(chord)
 
-# test_string = "dog frog bog log hypatia"
-# bowgle = None
-# p = test_string.split()
-# q = bowgle.split()
-# print(p)
-
-# p = [1,2,3]
-# q = [4,5,6]
-
-# for member in q:
-#     p.append(member)
-
-# print(p)
-
-
-
-
-
-
-
-
-
-
-### Today's Mantra ###
-## Climb a ladder, throw it away...
-## Climb a ladder, throw it away...
-## Climb a ladder, throw it away...
-
-
-# print(listify_mutators("waffle cone.messiah hummus"))
-# print(listify_compound_mutators(listify_mutators("waffle cone.messiah hummus")))
-
-# number = 1
-
-# print(number[0])
-
-# if number[0] == "frog":
-#     print("frog")
 
 
 
