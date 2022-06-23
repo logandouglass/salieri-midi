@@ -27,7 +27,7 @@ tonic = "C"
 # print(chords.augmented_triad(tonic))
 # print(chords.minor_major_seventh(tonic))
 
-print(scales.NaturalMinor("G"))
+print(scales.NaturalMinor("G#/Ab"))
 
 # test_string = "dog frog bog log hypatia"
 # bowgle = None
@@ -58,15 +58,15 @@ print(scales.NaturalMinor("G"))
 ## Climb a ladder, throw it away...
 
 
-print(listify_mutators("waffle cone.messiah hummus"))
-print(listify_compound_mutators(listify_mutators("waffle cone.messiah hummus")))
+# print(listify_mutators("waffle cone.messiah hummus"))
+# print(listify_compound_mutators(listify_mutators("waffle cone.messiah hummus")))
 
-number = 1
+# number = 1
 
-print(number[0])
+# print(number[0])
 
-if number[0] == "frog":
-    print("frog")
+# if number[0] == "frog":
+#     print("frog")
 
 
 

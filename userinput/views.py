@@ -24,6 +24,10 @@ def index(request):
             chord1_tonic = "G#"    
 
         chord1_quality = request.POST.get('chord1_quality')
+        chord1_quality_display = chord1_quality
+        if chord1_quality == None:
+            chord1_quality_display = ""
+
         if request.POST.get('chord1_bars') == ("" or None):
             chord1_bars = 0
         else: chord1_bars = int(request.POST.get('chord1_bars'))
@@ -41,6 +45,11 @@ def index(request):
                 chord2_tonic = "G#"
 
         chord2_quality = request.POST.get('chord2_quality')
+        chord2_quality_display = chord2_quality
+        if chord2_quality == None:
+            chord2_quality_display = ""
+
+
         if request.POST.get('chord2_bars') == ("" or None):
             chord2_bars = 0
         else: chord2_bars = int(request.POST.get('chord2_bars'))
@@ -57,6 +66,10 @@ def index(request):
         elif chord3_tonic == "G#/Ab":
                 chord3_tonic = "G#"
         chord3_quality = request.POST.get('chord3_quality')
+        chord3_quality_display = chord3_quality
+        if chord3_quality == None:
+            chord3_quality_display = ""
+
         if request.POST.get('chord3_bars') == ("" or None):
             chord3_bars = 0
         else: chord3_bars = int(request.POST.get('chord3_bars'))
@@ -73,6 +86,10 @@ def index(request):
         elif chord4_tonic == "G#/Ab":
                 chord4_tonic = "G#"
         chord4_quality = request.POST.get('chord4_quality')
+        chord4_quality_display = chord4_quality
+        if chord4_quality == None:
+            chord4_quality_display = ""
+
         if request.POST.get('chord4_bars') == ("" or None):
             chord4_bars = 0
         else: chord4_bars = int(request.POST.get('chord4_bars'))
@@ -89,6 +106,10 @@ def index(request):
         elif chord5_tonic == "G#/Ab":
                 chord5_tonic = "G#"
         chord5_quality = request.POST.get('chord5_quality')
+        chord5_quality_display = chord5_quality
+        if chord5_quality == None:
+            chord5_quality_display = ""
+
         if request.POST.get('chord5_bars') == ("" or None):
             chord5_bars = 0
         else: chord5_bars = int(request.POST.get('chord5_bars'))
@@ -140,6 +161,18 @@ def track(request, id):
     comp_data_dict_list = list(Composition.objects.filter(id=id).values())
     comp_data_dict = comp_data_dict_list[0]
     chord1_tonic = comp_data_dict["chord1_tonic"]
+    chord1_tonic_display = chord1_tonic
+    if chord1_tonic_display == "A#":
+        chord1_tonic_display = "A#/Bb"
+    if chord1_tonic_display == "C#":
+        chord1_tonic_display = "C#/Db"
+    if chord1_tonic_display == "D#":
+        chord1_tonic_display = "D#/Eb"
+    if chord1_tonic_display == "F#":
+        chord1_tonic_display = "F#/Gb"
+    if chord1_tonic_display == "G#":
+        chord1_tonic_display = "G#/Ab"
+
     chord1_quality = comp_data_dict["chord1_quality"]
     chord1_bars = comp_data_dict["chord1_bars"]
     chord1_bars_u = "bar(s)"
@@ -159,6 +192,21 @@ def track(request, id):
 
 
     chord2_tonic = comp_data_dict["chord2_tonic"]
+    chord2_tonic_display = chord2_tonic
+    if chord2_tonic_display == "A#":
+        chord2_tonic_display = "A#/Bb"
+    if chord2_tonic_display == "C#":
+        chord2_tonic_display = "C#/Db"
+    if chord2_tonic_display == "D#":
+        chord2_tonic_display = "D#/Eb"
+    if chord2_tonic_display == "F#":
+        chord2_tonic_display = "F#/Gb"
+    if chord2_tonic_display == "G#":
+        chord2_tonic_display = "G#/Ab"
+
+
+
+
     chord2_quality = comp_data_dict["chord2_quality"]
     chord2_bars = comp_data_dict["chord2_bars"]
     chord2_bars_u = "bar(s)"
@@ -174,6 +222,19 @@ def track(request, id):
             chord2_works = False
 
     chord3_tonic = comp_data_dict["chord3_tonic"]
+    chord3_tonic_display = chord3_tonic
+    if chord3_tonic_display == "A#":
+        chord3_tonic_display = "A#/Bb"
+    if chord3_tonic_display == "C#":
+        chord3_tonic_display = "C#/Db"
+    if chord3_tonic_display == "D#":
+        chord3_tonic_display = "D#/Eb"
+    if chord3_tonic_display == "F#":
+        chord3_tonic_display = "F#/Gb"
+    if chord3_tonic_display == "G#":
+        chord3_tonic_display = "G#/Ab"
+
+
     chord3_quality = comp_data_dict["chord3_quality"]
     chord3_bars = comp_data_dict["chord3_bars"]
     chord3_bars_u = "bar(s)"
@@ -189,6 +250,18 @@ def track(request, id):
             chord3_works = False
 
     chord4_tonic = comp_data_dict["chord4_tonic"]
+    chord4_tonic_display = chord4_tonic
+    if chord4_tonic_display == "A#":
+        chord4_tonic_display = "A#/Bb"
+    if chord4_tonic_display == "C#":
+        chord4_tonic_display = "C#/Db"
+    if chord4_tonic_display == "D#":
+        chord4_tonic_display = "D#/Eb"
+    if chord4_tonic_display == "F#":
+        chord4_tonic_display = "F#/Gb"
+    if chord4_tonic_display == "G#":
+        chord4_tonic_display = "G#/Ab"
+
     chord4_quality = comp_data_dict["chord4_quality"]
     chord4_bars = comp_data_dict["chord4_bars"]
     chord4_bars_u = "bar(s)"
@@ -204,6 +277,19 @@ def track(request, id):
             chord4_works = False
 
     chord5_tonic = comp_data_dict["chord5_tonic"]
+    chord5_tonic_display = chord5_tonic
+    if chord5_tonic_display == "A#":
+        chord5_tonic_display = "A#/Bb"
+    if chord5_tonic_display == "C#":
+        chord5_tonic_display = "C#/Db"
+    if chord5_tonic_display == "D#":
+        chord5_tonic_display = "D#/Eb"
+    if chord5_tonic_display == "F#":
+        chord5_tonic_display = "F#/Gb"
+    if chord5_tonic_display == "G#":
+        chord5_tonic_display = "G#/Ab"
+
+
     chord5_quality = comp_data_dict["chord5_quality"]
     chord5_bars = comp_data_dict["chord5_bars"]
     chord5_bars_u = "bar(s)"
@@ -228,6 +314,23 @@ def track(request, id):
         chord4_vis = True
     if "" not in chord5_dg:
         chord5_vis = True
+
+    chord1_works_not = False
+    chord2_works_not = False
+    chord3_works_not = False
+    chord4_works_not = False
+    chord5_works_not = False
+
+    if chord1_works == False:
+        chord1_works_not = True
+    if chord2_works == False:
+        chord2_works_not = True
+    if chord3_works == False:
+        chord3_works_not = True
+    if chord4_works == False:
+        chord4_works_not = True
+    if chord5_works == False:
+        chord5_works_not = True
 
     all_tracks = Track.objects.all()
     track_objs = all_tracks.filter(comp=composition)
@@ -282,7 +385,21 @@ def track(request, id):
         "chord4_works": chord4_works,
         "chord5_works": chord5_works,
     
-    
+        "chord1_tonic_display":chord1_tonic_display,
+        "chord2_tonic_display":chord2_tonic_display,
+        "chord3_tonic_display":chord3_tonic_display,
+        "chord4_tonic_display":chord4_tonic_display,
+        "chord5_tonic_display":chord5_tonic_display,
+
+        "chord1_works_not":chord1_works_not,
+        "chord2_works_not":chord2_works_not,
+        "chord3_works_not":chord3_works_not,
+        "chord4_works_not":chord4_works_not,
+        "chord5_works_not":chord5_works_not,
+
+        
+        
+
     
     }
     return render(request, "userinput/track-remaster-2b.html", context) ####@@@

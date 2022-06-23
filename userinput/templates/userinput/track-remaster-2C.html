@@ -67,7 +67,7 @@
         </a> -->
     
         <!-- ttu tracked hover-bg-gray-->
-        <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
+        <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Calieri</h1>
         <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
         <nav class=" bt bb bw1 tc mw7 center mt4" style = "border-color: #E0AB79">
           <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:index' %}">Home</a>
@@ -155,12 +155,7 @@
               </div>
               {% endif %}
 
-              {% if chord1_works_not  %}
-            
-                <div v-show="oneIsCurrent" class = "" style="height:25vh">
-
-                </div>
-                {% endif %}
+             
             
               {% if chord2_works %}
               <div id = "chord2-data" v-show="chord2Vis" style="height:25vh">
@@ -206,12 +201,7 @@
               </div>
               {% endif %}
 
-              {% if chord2_works_not  %}
-            
-                <div v-show="twoIsCurrent" class = "" style="height:25vh">
-
-                </div>
-                {% endif %}
+             
 
               {% if chord3_works %}
               <div id = "chord3-data" v-show="chord3Vis" style="height:25vh">
@@ -257,21 +247,7 @@
               </div>
               {% endif %}
 
-              {% if chord3_works_not  %}
-            
-                <!-- <p v-show="threeIsCurrent" class = "">
-                <br><br><br><br><br><br>
-                <br><br><br><br><br><br>
-                <br><br><br><br><br>
-                </p> -->
-
-                <div v-show="threeIsCurrent" class="" style="height:25vh">
-
-
-                </div>
-
-
-              {% endif %}
+              
 
               {% if chord4_works %}
               <div id = "chord4-data" v-show="chord4Vis" style="height:25vh">
@@ -317,12 +293,7 @@
               </div>
               {% endif %}
 
-              {% if chord4_works_not  %}
-            
-                <div v-show="fourIsCurrent" class = "" style="height:25vh">
-
-                </div>
-            {% endif %}
+              
 
             {% if chord5_works %}
               <div id = "chord5-data" v-show="chord5Vis" style="height:25vh">
@@ -368,27 +339,23 @@
               </div>
             {% endif %}
 
-            {% if chord5_works_not  %}
-            
-            <div v-show="fiveIsCurrent" class = "" style="height:25vh">
-
-            </div>
-            {% endif %}
+           
             
         
             <div id="button-div" class = "flex flex-wrap justify-center w-100">
             
+            <!-- <div id="button-row-1" class ="flex flex-wrap w-100"> -->
                 <button id="minib" @click.prevent = "prevPage" class = "w-45 b pointer dim  mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> < </button>
                 <button id="minib" @click.prevent = "nextPage" class = "w-45 b pointer dim  mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> > </button>
                 <button id="minib" @click.prevent = "copyLast" class = "w-45 b pointer dim  mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> copy last </button>
                 <button id="minib" @click.prevent = "copyAll" class = "w-45 b pointer dim  mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> style all </button>
                 <button id="stylebar" @click.prevent = "clearBar" class = "w-90 b pointer dim  f4 calisto no-underline br2 ph4 pv2 mb2  white" type = "button"> reset styling </button>
                   
-
+            <!-- <a href = "{% url 'generation:magic' composition.id %}"></a> -->
                 <input id="submit" class = "w-90 b pointer dim  f4 calisto no-underline br2 ph4 pv2 mb2 white" type="submit" value="add track"/>
 
                 <a href = "{% url 'generation:magic' composition.id %}" class = "no-underline w-100 flex justify-center ">
-                <button id="finish" class = "w-90 b pointer dib dim f4 calisto no-underline br2 ph3 pv2 mb2 white" type="button" method="post">
+                <button id="finish" class = "w-90 b pointer dib dim ml1 f4 calisto no-underline br2 ph3 pv2 mb2 white" type="button" method="post">
                   finish composition
                 </button>
                 </a>
