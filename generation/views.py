@@ -287,7 +287,9 @@ def magic(request, id):
     type_test = f"{type(chord5_tonic_harvest)} + {chord5_tonic_harvest}"
     data_test = track_dict_list
     # data_test = track_dict_list[0]
-    data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
+    # data_test_2 = list(list(all_tracks.filter(comp=comp_obj).values_list())[0])
+    # data_test_3 = feed_progression
+    data_test_2 = "dog"
     data_test_3 = feed_progression
 
 

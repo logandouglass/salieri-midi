@@ -200,7 +200,8 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     # else:
     #     chord_adj = octave_ascend(chord)
     chord_adj = octave_ascend(chord)
-    chord_adj_d = octave_descend(chord) ## use to clean up code and do inversions/reaches
+    chord_copy = chord.copy()
+    chord_adj_d = octave_descend(chord_copy) ## use to clean up code and do inversions/reaches
 
 
     
@@ -216,7 +217,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
             inverted_list.append(note)
         chord_adj_d.clear()
         chord_adj_d = inverted_list
-    if "invert2" in mut_list:
+    elif "invert2" in mut_list:
         inverted_list = []
         for note in chord_adj_d[-1:-3:-1]:
             inverted_list.append(note)
@@ -261,81 +262,98 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     ### reach -- these allow the arpeggio to overflow into the next octave -- use only on non-reverse figures s of 6/23
 
+    ####### DANGER ##################
 
     ## doesn't work on reverses, need to investigate
+
+
     if "reach1" in mut_list:
-        tonic_cap = Note() # rename this, it's misleading on the reverse ones
-        tonic_cap.name = chord_adj[0].name   
-        # tonic_cap.octave = chord_adj[0].octave + counter
-        if "reverse" in mut_list:
-            tonic_cap.octave = chord_adj[0].octave + counter
-            expanded_set.insert(0, tonic_cap)
-        else:
-            tonic_cap.octave = chord_adj[0].octave - counter    
-            expanded_set.append(tonic_cap)
-        # expanded_set.append(tonic_cap)
+        tonic_cap = Note()
+        tonic_cap.name = chord_adj[0].name
+        tonic_cap.octave = chord_adj[0].octave + counter
+        expanded_set.append(tonic_cap)
     ##
     elif "reach2" in mut_list:
         tonic_cap = Note()
         tonic_cap.name = chord_adj[0].name
-
-        # tonic_cap.octave = chord_adj[0].octave + counter
-        if "reverse" in mut_list:
-            tonic_cap.octave = chord_adj[0].octave + counter
-            expanded_set.insert(0, tonic_cap)
-        else:
-            tonic_cap.octave = chord_adj[0].octave - counter    
-            expanded_set.append(tonic_cap)
-        # expanded_set.append(tonic_cap)
+        tonic_cap.octave = chord_adj[0].octave + counter
+        expanded_set.append(tonic_cap)
         degree2_cap = Note()
         degree2_cap.name = chord_adj[1].name
-
-        # degree2_cap.octave = chord_adj[1].octave + counter
-        if "reverse" in mut_list:
-            degree2_cap.octave = chord_adj[1].octave - counter
-            expanded_set.insert(1, degree2_cap)
-        else:
-            degree2_cap.octave = chord_adj[1].octave + counter    
-            expanded_set.append(degree2_cap)
-        # expanded_set.append(degree2_cap)
+        degree2_cap.octave = chord_adj[1].octave + counter
+        expanded_set.append(degree2_cap)
     elif "reach3" in mut_list:
         tonic_cap = Note()
         tonic_cap.name = chord_adj[0].name
-        # tonic_cap.octave = chord_adj[0].octave + counter
-        if "reverse" in mut_list:
-            tonic_cap.octave = chord_adj[0].octave + counter
-            expanded_set.insert(0, tonic_cap)
-        else:
-            tonic_cap.octave = chord_adj[0].octave - counter    
-            expanded_set.append(tonic_cap)
-        # expanded_set.append(tonic_cap)
+        tonic_cap.octave = chord_adj[0].octave + counter
+        expanded_set.append(tonic_cap)
         degree2_cap = Note()
         degree2_cap.name = chord_adj[1].name
-
-        # degree2_cap.octave = chord_adj[1].octave + counter
-        if "reverse" in mut_list:
-            degree2_cap.octave = chord_adj[1].octave - counter
-            expanded_set.insert(1, degree2_cap)
-        else:
-            degree2_cap.octave = chord_adj[1].octave + counter    
-            expanded_set.append(degree2_cap)
-        # expanded_set.append(degree2_cap)
+        degree2_cap.octave = chord_adj[1].octave + counter
+        expanded_set.append(degree2_cap)
         degree3_cap = Note()
         degree3_cap.name = chord_adj[2].name
+        degree3_cap.octave = chord_adj[2].octave + counter
+        expanded_set.append(degree3_cap)
 
-        # degree3_cap.octave = chord_adj[2].octave + counter
-        if "reverse" in mut_list:
-            degree3_cap.octave = chord_adj[1].octave - counter
-            expanded_set.insert(1, degree3_cap)
-        else:
-            degree3_cap.octave = chord_adj[1].octave + counter    
-            expanded_set.append(degree3_cap)
-        # expanded_set.append(degree3_cap)
+
+    # if "reach1" in mut_list:
+    #     tonic_cap = Note()
+    #     tonic_cap.name = chord_adj[0].name
+    #     # if "reverse" in mut_list:
+    #     #     tonic_cap.octave = chord_adj[0].octave + (counter*-1)
+    #     # else:    
+    #     #     tonic_cap.octave = chord_adj[0].octave + counter
+    #     tonic_cap.octave = chord_adj[0].octave - counter
+    #     expanded_set.append(tonic_cap)
+    # ##
+    # elif "reach2" in mut_list:
+    #     tonic_cap = Note()
+    #     tonic_cap.name = chord_adj[0].name
+    #     # if "reverse" in mut_list:
+    #     #     tonic_cap.octave = chord_adj[0].octave + (counter*-1)
+    #     # else:    
+    #     #     tonic_cap.octave = chord_adj[0].octave + counter
+    #     tonic_cap.octave = chord_adj[0].octave - counter
+    #     expanded_set.append(tonic_cap)
+    #     degree2_cap = Note()
+    #     degree2_cap.name = chord_adj[1].name
+    #     # if "reverse" in mut_list:
+    #     #     degree2_cap.octave = chord_adj[0].octave + (counter*-1)
+    #     # else:    
+    #     #     degree2_cap.octave = chord_adj[0].octave + counter
+    #     degree2_cap.octave = chord_adj[1].octave - counter
+    #     expanded_set.append(degree2_cap)
+    # elif "reach3" in mut_list:
+    #     tonic_cap = Note()
+    #     tonic_cap.name = chord_adj[0].name
+    #     # if "reverse" in mut_list:
+    #     #     tonic_cap.octave = chord_adj[0].octave + (counter*-1)
+    #     # else:    
+    #     #     tonic_cap.octave = chord_adj[0].octave + counter
+    #     tonic_cap.octave = chord_adj[0].octave - counter
+    #     expanded_set.append(tonic_cap)
+    #     degree2_cap = Note()
+    #     degree2_cap.name = chord_adj[1].name
+    #     # if "reverse" in mut_list:
+    #     #     degree2_cap.octave = chord_adj[0].octave + (counter*-1)
+    #     # else:    
+    #     #     degree2_cap.octave = chord_adj[0].octave + counter
+    #     degree2_cap.octave = chord_adj[1].octave - counter
+    #     expanded_set.append(degree2_cap)
+    #     degree3_cap = Note()
+    #     degree3_cap.name = chord_adj[2].name
+    #     # if "reverse" in mut_list:
+    #     #     degree3_cap.octave = chord_adj[0].octave + (counter*-1)
+    #     # else:    
+    #     #     degree3_cap.octave = chord_adj[0].octave + counter
+    #     degree3_cap.octave = chord_adj[2].octave - counter
+    #     expanded_set.append(degree3_cap)
 
     reverse_set = expanded_set.copy()
     reverse_set.reverse()
     
-
+    ########### DANGER #########################################
 
 
     ## lingers
