@@ -382,14 +382,14 @@
         
             <div id="button-div" class = "flex flex-wrap justify-center w-100">
             
-                <button id="minib" @click.prevent = "prevPage" class = "w-45 b pointer dim  mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> < </button>
-                <button id="minib" @click.prevent = "nextPage" class = "w-45 b pointer dim  mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> > </button>
-                <button id="minib" @click.prevent = "copyLast" class = "w-45 b pointer dim  mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> copy last </button>
-                <button id="minib" @click.prevent = "copyAll" class = "w-45 b pointer dim  mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> style all </button>
-                <button id="stylebar" @click.prevent = "clearBar" class = "w-90 b pointer dim  f4 calisto no-underline br2 ph4 pv2 mb2  white" type = "button"> reset styling </button>
+                <button id="minib" @click.prevent = "prevPage" class = "w-45 b pointer   mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> < </button>
+                <button id="minib" @click.prevent = "nextPage" class = "w-45 b pointer   mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> > </button>
+                <button id="minib" @click.prevent = "copyLast" class = "w-45 b pointer   mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> copy last </button>
+                <button id="minib" @click.prevent = "copyAll" class = "w-45 b pointer   mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> style all </button>
+                <button id="stylebar" @click.prevent = "clearBar" class = "w-90 b pointer   f4 calisto no-underline br2 ph4 pv2 mb2  white" type = "button"> reset styling </button>
                   
 
-                <input id="submit" class = "w-90 b pointer dim  f4 calisto no-underline br2 ph4 pv2 mb2 white" type="submit" value="add track"/>
+                <input id="submit" class = "w-90 b pointer   f4 calisto no-underline br2 ph4 pv2 mb2 white" type="submit" value="add track"/>
 
                 <a href = "{% url 'generation:magic' composition.id %}" class = "no-underline w-100 flex justify-center ">
                 <button id="finish" class = "w-90 b pointer dib dim f4 calisto no-underline br2 ph3 pv2 mb2 white" type="button" method="post">

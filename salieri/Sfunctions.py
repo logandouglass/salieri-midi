@@ -203,6 +203,11 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     chord_copy = chord.copy()
     chord_adj_d = octave_descend(chord_copy) ## use to clean up code and do inversions/reaches
 
+    if "bassify" in mut_list:
+        for note in chord_adj:
+            note.octave_down()
+    
+
 
     
     
