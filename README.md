@@ -7,6 +7,6 @@ The current version had to be developed very quickly to be demo'd as a final pro
 
 I will make these improvements, as well as *drastically* expanding functionality, in time.  
 
-The end goal is to create an accessible but powerful tool that can help users of all skill levels create their own music as midi.  Check back over time to see the project develop!
+The end goal is to create an accessible but powerful open source tool that can help users of all skill levels create their own music as midi.  Check back over time to see the project develop.
 
-- Logan Douglass, Salieri dev, 7/11/2022 
+<i>Logan Douglass, Salieri dev, 7/11/2022</i> 
