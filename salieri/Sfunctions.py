@@ -196,6 +196,8 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     initial remaster 6/20
     """
     bar = Bar()
+
+    # pretend this is a change
     
     # if "reverse" in mut_list:
     #     chord_adj = octave_descend(chord)
