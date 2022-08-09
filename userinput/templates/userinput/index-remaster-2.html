@@ -41,7 +41,7 @@
 
     </style>
 </head>
-<body class = "h-100">
+<body style="min-height:100vh">
 
     <!-- Sal image div -->
 
@@ -81,7 +81,7 @@
         
       <div id = "containersdiv" class = "flex flex-wrap justify-center h-100">
   
-        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100  br4 mr2" style = "border-color: #E2D8CC">
+        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100 br4 mr2" style = "border-color: #E2D8CC">
           <form class="" action= "{% url 'userinput:index' %}" style = 'border-color: #E2D8CC' method="POST">
           {% csrf_token %}
             <div class="measure-narrow">
@@ -367,7 +367,7 @@
                     </select>
                     <small id="chord-5-bars-desc" class="f5 db mb2"></small>
           
-                    <br><br><hr class = " "><br><br>
+                    <br><hr class = " "><br>
                   </div>
           
                   <div id="button-div" class = "flex flex-wrap justify-center w-100">

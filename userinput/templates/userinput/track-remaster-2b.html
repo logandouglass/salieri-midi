@@ -50,7 +50,8 @@
 
     </style>
 </head>
-<body>
+<body class = "h-100" style="min-height:100vh">
+  <!-- tags above are on the other pages, but don't seem to fix any problem here -->
 
     <!-- Sal image div -->
 
@@ -88,9 +89,9 @@
       <div id = "app">
 
         
-      <div id = "containersdiv" class = "flex flex-wrap justify-center">
+      <div id = "containersdiv" class = "flex flex-wrap justify-center h-100">
   
-        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100  br4 mr2" style = "border-color: #E2D8CC;">
+        <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100 br4 mr2" style = "border-color: #E2D8CC;">
           <form class="" action= "{% url 'userinput:trackadd' composition.id %}" style = 'border-color: #E2D8CC' method="POST">
           {% csrf_token %}
             <div class="measure-narrow">
@@ -117,7 +118,7 @@
             <!-- Begin fields -- TEST FIELD -->
     
             {% if chord1_works %}
-            <div id = "chord1-data" v-show="chord1Vis" style="height:25vh">
+            <div id = "chord1-data" v-show="chord1Vis" style="height:20rem">
                 <label for="chord-1-style" class="f4 calisto  db mb2"> Chord 1 Style <span class="normal black-60"></span></label>
                 <select v-model="chord1Style" ref= "chord1style" id="chord-1-style" name="chord1_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-1-style-desc" >
                         <option value="arpeggio"> arpeggio </option>
@@ -161,13 +162,13 @@
 
               {% if chord1_works_not  %}
             
-                <div v-show="oneIsCurrent" class = "" style="height:25vh">
+                <div v-show="oneIsCurrent" class = "" style="height:20rem">
 
                 </div>
                 {% endif %}
             
               {% if chord2_works %}
-              <div id = "chord2-data" v-show="chord2Vis" style="height:25vh">
+              <div id = "chord2-data" v-show="chord2Vis" style="height:20rem">
                 <label  for="chord-2-style" class="f4 calisto  db mb2"> Chord 2 Style <span class="normal black-60"></span></label>
                 <select v-model="chord2Style" ref= "chord2style" id="chord-2-style" name="chord2_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-2-style-desc" >
                         
@@ -212,13 +213,13 @@
 
               {% if chord2_works_not  %}
             
-                <div v-show="twoIsCurrent" class = "" style="height:25vh">
+                <div v-show="twoIsCurrent" class = "" style="height:20rem">
 
                 </div>
                 {% endif %}
 
               {% if chord3_works %}
-              <div id = "chord3-data" v-show="chord3Vis" style="height:25vh">
+              <div id = "chord3-data" v-show="chord3Vis" style="height:20rem">
                 <label for="chord-3-style" class="f4 calisto  db mb2"> Chord 3 Style <span class="normal black-60"></span></label>
                 <select v-model="chord3Style" ref= "chord3style" id="chord-3-style" name="chord3_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-3-style-desc" >
                         
@@ -269,7 +270,7 @@
                 <br><br><br><br><br>
                 </p> -->
 
-                <div v-show="threeIsCurrent" class="" style="height:25vh">
+                <div v-show="threeIsCurrent" class="" style="height:20rem">
 
 
                 </div>
@@ -278,7 +279,7 @@
               {% endif %}
 
               {% if chord4_works %}
-              <div id = "chord4-data" v-show="chord4Vis" style="height:25vh">
+              <div id = "chord4-data" v-show="chord4Vis" style="height:20rem">
                 <label for="chord-4-style" class="f4 calisto  db mb2"> Chord 4 Style <span class="normal black-60"></span></label>
                 <select v-model="chord4Style" ref= "chord4style" id="chord-4-style" name="chord4_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-4-style-desc" >
                         
@@ -323,13 +324,13 @@
 
               {% if chord4_works_not  %}
             
-                <div v-show="fourIsCurrent" class = "" style="height:25vh">
+                <div v-show="fourIsCurrent" class = "" style="height:20rem">
 
                 </div>
             {% endif %}
 
             {% if chord5_works %}
-              <div id = "chord5-data" v-show="chord5Vis" style="height:25vh">
+              <div id = "chord5-data" v-show="chord5Vis" style="height:20rem">
                 <label for="chord-5-style" class="f4 calisto  db mb2"> Chord 5 Style <span class="normal black-60"></span></label>
                 <select v-model="chord5Style" ref= "chord5style" id="chord-5-style" name="chord5_style" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-5-style-desc" >
                         
@@ -374,13 +375,13 @@
 
             {% if chord5_works_not  %}
             
-            <div v-show="fiveIsCurrent" class = "" style="height:25vh">
+            <div v-show="fiveIsCurrent" class = "" style="height:20rem">
 
             </div>
             {% endif %}
             
         
-            <div id="button-div" class = "flex flex-wrap justify-center w-100">
+            <div id="button-div" class = "flex flex-wrap justify-center w-100"> 
             
                 <button id="minib" @click.prevent = "prevPage" class = "w-45 b pointer   mh1 mb2 f4 calisto no-underline br2 ph4 pv2  white" type = "button"> < </button>
                 <button id="minib" @click.prevent = "nextPage" class = "w-45 b pointer   mh1  mb2 f4 calisto no-underline br2 pv2 ph4  white" type = "button"> > </button>
