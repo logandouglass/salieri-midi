@@ -38,7 +38,7 @@ def magic(request, id):
     chord4_tuple = (chord4, comp_obj.chord4_bars)
     chord5_tuple = (chord5, comp_obj.chord5_bars)
 
-    chord_tuples = [
+    feed_progression = [
             chord1_tuple,
             chord2_tuple,
             chord3_tuple,
@@ -47,7 +47,6 @@ def magic(request, id):
 
     ]
 
-    feed_progression = tuple_cleaner(chord_tuples)
     #8-24-22 double check how this works
 
     ### summon the comp tracks, the len of their set, and the track model param list 
@@ -75,43 +74,49 @@ def magic(request, id):
         new_track_data_dict = track_dict_list[i]
         new_track.name = new_track_data_dict["trackname"]
         for tuple in feed_progression:
+            skip = False
             current_chord = tuple[0] # a list of unclassed notes as strings
+            if current_chord == None:
+                skip = True
             current_duration = tuple[1] # a number of bars
+            if current_duration in [0, "0"]:
+                skip = True
+            
+            if skip == False:
+                if counter == 1:
+                    current_style = new_track_data_dict["chord1_style"]
+                    current_denom = new_track_data_dict["chord1_denom"]
+                    current_mutators = listify_mutators(new_track_data_dict["chord1_mutators"])
+                    bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
+                    new_track = bar_adder(bar_list, new_track)
 
-            if counter == 1:
-                current_style = new_track_data_dict["chord1_style"]
-                current_denom = new_track_data_dict["chord1_denom"]
-                current_mutators = listify_mutators(new_track_data_dict["chord1_mutators"])
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
-                new_track = bar_adder(bar_list, new_track)
+                elif counter == 2:
+                    current_style = new_track_data_dict["chord2_style"]
+                    current_denom = new_track_data_dict["chord2_denom"]
+                    current_mutators = listify_mutators(new_track_data_dict["chord2_mutators"])
+                    bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
+                    new_track = bar_adder(bar_list, new_track)
 
-            elif counter == 2:
-                current_style = new_track_data_dict["chord2_style"]
-                current_denom = new_track_data_dict["chord2_denom"]
-                current_mutators = listify_mutators(new_track_data_dict["chord2_mutators"])
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
-                new_track = bar_adder(bar_list, new_track)
-                
-            elif counter == 3:
-                current_style = new_track_data_dict["chord3_style"]
-                current_denom = new_track_data_dict["chord3_denom"]
-                current_mutators = listify_mutators(new_track_data_dict["chord3_mutators"])
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
-                new_track = bar_adder(bar_list, new_track)
+                elif counter == 3:
+                    current_style = new_track_data_dict["chord3_style"]
+                    current_denom = new_track_data_dict["chord3_denom"]
+                    current_mutators = listify_mutators(new_track_data_dict["chord3_mutators"])
+                    bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
+                    new_track = bar_adder(bar_list, new_track)
 
-            elif counter == 4:
-                current_style = new_track_data_dict["chord4_style"]
-                current_denom = new_track_data_dict["chord4_denom"]
-                current_mutators = listify_mutators(new_track_data_dict["chord4_mutators"])
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
-                new_track = bar_adder(bar_list, new_track)
+                elif counter == 4:
+                    current_style = new_track_data_dict["chord4_style"]
+                    current_denom = new_track_data_dict["chord4_denom"]
+                    current_mutators = listify_mutators(new_track_data_dict["chord4_mutators"])
+                    bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
+                    new_track = bar_adder(bar_list, new_track)
 
-            elif counter == 5:
-                current_style = new_track_data_dict["chord5_style"]
-                current_denom = new_track_data_dict["chord5_denom"]
-                current_mutators = listify_mutators(new_track_data_dict["chord5_mutators"])
-                bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
-                new_track = bar_adder(bar_list, new_track)
+                elif counter == 5:
+                    current_style = new_track_data_dict["chord5_style"]
+                    current_denom = new_track_data_dict["chord5_denom"]
+                    current_mutators = listify_mutators(new_track_data_dict["chord5_mutators"])
+                    bar_list = musicorum_ex_machina(current_chord, current_duration, current_style, current_denom, current_mutators)
+                    new_track = bar_adder(bar_list, new_track)
                 
             counter += 1
 
@@ -134,8 +139,8 @@ def magic(request, id):
     context = {
         "comp_obj":comp_obj,
         "data_test":feed_progression,
-        "data_test2":chord_tuples,
-        "data_test3":"walrus"
+        "data_test2":"",
+        "data_test3":"",
 
     }
     

@@ -21,19 +21,10 @@ import math
 ## For writing MIDI
 from mingus.midi import midi_file_out
 
-
-
 #####==========================================================================
-#### Logistical
-def tuple_cleaner(tuple_list): # currently essential to automation
-    """
-    Weeds out any incomplete or invalid tuples when making the feed progression for the magic function in generation/views.py
-    """
-    cleaned_list = []
-    for tuple in tuple_list:
-        if (0 or None) not in tuple:
-            cleaned_list.append(tuple)
-    return cleaned_list
+
+
+# Logistical
 
 def bar_adder(barr_list, Mtrackk): # no longer necessary, but currently in use.  Candidate for revision
     """
@@ -54,19 +45,10 @@ def listify_mutators(mutator_string): # currently essential to automation
         mutator_list = mutator_string.split(" ")
         return (mutator_list)
 
-def listify_compound_mutators(mutator_list): # not in use, went with a different mutator system, candidate for scrapping
-    new_list = mutator_list.copy()
-    for item in mutator_list:
-        if "." in item:
-            item_remade = item.split(".")
-            new_list.remove(item)
-            new_list.append(item_remade)
-    return new_list
-
 #### General Musical functions
 def octave_ascend(scale):
     """
-    Returns list of classed notes ascending from the tonic in the octave.
+    Returns list of note ascending from the tonic in the octave.
     """
     start_note = scale[0]
     corrected_scale = [] ##
@@ -83,11 +65,9 @@ def octave_ascend(scale):
         corrected_scale.append(note) ##
     return corrected_scale ##
 
-def octave_descend(scale): # not currently in use, but may have its advantages eventually...
+def octave_descend(scale):
     """
-    Returns list of classed notes descending from the tonic in the octave.
-    
-    May need corrections flagged above with '##'
+    Returns list of note objects descending from the tonic in the octave.
     """
     start_note = scale[0]
     corrected_scale = []
@@ -102,7 +82,17 @@ def octave_descend(scale): # not currently in use, but may have its advantages e
             note.octave_down()
         initial = False
         corrected_scale.append(note)
+
+    for note in corrected_scale:
+        note.octave_up()
+
+    tonic = corrected_scale[0]
+    corrected_scale.pop(0)
+    corrected_scale.reverse()
+    corrected_scale.insert(0, tonic)
+        
     return corrected_scale
+    
 
 def chordbuild(tonic, quality): # currently essential to automation
     """
@@ -518,21 +508,6 @@ def musicorum_ex_machina_legacy(chord, duration, style, denom, mutator_list=[]):
     """
     bar_list = []
     
-    ###
-    ## for future functionality ##
-    # if duration == .5:
-    #     half_flag = True
-    #     duration = 1
-    # elif duration == .25:
-    #     quarter_flag = True
-    #     duration = 1
-    ###
-    
-
-    ## can use meter change to fake writing half, quarter bars
-
-    # if duration not in [1,2,3,4]: ##nest within for non-fractional bar totals, need half measure flags
-
     for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
         ## These conditionals will eventually nest every note and silence writer, so it will become massive.
         if style == "arpeggio":
