@@ -132,10 +132,15 @@ def magic(request, id):
         comp_obj.save()
 
     context = {
-        "comp_obj":comp_obj
+        "comp_obj":comp_obj,
+        "data_test":feed_progression,
+        "data_test2":chord_tuples,
+        "data_test3":"walrus"
+
     }
     
     # render the page
-    return render(request, "generation/finalpage.html", context)
+    # return render(request, "generation/finalpage.html", context)
+    return render(request, "generation/datatest.html", context)
 
     ###=================================================================================

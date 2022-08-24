@@ -495,33 +495,3 @@ def trackadd(request, id): ## fix!!!
 
 def dummy(request):
     return HttpResponse("Only a dummy would come here...dummy!")
-
-# def magic(request):
-    # Here's where the magic will have to happen...perhaps in a different app.
-    ...
-    
-    
-    
-    # else:
-    #     return redirect("")
-
-
-
-#######################################################
-##scrap
-# def trackadd(request):
-#     context = {}
-#     if request.method == 'POST': # receiving a form submission // might not need (LD)
-#         form = ProgressionForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-    
-#             return HttpResponse("So glad you made it.")
-#         else:
-#             return redirect("")
-
-######################################################
-##development
-# if request.method == 'POST': # receiving a form submission
-#     #     form = ProgressionForm(request.POST)
-#     #     if form.is_valid():
