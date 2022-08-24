@@ -3,8 +3,9 @@ from django.http import HttpResponse, HttpRequest
 
 from .models import Composition, Track
 from .forms import ProgressionForm, TrackForm
+#==============================
 
-# Create your views here.
+
 def index(request):
     context = {}
     if request.method == 'POST':
@@ -140,11 +141,6 @@ def index(request):
 
                 )
         return redirect(f"/track/{composition.id}")
-
-        #
-        #
-        #
-
 
     # form = ProgressionForm() # Won't need this if it works
     # context = {"form":form}
