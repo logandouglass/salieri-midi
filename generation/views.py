@@ -118,9 +118,9 @@ def magic(request, id):
         final_comp.add_track(new_track)
 
     ## sets the local path for the midi file
-    # directory = "midi"
-    # path = f"{directory}/{comp_obj.name} (id{comp_obj.id}).mid"
-    path = f"{comp_obj.name} (id{comp_obj.id}).mid"
+    directory = "midi"
+    path = f"{directory}/{comp_obj.name} (id{comp_obj.id}).mid"
+    # path = f"{comp_obj.name} (id{comp_obj.id}).mid"
 
 
     # writes the midi file locally   
@@ -131,7 +131,9 @@ def magic(request, id):
         comp_obj.midi = File(f)
         comp_obj.save()
 
-    context = {}
+    context = {
+        "comp_obj":comp_obj
+    }
     
     # render the page
     return render(request, "generation/finalpage.html", context)
