@@ -15,7 +15,7 @@ def magic(request, id):
     """
     ==MASTER FUNCTION==
     Writes music as MIDI based on the user's commands
-
+    
     """
     # summon the comp and harvest the data from the django forms 
     comp_obj = Composition.objects.get(id=id)
@@ -44,7 +44,6 @@ def magic(request, id):
             chord3_tuple,
             chord4_tuple,
             chord5_tuple,
-
     ]
 
     #8-24-22 double check how this works

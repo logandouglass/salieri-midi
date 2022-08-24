@@ -453,6 +453,8 @@ def trackadd(request, id): ## fix!!!
     chord3_denom = 0
     chord4_denom = 0
     chord5_denom = 0
+
+    
     if request.POST.get('chord1_denom') != None:
         chord1_denom = int(request.POST.get('chord1_denom'))
     chord2_style = request.POST.get('chord2_style')

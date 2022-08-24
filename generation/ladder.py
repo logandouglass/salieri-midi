@@ -61,3 +61,16 @@
 # ## might need OS
 # from msilib.schema import File
 # import os
+
+############################
+# tuple cleaner
+
+# def tuple_cleaner(tuple_list): # currently essential to automation -- maybe not essential 8-24-22
+#     """
+#     Weeds out any incomplete or invalid tuples when making the feed progression for the magic function in generation/views.py
+#     """
+#     cleaned_list = []
+#     for tuple in tuple_list:
+#         if (0 or None) not in tuple:
+#             cleaned_list.append(tuple)
+#     return cleaned_list

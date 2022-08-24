@@ -93,7 +93,6 @@ def octave_descend(scale):
         
     return corrected_scale
     
-
 def chordbuild(tonic, quality): # currently essential to automation
     """
     Returns an unclassed list of the notes in a chord.
@@ -116,6 +115,7 @@ def chordbuild(tonic, quality): # currently essential to automation
             note_list = chords.major_seventh(tonic)
         elif quality == "dominant7":
             # note_list = chords.dominant7(tonic)  ## YOU WOULD THINK, they messed it up
+            # I think there might be an alternative method, though
             note_list = chords.major_triad(tonic)
             minor_7 = intervals.minor_seventh(tonic)
             note_list.append(minor_7)
@@ -133,17 +133,6 @@ def chordbuild(tonic, quality): # currently essential to automation
         elif quality == "augmented":
             note_list = chords.augmented_triad(tonic)
 
-        
-        
-
-
-
-
-
-
-
-
-
         return note_list
 
 def bassify_old(classed_note_list): # not currently in use, may move to legacy or scrap
@@ -156,6 +145,7 @@ def bassify_old(classed_note_list): # not currently in use, may move to legacy o
     for note in classed_note_list:
         note = note.octave_down()
         bassified_classed_note_list.append(note)
+
     return bassified_classed_note_list
 
 #####===============================================================================
@@ -199,12 +189,6 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         for note in chord_adj:
             note.octave_down()
     
-
-
-    
-    
-    
-    
     ## inversions -- 
     if "invert1" in mut_list:
         inverted_list = []
@@ -223,9 +207,6 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         chord_adj_d.clear()
         chord_adj_d = inverted_list
 
-
-    
-    
     ## standard counter -- for more octave correction
     counter = 1
 
@@ -253,12 +234,9 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
             expanded_set.append(new_note)
         counter +=1
 
-
-
     ### reach -- these allow the arpeggio to overflow into the next octave -- use only on non-reverse figures as of 6/23
 
     ## need to fix reverse reaches
-
 
     if "reach1" in mut_list:
         tonic_cap = Note()
@@ -292,7 +270,6 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     reverse_set = expanded_set.copy()
     reverse_set.reverse()
 
-
     ## lingers
     linger_value = 1
     if "linger2" in mut_list:
@@ -309,8 +286,6 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         linger_value = 7
     elif "linger8" in mut_list:
         linger_value = 8
-
-
 
     ###  Timing
     bar.length = duration
@@ -332,8 +307,6 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         bar.place_rest(4)
         bar.place_rest(4)
         bar.place_rest(4)
-
-
 
     if "reverse" in mut_list:
         # descending
