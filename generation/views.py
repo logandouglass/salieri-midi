@@ -15,7 +15,7 @@ def magic(request, id):
     """
     ==MASTER FUNCTION==
     Writes music as MIDI based on the user's commands
-    
+
     """
     # summon the comp and harvest the data from the django forms 
     comp_obj = Composition.objects.get(id=id)
@@ -144,7 +144,7 @@ def magic(request, id):
     }
     
     # render the page
-    # return render(request, "generation/finalpage.html", context)
-    return render(request, "generation/datatest.html", context)
+    return render(request, "generation/finalpage.html", context)
+    # return render(request, "generation/datatest.html", context)
 
     ###=================================================================================

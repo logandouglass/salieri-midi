@@ -176,41 +176,45 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     initial remaster 6/20
     """
     bar = Bar()
-    
-    # if "reverse" in mut_list:
-    #     chord_adj = octave_descend(chord)
-    # else:
-    #     chord_adj = octave_ascend(chord)
-    chord_adj = octave_ascend(chord)
-    chord_copy = chord.copy()
-    chord_adj_d = octave_descend(chord_copy) ## use to clean up code and do inversions/reaches
+    chord_ascending = octave_ascend(chord)
+    chord_descending = octave_descend(chord)
+    base_list = chord_ascending.copy()
 
-    if "bassify" in mut_list:
-        for note in chord_adj:
-            note.octave_down()
-    
-    ## inversions -- 
+    # reverse
+    reverse = False
+    if "reverse" in mut_list:
+        base_list = chord_descending.copy()
+        reverse = True
+
+    # invert here
+    def inverter(base_list, invert_len, reverse_bool):
+        if reverse_bool == True:
+            oct_adj = 1
+            # invert_note_index = -1
+        else:
+            oct_adj = -1
+            # invert_note_index = -1
+
+        for _ in range(invert_len):
+            new_note = Note()
+            new_note.name = base_list[-1].name
+            new_note.octave = base_list[-1].octave + oct_adj
+            base_list.pop(-1)
+            base_list.insert(0, new_note)
+        
+        return base_list
+
     if "invert1" in mut_list:
-        inverted_list = []
-        for note in chord_adj_d[-1:-2:-1]:
-            inverted_list.append(note)
-        for note in chord_adj_d[0:-1]:
-            inverted_list.append(note)
-        chord_adj_d.clear()
-        chord_adj_d = inverted_list
+        invert_val = 1
+        base_list = inverter(base_list, invert_val, reverse)
     elif "invert2" in mut_list:
-        inverted_list = []
-        for note in chord_adj_d[-1:-3:-1]:
-            inverted_list.append(note)
-        for note in chord_adj_d[0:-2]:
-            inverted_list.append(note)
-        chord_adj_d.clear()
-        chord_adj_d = inverted_list
+        invert_val = 2
+        base_list = inverter(base_list, invert_val, reverse)
 
-    ## standard counter -- for more octave correction
-    counter = 1
+    # create full list 
+    full_list = base_list.copy()
 
-    ## parsing mutators for octave extension
+    # octave extend
     num_octaves = 0
     if "o1" in mut_list:
         num_octaves = 1
@@ -219,58 +223,47 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     elif "o3" in mut_list:
         num_octaves = 3
     
-    expanded_set = chord_adj.copy()
+    if reverse == True:
+        counter_inc = -1
 
-    ## determine # of octaves 
+    else:
+        counter_inc = 1
+
+    counter = 0
     for _ in range(num_octaves):
-        # expanded_set = []
-        new_octave = []
-        for degree in chord_adj:
+        counter += counter_inc
+        for note in base_list:
+            new_note = Note()
+            new_note.name = note.name
+            new_note.octave = note.octave + counter
+            full_list.append(new_note)
+    
+    counter += counter_inc
+    reach_mod = counter
+
+    # reach
+    def reacher(new_notelist, notelist, len, oct_adj):
+        for i in range(len):
             note = Note()
-            note.name = degree.name
-            note.octave = (degree.octave + counter)
-            new_octave.append(note)
-        for new_note in new_octave:
-            expanded_set.append(new_note)
-        counter +=1
+            note.name = notelist[i].name
+            note.octave = (notelist[i].octave + oct_adj)
+            new_notelist.append(note)
+        return new_notelist
 
-    ### reach -- these allow the arpeggio to overflow into the next octave -- use only on non-reverse figures as of 6/23
-
-    ## need to fix reverse reaches
-
+    reach = False
     if "reach1" in mut_list:
-        tonic_cap = Note()
-        tonic_cap.name = chord_adj[0].name
-        tonic_cap.octave = chord_adj[0].octave + counter
-        expanded_set.append(tonic_cap)
-    ##
+        reach_len = 1
+        full_list = reacher(full_list, base_list, reach_len, reach_mod)
+
     elif "reach2" in mut_list:
-        tonic_cap = Note()
-        tonic_cap.name = chord_adj[0].name
-        tonic_cap.octave = chord_adj[0].octave + counter
-        expanded_set.append(tonic_cap)
-        degree2_cap = Note()
-        degree2_cap.name = chord_adj[1].name
-        degree2_cap.octave = chord_adj[1].octave + counter
-        expanded_set.append(degree2_cap)
+        reach_len = 2
+        full_list = reacher(full_list, base_list, reach_len, reach_mod)
+
     elif "reach3" in mut_list:
-        tonic_cap = Note()
-        tonic_cap.name = chord_adj[0].name
-        tonic_cap.octave = chord_adj[0].octave + counter
-        expanded_set.append(tonic_cap)
-        degree2_cap = Note()
-        degree2_cap.name = chord_adj[1].name
-        degree2_cap.octave = chord_adj[1].octave + counter
-        expanded_set.append(degree2_cap)
-        degree3_cap = Note()
-        degree3_cap.name = chord_adj[2].name
-        degree3_cap.octave = chord_adj[2].octave + counter
-        expanded_set.append(degree3_cap)
-
-    reverse_set = expanded_set.copy()
-    reverse_set.reverse()
-
-    ## lingers
+        reach_len = 3
+        full_list = reacher(full_list, base_list, reach_len, reach_mod)
+    
+    # linger
     linger_value = 1
     if "linger2" in mut_list:
         linger_value = 2
@@ -286,65 +279,23 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         linger_value = 7
     elif "linger8" in mut_list:
         linger_value = 8
+    
+    def lingerer(note_l, linger_v):
+        linger_list = []
+        for note in note_l:
+            for _ in range(linger_v):
+                linger_list.append(note)
+        return linger_list
 
-    ###  Timing
+    if linger_value != 1:
+        full_list = lingerer(full_list, linger_value)
+
     bar.length = duration
-    range_val = 4 * duration # ? What was I thinking of?
-    loop_value = math.ceil((denominator * duration) / len(expanded_set))
+    loop_value = math.ceil((denominator * duration) / len(full_list))
 
-    ##delays
-    if "delay1" in mut_list:
-        bar.place_rest(4)
-    if "delay2" in mut_list:
-        bar.place_rest(4)
-        bar.place_rest(4)
-    if "delay3" in mut_list:
-        bar.place_rest(4)
-        bar.place_rest(4)
-        bar.place_rest(4)
-    if "delay4" in mut_list:
-        bar.place_rest(4)
-        bar.place_rest(4)
-        bar.place_rest(4)
-        bar.place_rest(4)
-
-    if "reverse" in mut_list:
-        # descending
-        for _ in range(loop_value): # the 5 value is currently arbitrary but effective
-            for note in reverse_set:
-                for __ in range(linger_value):    
-                    bar.place_notes(note, denominator) 
-    elif "return" in mut_list:
-        ## returning
-        # print(expanded_set)
-        # print(reverse_set)
-
-        return_counter = 1
-        for _ in range(loop_value): # the 5 value is currently arbitrary but effective // could be made more efficient 6/21
-            if return_counter == 1:
-                for note in expanded_set:
-                    for __ in range(linger_value):
-                        # print(note)
-                        bar.place_notes(note, denominator)
-            else:
-                for note in expanded_set:
-                    if expanded_set.index(note) != 0:  
-                        for __ in range(linger_value):
-                            # print(note)
-                            bar.place_notes(note, denominator)
-            for note in reverse_set:
-                 if reverse_set.index(note) != 0:
-                    for __ in range(linger_value):
-                        # print(note)
-                        bar.place_notes(note, denominator)
-            return_counter += 1
-
-    ## ascending
-    else:
-        for _ in range(loop_value): # the 5 value is currently arbitrary but effective
-            for note in expanded_set:
-                for __ in range(linger_value):
-                    bar.place_notes(note, denominator)
+    for _ in range(loop_value):
+        for note in full_list:
+            bar.place_notes(note, denominator)
 
     return bar
 

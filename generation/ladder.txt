@@ -1,1 +1,6 @@
+lines u need
+----------------------------
+
 loop_value = math.ceil((denominator * duration) / len(expanded_set))
+
+bar.length = duration
