@@ -46,6 +46,61 @@ def listify_mutators(mutator_string): # currently essential to automation
         return (mutator_list)
 
 #### General Musical functions
+def bassify(note_list, mutlist):
+    if ("bassify1" in mutlist) or ("bassify" in mutlist):
+        num = 1
+    elif "bassify2" in mutlist:
+        num = 2
+    elif "bassify3" in mutlist:
+        num = 3
+    
+    for note in note_list:
+        note.octave -= num
+
+
+    return note_list
+
+def chordbuild(tonic, quality): # currently essential to automation
+    """
+    Returns a list of the notes in a chord as strings.
+
+    """
+    if tonic in ["", None]:
+        return None
+    else:
+        # add many more qualities when you have time
+        if quality == "major":
+            note_list = chords.major_triad(tonic)
+        elif quality == "minor":
+            note_list = chords.minor_triad(tonic)
+        elif quality == "diminished":
+            note_list = chords.diminished_triad(tonic)
+        elif quality == "minor7":
+            note_list = chords.minor_seventh(tonic)
+        elif quality == "major7":
+            note_list = chords.major_seventh(tonic)
+        elif quality == "dominant7":
+            # note_list = chords.dominant7(tonic)  ## YOU WOULD THINK, they messed it up
+            # I think there might be an alternative method, though
+            note_list = chords.major_triad(tonic)
+            minor_7 = intervals.minor_seventh(tonic)
+            note_list.append(minor_7)
+
+        elif quality == "diminished7":
+            note_list = chords.diminished_seventh(tonic)
+        elif quality == "half-diminished7":
+            note_list = chords.minor_seventh_flat_five(tonic)
+        elif quality == "augmented":
+            note_list = chords.augmented_triad(tonic)
+        elif quality == "augmented major7":
+            note_list = chords.augmented_major_seventh(tonic)
+        elif quality == "minor-major7":
+            note_list = chords.minor_major_seventh(tonic)
+        elif quality == "augmented":
+            note_list = chords.augmented_triad(tonic)
+
+        return note_list
+
 def octave_ascend(scale):
     """
     Returns list of note ascending from the tonic in the octave.
@@ -92,61 +147,21 @@ def octave_descend(scale):
     corrected_scale.insert(0, tonic)
         
     return corrected_scale
+
+def trebify(note_list, mutlist):
+    if ("trebify1" in mutlist) or ("trebify" in mutlist):
+        num = 1
+    elif "trebify2" in mutlist:
+        num = 2
+    elif "trebify3" in mutlist:
+        num = 3
+    elif "trebify4" in mutlist:
+        num = 4
     
-def chordbuild(tonic, quality): # currently essential to automation
-    """
-    Returns an unclassed list of the notes in a chord.
-    No inversion support yet.
+    for note in note_list:
+        note.octave += num
 
-    """
-    if tonic in ["", None]:
-        return None
-    else:
-        # add many more qualities when you have time
-        if quality == "major":
-            note_list = chords.major_triad(tonic)
-        elif quality == "minor":
-            note_list = chords.minor_triad(tonic)
-        elif quality == "diminished":
-            note_list = chords.diminished_triad(tonic)
-        elif quality == "minor7":
-            note_list = chords.minor_seventh(tonic)
-        elif quality == "major7":
-            note_list = chords.major_seventh(tonic)
-        elif quality == "dominant7":
-            # note_list = chords.dominant7(tonic)  ## YOU WOULD THINK, they messed it up
-            # I think there might be an alternative method, though
-            note_list = chords.major_triad(tonic)
-            minor_7 = intervals.minor_seventh(tonic)
-            note_list.append(minor_7)
-
-        elif quality == "diminished7":
-            note_list = chords.diminished_seventh(tonic)
-        elif quality == "half-diminished7":
-            note_list = chords.minor_seventh_flat_five(tonic)
-        elif quality == "augmented":
-            note_list = chords.augmented_triad(tonic)
-        elif quality == "augmented major7":
-            note_list = chords.augmented_major_seventh(tonic)
-        elif quality == "minor-major7":
-            note_list = chords.minor_major_seventh(tonic)
-        elif quality == "augmented":
-            note_list = chords.augmented_triad(tonic)
-
-        return note_list
-
-def bassify_old(classed_note_list): # not currently in use, may move to legacy or scrap
-    """
-    Input unclassed note list, returns a classed list of every note in the input list an octave down.
-    Good for writing basslines.
-
-    """
-    bassified_classed_note_list = []
-    for note in classed_note_list:
-        note = note.octave_down()
-        bassified_classed_note_list.append(note)
-
-    return bassified_classed_note_list
+    return note_list
 
 #####===============================================================================
 #### Legacy Note & Rest-placing Functions
@@ -175,10 +190,15 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     initial remaster 6/20
     """
+
     bar = Bar()
     chord_ascending = octave_ascend(chord)
     chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
+
+    base_list = bassify(base_list, mut_list)
+    base_list = trebify(base_list, mut_list)
+
 
     # reverse
     reverse = False
@@ -304,19 +324,16 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     chord_adj = octave_ascend(chord)
 
     tonic = chord_adj[0]
+    tonic_singleton = [tonic]
     
-    ### bassify
-    if "bassify" in mut_list:
-        for note in chord_adj:
-            note.octave_down()
+    bassify(tonic_singleton, mut_list)
+    trebify(tonic_singleton, mut_list)
+
+    tonic = tonic_singleton[0]
     
-
-    # numerator = 4 * duration
-    # bar.set_meter((numerator, 4))
-
     bar.length = duration
-    # range_val = 4 * duration
     loop_value = math.ceil(denominator * duration)
+    p_loop_value = math.ceil(duration)
 
     ##delays
     if "delay1" in mut_list:
@@ -335,15 +352,16 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
         bar.place_rest(4)
     
     if "p1" in mut_list: # they should have real names
+    
     ### fun pattern 1 - dramatic
-        for _ in range(loop_value):
+        for _ in range(p_loop_value):
              bar.place_notes(tonic, 12) # fix
              bar.place_notes(tonic, 12)
              bar.place_notes(tonic, 12)
              bar.place_notes(tonic, 8)
              bar.place_notes(tonic, 8)
              bar.place_notes(tonic, 2)
-    
+    # elifs here
 
     else:
         for _ in range(loop_value):
@@ -355,14 +373,22 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=[]):
     bar = Bar()
     chord_adj = octave_ascend(chord)
+    
+
+    chord_adj = bassify(chord_adj, mut_list) ## STOP, review after dinner
+    chord_adj = trebify(chord_adj, mut_list)
+
     note_c = NoteContainer()
     note_c.add_notes(chord_adj)
 
     # numerator = 4* duration
-    loop_value = denominator * duration # rename range val?
+    loop_value = math.ceil(denominator * duration) # rename range val?
+    p_loop_value = math.ceil(duration)
     # bar.set_meter((numerator, 4)) # need to do trick for if they goof up and put in a denominator > the measure length
     bar.length = duration
     # range_val = 4 * duration
+
+    
 
     ##delays
     if "delay1" in mut_list:
@@ -382,7 +408,7 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
     if "p1" in mut_list: # they should have real names
     ### fun pattern 1 - dramatic
-        for _ in range(loop_value): # 5? wtf lol
+        for _ in range(p_loop_value): # 5? wtf lol
              bar.place_notes(note_c, 12) # fix
              bar.place_notes(note_c, 12)
              bar.place_notes(note_c, 12)
@@ -421,202 +447,3 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
         bar_list.append(bar)
     
     return bar_list
-
-
-
-#####================================================================================================================
-#### Legacy Functions -- no longer in use
-# 
-def musicorum_ex_machina_legacy(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
-    """
-    """
-    bar_list = []
-    
-    for _ in range(duration):# will need to be changed for decimal bar totals...see notes below
-        ## These conditionals will eventually nest every note and silence writer, so it will become massive.
-        if style == "arpeggio":
-            bar = arpup_legacy(chord, denom)
-            bar_list.append(bar)
-        elif style == "simpline":
-            bar = simpline(chord, denom)
-            bar_list.append(bar)
-
-        else:
-            bar = silence_legacy()
-            bar_list.append(bar)
-    
-    return bar_list
-
-
-def simpline_legacy(chord, denominator):
-    "Writes simple steady figures"
-    bar = Bar()
-    note = chord[0]
-    note = Note(note) # do I need these even?
-    note.octave_down()
-    for _ in range(denominator):
-        bar.place_notes(note, denominator)
-    return bar
-
-def gallopline(chord):
-    "Writes galloping lines a la Iron Maiden"
-    bar = Bar()
-    note = chord[0]
-    note = Note(note)    
-    note.octave_down()
-    for _ in range(4):
-        bar.place_notes(note, 8)
-        bar.place_notes(note, 16)
-        bar.place_notes(note, 16)
-    return bar
-
-def reverse_gallopline(chord):
-    "Writes reverse galloping lines...also a la Iron Maiden"
-    bar = Bar()
-    note = chord[0]
-    note = Note(note)    
-    note.octave_down()
-    for _ in range(4):
-        bar.place_notes(note, 16)
-        bar.place_notes(note, 16)
-        bar.place_notes(note, 8)
-    return bar
-
-def simprhythm(chord, denominator):
-    "Writes simple steady harmony like a hard rock rhythm guitar"
-    bar = Bar()
-    notes = NoteContainer()
-    notes.add_notes(chord)
-    for _ in range(denominator):
-        bar.place_notes(notes, denominator)
-    return bar
-
-def arp(chord, denominator):
-    """
-    Writes simple steady ascending arpeggios
-    
-    if the 10 in the 2nd for-loop seems arbitrary, it's because it sorta is.  
-    there's no penalty for overflowing notes in a bar - it just stops adding.
-    This makes sure the bar is filled for most common note denominations
-    """
-    bar = Bar()
-    for note in chord:
-        note = Note()
-    for _ in range(10):
-        for note in chord:
-            bar.place_notes(note, denominator)
-    return bar
-
-def arpreturn(chord, denominator):
-    "Writes steady up and down arpeggios, like a classical pianist or sweep-picking guitarist would play"
-    bar = Bar()
-    for note in chord:
-        note = Note()
-    chord_r = []
-    for note in chord:
-        chord_r.append(note)
-    chord_r.reverse()
-    for _ in range(10):
-        for note in chord:
-            bar.place_notes(note, denominator)
-        for note in chord_r:
-            bar.place_notes(note, denominator)
-    return bar
-
-def arpup_legacy(chord, denominator):
-    bar = Bar()
-    chord_adj = octave_ascend(chord)
-    
-    #$ For adding another tonic note an octave up
-    tonic_octave = Note()
-    tonic_octave.name = chord_adj[0].name
-    tonic_octave.octave = chord_adj[0].octave
-    tonic_octave.octave_up()
-    chord_adj.append(tonic_octave)
-    #$
-
-    for _ in range(10):
-        for note in chord_adj:
-            bar.place_notes(note, denominator)
-    return bar
-
-def silence_legacy(duration):
-    """
-    initial remaster 6/20
-    """
-    bar = Bar()
-    bar.set_meter(((4 * duration), 4))
-    for _ in range(4 * duration):
-        bar.place_rest(4)
-    return bar
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##################################################################
-
-## Notes
-## Make only .5 and then integers selectable
-
-
-
-
-
-
-
-
-#### Percussion ###
-### Not working yet
-
-
-# def drums1():
-#     """
-#     Nothing special -- my first beat!  Set instrument to Late Nite Drum Kit in Ableton
-#     UNDER CONSTRUCTION!
-#     """
-#     bar = Bar()
-#     # bass_d = "C"
-#     # splat = "G"
-#     bass_d = Note("C", 2) 
-#     splat = Note("F", 2)  
-#     # bass_d.octave_down()
-#     # bass_d.octave_down()
-#     # splat.octave_down()
-#     # splat.octave_down()
-#     bar.place_notes(bass_d, 2)
-#     bar.place_notes(splat, 2)
-#     return bar
-
-# # test = arpreturn(chords.major_triad("A"), 16)
-
-# # midi_file_out.write_Bar("tests/arpreturn.mid", test, 120, 7)
-
-
-##scrap
-#sarpup
-    # print(chord_adj)
-    # # print(chord_adj[0].name)
-    # # print(type(chord_adj[0].name))
-    # # print(type(chord_adj[0]))
-    # print(tonic_octave)
