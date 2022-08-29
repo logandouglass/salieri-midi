@@ -145,7 +145,7 @@ def index(request):
     # form = ProgressionForm() # Won't need this if it works
     # context = {"form":form}
     context = {}
-    return render(request, "userinput/index-remaster-2.html", context)
+    return render(request, "userinput/index-remaster-3.html", context)
 
 def track(request, id):
     ## Get progression data and create model
@@ -454,7 +454,7 @@ def trackadd(request, id): ## fix!!!
     chord4_denom = 0
     chord5_denom = 0
 
-    
+
     if request.POST.get('chord1_denom') != None:
         chord1_denom = int(request.POST.get('chord1_denom'))
     chord2_style = request.POST.get('chord2_style')
