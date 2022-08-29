@@ -5,13 +5,13 @@ from .models import Composition, Track
 from .forms import ProgressionForm, TrackForm
 #==============================
 
-
 def index(request):
     context = {}
     if request.method == 'POST':
-        
-        ######################
+
         name = request.POST.get('name')
+
+        # Chord 1
         chord1_tonic = request.POST.get('chord1_tonic')
         if chord1_tonic == "A#/Bb":
             chord1_tonic = "A#"
@@ -24,15 +24,14 @@ def index(request):
         elif chord1_tonic == "G#/Ab":
             chord1_tonic = "G#"    
 
-        chord1_quality = request.POST.get('chord1_quality')
-        # chord1_quality_display = chord1_quality
-        # if chord1_quality == None:
-        #     chord1_quality_display = ""
 
+        chord1_quality = request.POST.get('chord1_quality')
         if request.POST.get('chord1_bars') == ("" or None):
             chord1_bars = 0
         else: chord1_bars = int(request.POST.get('chord1_bars'))
 
+        
+        # Chord 2
         chord2_tonic = request.POST.get('chord2_tonic')
         if chord2_tonic == "A#/Bb":
             chord2_tonic = "A#"
@@ -46,15 +45,11 @@ def index(request):
                 chord2_tonic = "G#"
 
         chord2_quality = request.POST.get('chord2_quality')
-        # chord2_quality_display = chord2_quality
-        # if chord2_quality == None:
-        #     chord2_quality_display = ""
-
-
         if request.POST.get('chord2_bars') == ("" or None):
             chord2_bars = 0
         else: chord2_bars = int(request.POST.get('chord2_bars'))
 
+        # Chord 3
         chord3_tonic = request.POST.get('chord3_tonic')
         if chord3_tonic == "A#/Bb":
             chord3_tonic = "A#"
@@ -67,14 +62,12 @@ def index(request):
         elif chord3_tonic == "G#/Ab":
                 chord3_tonic = "G#"
         chord3_quality = request.POST.get('chord3_quality')
-        # chord3_quality_display = chord3_quality
-        # if chord3_quality == None:
-        #     chord3_quality_display = ""
 
         if request.POST.get('chord3_bars') == ("" or None):
             chord3_bars = 0
         else: chord3_bars = int(request.POST.get('chord3_bars'))
 
+        # Chord 4
         chord4_tonic = request.POST.get('chord4_tonic')
         if chord4_tonic == "A#/Bb":
             chord4_tonic = "A#"
@@ -87,14 +80,12 @@ def index(request):
         elif chord4_tonic == "G#/Ab":
                 chord4_tonic = "G#"
         chord4_quality = request.POST.get('chord4_quality')
-        # chord4_quality_display = chord4_quality
-        # if chord4_quality == None:
-        #     chord4_quality_display = ""
-
         if request.POST.get('chord4_bars') == ("" or None):
             chord4_bars = 0
         else: chord4_bars = int(request.POST.get('chord4_bars'))
 
+        
+        # Chord 5
         chord5_tonic = request.POST.get('chord5_tonic')
         if chord5_tonic == "A#/Bb":
             chord5_tonic = "A#"
@@ -107,14 +98,11 @@ def index(request):
         elif chord5_tonic == "G#/Ab":
                 chord5_tonic = "G#"
         chord5_quality = request.POST.get('chord5_quality')
-        # chord5_quality_display = chord5_quality
-        # if chord5_quality == None:
-        #     chord5_quality_display = ""
-
         if request.POST.get('chord5_bars') == ("" or None):
             chord5_bars = 0
         else: chord5_bars = int(request.POST.get('chord5_bars'))
 
+        # Create the Composition
         composition = Composition.objects.create(
 
             name = name,
@@ -142,20 +130,20 @@ def index(request):
                 )
         return redirect(f"/track/{composition.id}")
 
-    # form = ProgressionForm() # Won't need this if it works
-    # context = {"form":form}
     context = {}
     return render(request, "userinput/index-remaster-3.html", context)
 
 def track(request, id):
-    ## Get progression data and create model
 
     broken_values = ["", None, 0]
     
     composition = Composition.objects.get(id=id)
 
-    comp_data_dict_list = list(Composition.objects.filter(id=id).values())
+    comp_data_dict_list = list(Composition.objects.filter(id=id).values()) # could do all of this the Django way...
     comp_data_dict = comp_data_dict_list[0]
+
+
+    # Chord 1
     chord1_tonic = comp_data_dict["chord1_tonic"]
     chord1_tonic_display = chord1_tonic
     if chord1_tonic_display == "A#":
@@ -189,9 +177,8 @@ def track(request, id):
         if broken_value in chord1_vals:
             chord1_works = False
 
-
-
-
+    
+    # Chord 2
     chord2_tonic = comp_data_dict["chord2_tonic"]
     chord2_tonic_display = chord2_tonic
     if chord2_tonic_display == "A#":
@@ -227,6 +214,7 @@ def track(request, id):
         if broken_value in chord2_vals:
             chord2_works = False
 
+    # Chord 3
     chord3_tonic = comp_data_dict["chord3_tonic"]
     chord3_tonic_display = chord3_tonic
     if chord3_tonic_display == "A#":
@@ -259,6 +247,7 @@ def track(request, id):
         if broken_value in chord3_vals:
             chord3_works = False
 
+    # Chord 4
     chord4_tonic = comp_data_dict["chord4_tonic"]
     chord4_tonic_display = chord4_tonic
     if chord4_tonic_display == "A#":
@@ -291,6 +280,7 @@ def track(request, id):
         if broken_value in chord4_vals:
             chord4_works = False
 
+    # Chord 5
     chord5_tonic = comp_data_dict["chord5_tonic"]
     chord5_tonic_display = chord5_tonic
     if chord5_tonic_display == "A#":
@@ -362,13 +352,6 @@ def track(request, id):
         trackn = track.trackname
         track_names.append(trackn) 
 
-
-    
-    # form = TrackForm()
-    # context = {
-    #     "form":form,
-    #     "composition":composition
-    # }
     context={
         
         "composition": composition,

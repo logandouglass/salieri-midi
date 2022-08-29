@@ -135,19 +135,6 @@ def chordbuild(tonic, quality): # currently essential to automation
 
         return note_list
 
-def bassify_old(classed_note_list): # not currently in use, may move to legacy or scrap
-    """
-    Input unclassed note list, returns a classed list of every note in the input list an octave down.
-    Good for writing basslines.
-
-    """
-    bassified_classed_note_list = []
-    for note in classed_note_list:
-        note = note.octave_down()
-        bassified_classed_note_list.append(note)
-
-    return bassified_classed_note_list
-
 #####===============================================================================
 #### Legacy Note & Rest-placing Functions
 ## The original functions from Project Purple
