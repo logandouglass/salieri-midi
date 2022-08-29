@@ -131,7 +131,7 @@ def index(request):
         return redirect(f"/track/{composition.id}")
 
     context = {}
-    return render(request, "userinput/index-remaster-4.html", context)
+    return render(request, "userinput/index.html", context)
 
 def track(request, id):
 
