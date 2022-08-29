@@ -642,12 +642,6 @@
     
           //
     
-          //mounted () {
-    
-            //this.$refs.chord1Tonic.focus()
-    
-          //},
-    
           //
           
           methods: {
@@ -720,14 +714,13 @@
               console.log("here0")
               if (this.chordCurrent == 1)
               {
-                //console.log("here1")
-                //console.log("here1.25")
+
                 this.chordCurrent = 2
-                //console.log("here1.5")
+
                 this.chord1Vis = false
-                //console.log("here1.75") 
+
                 this.chord2Vis = true
-                //console.log("here2")
+
                 this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
               }
               
@@ -750,7 +743,7 @@
               this.chord5Vis = true
               this.currentChordDisplay = this.currentChordDict[this.chordCurrent]
             }
-              // console.log(`${this.chord2Vis}`)}
+
 
               this.setCurrent()
     
