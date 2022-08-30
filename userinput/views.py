@@ -412,7 +412,7 @@ def track(request, id):
 
     
     }
-    return render(request, "userinput/track-remaster-3.html", context) ####@@@
+    return render(request, "userinput/track.html", context) ####@@@
     
 def trackadd(request, id): ## fix!!!
     trackname = request.POST.get('trackname')
