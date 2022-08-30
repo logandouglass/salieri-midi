@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Salieri | About </title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <script src="https://unpkg.com/vue@3"></script>
+    {% load static %}
+
+    <style>
+      label {color: #E2D8CC}
+      small {color: #E2D8CC}
+      a {color: #E2D8CC}
+      nav {background-color: #130B23; }
+      select {background-color: #E2D8CC; color: #130B23}
+      input {background-color: #E2D8CC; color: #130B23;}
+      body {background-image: linear-gradient(#0F0B26, #8C2641);}
+      button {background-color: #0D0D0D
+        ; border-color: #E2D8CC}
+      #submit {background-color:#8C2641; border-color: #E2D8CC
+      }
+      #miniheadline {color: #E2D8CC}
+      #sig {color: #E2D8CC}
+      #miniheadline1 {color:#E0AB79
+      }
+      #miniheadline2 {color:#E2D8CC}
+      #miniheadline3 {color:#E2D8CC}
+      #textcontainer {background-color: #130B23
+        ; border-color: #E2D8CC; color:#E2D8CC}
+      #datacontainer {background-color: #130B23
+
+        ; border-color: #E2D8CC}
+      #datap {background-color: #E2D8CC; color: #130B23 }
+      #dataheadings {color:#8C2641
+      }
+      #styleupdate{color:#22731D}
+      #currchord{color:#22731D}
+
+    </style>
+</head>
+<body style="min-height:100vh">
+    
+    <div id = "sal image div" class="mt5 tc">
+        <a href="{% url 'userinput:index' %}"><img
+            src="{% static 'userinput/coolsal.png' %}"
+            class="br4 h5 w5 ba bw2 dib" alt="Salieri"
+            style = "border-color: #E0AB79">
+        </a>
+    </div>
+
+    <header class="tc pv4 calisto" style="color: #E2D8CC">
+        <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
+        <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
+        <nav class=" bt bb bw1 tc mw7 center mt4" style = "border-color: #E0AB79">
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:index' %}">Home</a>
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:about' %}">About</a>
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:instructions' %}">Instructions</a>
+          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:dedication' %}">Dedication</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id = "containersdiv" class = "flex flex-wrap justify-center h-100">
+            <div id = "textcontainer" class = "pa4 mb3 arial ba bw2 h-100 br4" style = "border-color: #E2D8CC;">
+                <div class = "measure">
+                    
+                    <div class = "f3 ">
+                        <div class = "f2 flex justify-center">
+                            <span id = "miniheadline1" class = "calisto"> What is Salieri? </span> <br>
+                        </div>
+                        <br>
+                        Salieri is a music composition tool that allows users to create their own customizable music clips as downloadable MIDI.  
+                        You don't need to play an instrument or read traditional notation, and there's no fee. <br><br> 
+                        
+                        (It does help to know some basic music terminology.  But my hope is to keep the knowledge barrier as low as possible, and there's no harm in experimenting even if you've never played a note in your life.) <br><br>
+                        
+                        Salieri is in very early development.  The present version is a demo that was thrown together in about a month as a project for PDX Code Guild.  It is my first fullstack web app, utilizing home-brewed python algorithms on the backend to generate the musical figures.  <br><br>
+                        
+                        Right now, Salieri's functionality is limited, but it is capable of writing simple accompaniment and complex, customizable arpeggios.  Already the app is a useful tool for creating your own jam session MIDI, or for creating musical setpieces you can import and manipulate in popular programs like Ableton.<br><br>
+                        
+                        In time, I am planning on drastically expanding the range and sophistication of Salieri's music writing algorithms.  Check back over time to see the project grow.<br><br>
+                        
+                        You can find the code for Salieri in my Github repository (link below).  Feel free to contact me if you're curious about the project or looking to collaborate.<br><br>
+                        
+                        <a id="miniheadline1" href="https://github.com/logandouglass/pdxcapstone">github.com/logandouglass/pdxcapstone</a><br><br>
+                        <span id = "miniheadline1"> logandouglass@gmail.com </span>
+                        <br><br>
+                        
+                            <span id = "" class = ""> - Logan </span> <br>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <h4 id = "sig" class = "calisto f5 mb4 tc" > Logan Douglass | © 2022 </h4>
+    </footer>
+
+</body>
+</html>

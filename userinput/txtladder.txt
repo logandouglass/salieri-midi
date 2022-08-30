@@ -1,0 +1,31 @@
+About
+#=====
+Update 8/30/2022
+Version 0.1 A
+
+Salieri is a music composition tool that allows users to create their own customizable music clips as downloadable MIDI.  
+You don't need to play an instrument or read traditional notation, and there's no fee.  (It does help to know some basic music terminology.  But my hope is to keep the knowledge barrier as low as possible, and there's no harm in experimenting even if you've never played a note in your life.)
+
+Salieri is in very early development.  The present version is a demo that was thrown together in about a month as a project for PDX Code Guild.  It is my first fullstack web app, utilizing home-brewed python algorithms on the backend to generate the musical figures.  
+
+Right now, Salieri's functionality is limited, but it is capable of writing simple accompaniment and complex, customizable arpeggios.  Already the app is a useful tool for creating your own jam session MIDI, or for creating musical setpieces you can import and manipulate in popular programs like Ableton.
+
+In time, I am planning on drastically expanding the range and sophistication of Salieri's music writing algorithms.  Check back over time to see the project grow.
+
+You can find the code for Salieri in my Github repository (link below).  Feel free to contact me if you're curious about the project or looking to collaborate.
+
+https://github.com/logandouglass/pdxcapstone
+logandouglass@gmail.com
+
+
+
+
+
+
+Instructions
+#=====
+
+
+
+Dedication
+

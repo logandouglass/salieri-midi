@@ -62,10 +62,10 @@
         <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
         <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
         <nav class=" bt bb bw1 tc mw7 center mt4" style = "border-color: #E0AB79">
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:index' %}">Home</a>
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">About</a>
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Instructions</a>
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Dedication</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:index' %}">Home</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:about' %}">About</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:instructions' %}">Instructions</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:dedication' %}">Dedication</a>
         </nav>
       </header>
 
@@ -77,7 +77,7 @@
         
             <div id = "containersdiv" class = "flex flex-wrap justify-center h-100">
   
-                <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100 br4 mr2" style = "border-color: #E2D8CC;">
+                <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100 br4 " style = "border-color: #E2D8CC;">
                     <form class="" action= "{% url 'userinput:trackadd' composition.id %}" style = 'border-color: #E2D8CC' method="POST">
                         {% csrf_token %}
                         <div class="measure-narrow">
