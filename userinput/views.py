@@ -382,6 +382,7 @@ def track(request, id):
         "chord5_vis": chord5_vis,
         "track_names": track_names,
         "no_tracks": no_tracks,
+        "track_objs": track_objs,
         "chord1_works": chord1_works,
         "chord2_works": chord2_works,
         "chord3_works": chord3_works,
@@ -411,7 +412,7 @@ def track(request, id):
 
     
     }
-    return render(request, "userinput/track-remaster-2b.html", context) ####@@@
+    return render(request, "userinput/track-remaster-3.html", context) ####@@@
     
 def trackadd(request, id): ## fix!!!
     trackname = request.POST.get('trackname')
