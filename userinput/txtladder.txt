@@ -25,7 +25,60 @@ logandouglass@gmail.com
 Instructions
 #=====
 
+The Basic Process
+
+There are two main phases to using Salieri.
+
+Phase I: Title and Progression
+
+Create a chord progression and title your composition.  In the demo version, you can create a progression up to five chords long.
+
+Parameters
+Tonic - sets what note the chord is based (ex: C) 
+Quality - sets what varietys of chord to employ (ex: major)
+Bars - sets how long the chord will linger
+
+Phase II: Tracks
+
+Add and style tracks that follow the user-input progression.
+
+Parameters
+
+Style - sets what kind of musical figure will be played over a chord (ex: arpeggio)
+Denominator - sets what length of note will play a starring role in the musical figure (ex: 4)
+Mutators - applies various changes to the musical figure, depending which mutators are entered (ex: bassify1)
 
 
+
+
+
+
+
+Mutators 
+
+bassify1, bassify2, bassify3 -- apparently not, come back to these
+
+invert1, invert2
+
+o1, o2, o3
+
+reverse
+
+reach1, reach2, reach3
+
+linger2, linger3, linger4, linger5, linger6, linger7, linger8
+
+
+
+
+
+
+
+
+
+
+
+
+@!#$@!#$@!$@!$@!$@!#
 Dedication
 
