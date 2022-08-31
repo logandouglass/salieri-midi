@@ -9,4 +9,9 @@ I will make these improvements, as well as *drastically* expanding the functiona
 
 The end goal is to create an accessible but powerful open source tool that can help users of all skill levels create their own music as midi.  Check back over time to see the project develop.
 
-<i>Logan Douglass, Salieri dev, 7/11/2022</i> 
+You can try the demo version of Salieri at https://salierimidi.herokuapp.com/
+
+Expect a proper documentation and functionality update early fall 2022.
+
+
+<i>Logan Douglass, Salieri dev, 8/31/2022</i> 
