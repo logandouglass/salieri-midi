@@ -480,7 +480,8 @@ def trackadd(request, id): ## fix!!!
     return redirect(f"/track/{id}") ####@@@
 
 def about(request):
-    return HttpResponse("So glad you made it.")
+    return render(request, "userinput/about.html")
+    # return HttpResponse("So glad you made it.")
 
 def instructions(request):
     return HttpResponse("So glad you made it.")
