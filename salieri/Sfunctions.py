@@ -415,7 +415,6 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
         
     return bar
-
 ## Coming soon -- remastered scalerunner
 
 #####===============================================================================================
