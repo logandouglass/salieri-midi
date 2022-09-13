@@ -278,6 +278,16 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         reach_len = 3
         full_list = reacher(full_list, base_list, reach_len, reach_mod)
     
+    # return
+    return_bool = False
+    if "return" in mut_list:
+        return_counter = 1
+        return_list = full_list.copy()
+        return_list.reverse()
+        return_list.pop(0)
+        return_list.pop(-1)
+        return_bool = True
+    
     # linger
     linger_value = 1
     if "linger2" in mut_list:
@@ -297,13 +307,28 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     if linger_value != 1:
         full_list = lingerer(full_list, linger_value)
+        return_list = lingerer(return_list, linger_value)
 
     bar.length = duration
     loop_value = math.ceil((denominator * duration) / len(full_list))
+    
+    if return_bool == True:
+        for _ in range(loop_value):
+            if return_counter % 2 != 0:
+                for note in full_list:
 
-    for _ in range(loop_value):
-        for note in full_list:
-            bar.place_notes(note, denominator)
+                    bar.place_notes(note, denominator)
+                return_counter += 1
+            else:
+                for note in return_list:
+
+                    bar.place_notes(note, denominator)
+                return_counter += 1
+    else:     
+        for _ in range(loop_value):
+            for note in full_list:
+
+                bar.place_notes(note, denominator)
 
     return bar
 
