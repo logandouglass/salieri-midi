@@ -12,7 +12,7 @@ from mingus.containers import Bar
 from mingus.containers import Composition as Mcomposition
 from mingus.containers import Track as Mtrack
 
-## For improvisation and randomized generation
+## For improvisation and randomized generation (coming eventually)
 # import random
 
 ## for MATH
@@ -101,6 +101,31 @@ def chordbuild(tonic, quality): # currently essential to automation
             note_list = chords.augmented_triad(tonic)
 
         return note_list
+
+def denom_check(blength, bbeat, denom):
+    """
+    In testing
+    Returns true if note denominator needs correcting.
+    """
+    if bbeat == 0:
+        return False
+
+    # need handling for notes longer than the bar somewhere
+    if (blength - bbeat) < (1/denom):
+        return True
+    else:
+        return False
+
+def denom_corrrect(blength, bbeat):
+    """
+    In testing
+    Corrects denom in the event of a successful denom_check
+    """
+    if (blength - bbeat) != 0:
+        corrected_denom = 1/(blength - bbeat)
+    else:
+        corrected_denom = 1 # the one here is pretty arbitrary, but I think it'll fly because of mingus's bar overflow protections
+    return corrected_denom
 
 def lingerer(note_l, linger_v):
     linger_list = []
@@ -217,6 +242,22 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
 
+    ##delays
+    if "delay1" in mut_list:
+        bar.place_rest(4)
+    if "delay2" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay3" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay4" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+
     # reverse
     reverse = False
     if "reverse" in mut_list:
@@ -307,7 +348,8 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     if linger_value != 1:
         full_list = lingerer(full_list, linger_value)
-        return_list = lingerer(return_list, linger_value)
+        if return_bool:
+            return_list = lingerer(return_list, linger_value)
 
     bar.length = duration
     loop_value = math.ceil((denominator * duration) / len(full_list))
@@ -316,19 +358,25 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
         for _ in range(loop_value):
             if return_counter % 2 != 0:
                 for note in full_list:
-
-                    bar.place_notes(note, denominator)
+                    if denom_check(bar.length, bar.current_beat, denominator):
+                        bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
+                    else:
+                        bar.place_notes(note, denominator)
                 return_counter += 1
             else:
                 for note in return_list:
-
-                    bar.place_notes(note, denominator)
+                    if denom_check(bar.length, bar.current_beat, denominator):
+                        bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
+                    else:
+                        bar.place_notes(note, denominator)
                 return_counter += 1
     else:     
         for _ in range(loop_value):
             for note in full_list:
-
-                bar.place_notes(note, denominator)
+                if denom_check(bar.length, bar.current_beat, denominator):
+                        bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
+                else:
+                    bar.place_notes(note, denominator)
 
     return bar
 
@@ -345,8 +393,6 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
     tonic = tonic_singleton[0]
     
-    
-
     # numerator = 4 * duration
     # bar.set_meter((numerator, 4))
 
@@ -440,9 +486,12 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
         
     return bar
-## Coming soon -- remastered scalerunner
 
-#####===============================================================================================
+# Coming soon -- remastered scalerunner
+# def scalerunner():
+#     ...
+
+#####==========================================================================
 # == MASTER COMBINATORIAL FUNCTION ==
 
 def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # changed ml from None to empty list
