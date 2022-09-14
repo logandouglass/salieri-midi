@@ -57,10 +57,10 @@
         <h1 class="mt2 mb0 calisto ttu tracked fw1 f-subheadline">Salieri</h1>
         <h2 class="mt2 f3 fw1 calisto i">you don't have to be mozart </h2>
         <nav class=" bt bb bw1 tc mw7 center mt4" style = "border-color: #E0AB79">
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:index' %}">Home</a>
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">About</a>
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Instructions</a>
-          <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="">Dedication</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:index' %}">Home</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:about' %}">About</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:instructions' %}">Instructions</a>
+            <a class="f4 f4-l link bg-animate dib pa3 ph4-l" href="{% url 'userinput:dedication' %}">Dedication</a>
         </nav>
     </header>
 
@@ -69,7 +69,7 @@
 
             <div id = "containersdiv" class = "flex flex-wrap justify-center h-100">
   
-                <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100 br4 mr2" style = "border-color: #E2D8CC">
+                <div id = "formcontainer" class = "pa4 mb3 calisto ba bw2 h-100 br4" style = "border-color: #E2D8CC">
                     <form class="" action= "{% url 'userinput:index' %}" style = 'border-color: #E2D8CC' method="POST">
                         {% csrf_token %}
                         <div class="measure-narrow">
@@ -92,7 +92,7 @@
 
                             <div id = "chord1-data" v-show="chord1Vis">
                                 <label for="chord-1-tonic" class="f4 calisto  db mb2"> Chord 1 Tonic </label>
-                                <select ref= "chord1Tonic" v-model="chord1Tonic" id="chord-1-tonic" name="chord1_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-1-tonic-desc" >
+                                <select ref= "chord1Tonic" v-model="chord1Tonic" id="chord-1-tonic" name="chord1_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-1-tonic-desc" >
                                     <option value="A"> A </option>
                                     <option value="A#/Bb" > A#/Bb </option>
                                     <option value="B"> B </option>
@@ -110,7 +110,7 @@
                                 <br>
           
                                 <label for="name" class="f4 calisto  db mb2"> Chord 1 Quality </label>
-                                <select id="chord-1-quality" v-model="chord1Quality" name="chord1_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-1-quality-desc" >
+                                <select id="chord-1-quality" v-model="chord1Quality" name="chord1_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-1-quality-desc" >
                                     <option value="major"> major (common triad) </option>
                                     <option value="minor" > minor (common triad)</option>
                                     <option value="diminished" > diminished (triad) </option>
@@ -143,7 +143,7 @@
           
                                 <label for="chord-2-tonic" class="f4 calisto  db mb2"> Chord 2 Tonic </label>
                                 <small id="chord-2-tonic-desc" class="f5 db mb2"></small>
-                                <select id="chord-2-tonic" v-model="chord2Tonic" name="chord2_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-2-tonic-desc" >
+                                <select id="chord-2-tonic" v-model="chord2Tonic" name="chord2_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-2-tonic-desc" >
 
                                     <option value="A"> A </option>
                                     <option value="A#/Bb" > A#/Bb </option>
@@ -163,7 +163,7 @@
           
                                 <label for="name" class="f4 calisto  db mb2"> Chord 2 Quality </label>
 
-                                <select id="chord-2-quality" v-model="chord2Quality" name="chord2_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-2-quality-desc" >
+                                <select id="chord-2-quality" v-model="chord2Quality" name="chord2_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-2-quality-desc" >
                                     <option value="major"> major (common triad) </option>
                                     <option value="minor" > minor (common triad)</option>
                                     <option value="diminished" > diminished (triad) </option>
@@ -196,7 +196,7 @@
                             <div id = "chord3-data" v-show="chord3Vis">
                                 <label for="chord-3-tonic" class="f4 calisto  db mb2"> Chord 3 Tonic </label>
                                 
-                                <select id="chord-3-tonic" v-model="chord3Tonic"  name="chord3_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-3-tonic-desc" >
+                                <select id="chord-3-tonic" v-model="chord3Tonic"  name="chord3_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-3-tonic-desc" >
 
                                     <option value="A"> A </option>
                                     <option value="A#/Bb" > A#/Bb </option>
@@ -215,7 +215,7 @@
                                 <br>
                             
                                 <label for="name" class="f4 calisto  db mb2"> Chord 3 Quality </label>         
-                                <select id="chord-3-quality" v-model="chord3Quality" name="chord3_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-3-quality-desc" >
+                                <select id="chord-3-quality" v-model="chord3Quality" name="chord3_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-3-quality-desc" >
                                     <option value="major"> major (common triad) </option>
                                     <option value="minor" > minor (common triad)</option>
                                     <option value="diminished" > diminished (triad) </option>
@@ -246,7 +246,7 @@
           
                             <div id = "chord4-data" v-show="chord4Vis">
                                 <label for="chord-4-tonic" class="f4 calisto  db mb2"> Chord 4 Tonic </label>
-                                <select id="chord-4-tonic" v-model="chord4Tonic" name="chord4_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-4-tonic-desc" >
+                                <select id="chord-4-tonic" v-model="chord4Tonic" name="chord4_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-4-tonic-desc" >
                                     <option value="A"> A </option>
                                     <option value="A#/Bb" > A#/Bb </option>
                                     <option value="B"> B </option>
@@ -264,7 +264,7 @@
                                 <br>
                             
                                 <label for="name" class="f4 calisto  db mb2"> Chord 4 Quality </label>
-                                <select id="chord-4-quality" v-model="chord4Quality" name="chord4_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-4-quality-desc" >
+                                <select id="chord-4-quality" v-model="chord4Quality" name="chord4_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-4-quality-desc" >
                                     <option value="major"> major (common triad) </option>
                                     <option value="minor" > minor (common triad)</option>
                                     <option value="diminished" > diminished (triad) </option>
@@ -295,7 +295,7 @@
                             <div id = "chord5-data" v-show="chord5Vis">
                                 <label for="chord-5-tonic" class="f4 calisto  db mb2"> Chord 5 Tonic </label>
                             
-                                <select id="chord-5-tonic" v-model="chord5Tonic" name="chord5_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-5-tonic-desc" >
+                                <select id="chord-5-tonic" v-model="chord5Tonic" name="chord5_tonic" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-5-tonic-desc" >
                                     <option value="A"> A </option>
                                     <option value="A#/Bb" > A#/Bb </option>
                                     <option value="B"> B </option>
@@ -313,7 +313,7 @@
                                 <br>
                             
                                 <label for="name" class="f4 calisto  db mb2"> Chord 5 Quality </label>
-                                <select id="chord-5-quality" v-model="chord5Quality" name="chord5_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" type="text" aria-describedby="chord-5-quality-desc" >
+                                <select id="chord-5-quality" v-model="chord5Quality" name="chord5_quality" class="pointer f4 input-reset ba b--black-20 pa2 mb2 db w-100 br4" aria-describedby="chord-5-quality-desc" >
                                     <option value="major"> major (common triad) </option>
                                     <option value="minor" > minor (common triad)</option>
                                     <option value="diminished" > diminished (triad) </option>
@@ -405,10 +405,6 @@
                         
                         <br><br>
             
-                        <span v-show="noneAdded">
-                            <i>None</i><br>
-
-                        </span>
             
                         <span class = "pointer" @click.prevent="toChord1()" v-show="chord1Added">    
                             <b>Chord 1</b> <br>
@@ -509,7 +505,7 @@
                 chord3Added: false,
                 chord4Added: false,
                 chord5Added: false,
-                //noneAdded: true,
+                noneAdded: true,
                 
                 chordsAdded: [1], // maybe unnecessary
                 noChords:1,

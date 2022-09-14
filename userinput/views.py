@@ -479,5 +479,17 @@ def trackadd(request, id): ## fix!!!
     # context = {}
     return redirect(f"/track/{id}") ####@@@
 
+def about(request):
+    return render(request, "userinput/about.html")
+    # return HttpResponse("So glad you made it.")
+
+def instructions(request):
+    return HttpResponse("So glad you made it.")
+
+def dedication(request):
+    return HttpResponse("So glad you made it.")
+
+    
+
 def dummy(request):
     return HttpResponse("Only a dummy would come here...dummy!")
