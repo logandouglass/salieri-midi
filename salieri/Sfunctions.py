@@ -429,7 +429,10 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
     else:
         for _ in range(loop_value):
-            bar.place_notes(tonic, denominator)
+            if denom_check(bar.length, bar.current_beat, denominator):
+                        bar.place_notes(tonic, denom_corrrect(bar.length, bar.current_beat))
+            else:
+                bar.place_notes(tonic, denominator)
 
         
     return bar
@@ -482,8 +485,10 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
     else:
         for _ in range(loop_value):
-            bar.place_notes(note_c, denominator)
-
+            if denom_check(bar.length, bar.current_beat, denominator):
+                        bar.place_notes(note_c, denom_corrrect(bar.length, bar.current_beat))
+            else:
+                bar.place_notes(note_c, denominator)
         
     return bar
 
