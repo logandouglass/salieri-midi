@@ -1,0 +1,86 @@
+About Mutators
+
+Mutators apply a range of effects to musical figures, and are a great way to inject variety and creativity into your MIDI.
+
+Make musical figure longer; play it in reverse; send all the notes down an octave -- these are just a few of the sorts of effects you can apply with mutators.
+
+Below you will find a list of all functional mutators included in the present demo version of Salieri.  Beneath each mutator you will find a list of all figure-writing functions that are compatible with that mutator.
+
+mutators can be entered in any order separated by a space
+
+for instance, the mutator string 
+
+"o1 reach2 return" 
+
+when applied to the arpeggio figure-writer will attempt to write an arpeggio that goes one full octave further, reaches 2 notes further into the next octave, and then walks back down. 
+
+
+Mutators
+
+bassifyn, for n 1-3
+[arpeggio, simpline, strummer]
+
+lowers base octave of a musical figure by n octaves
+
+good for making basslines
+--
+
+trebifyn, for n 1-3
+[arpeggio, simpline, strummer]
+
+raises base octave of a musical figure by n octaves 
+
+good for making lead figures stand out
+--
+
+invertn, for n 1-2
+[arpeggio]
+
+inverts the chord used to generate a musical figure by n notes
+
+(the notes in an inverted chord are stacked differently, so that the tonic is not the lowest note)
+
+on, for n 1-3
+[arpeggio]
+
+adds full octaves to a musical figure
+
+good for making long, sweeping musical figures
+--
+
+reverse
+[arpeggio]
+
+arranges a musical figure in reverse
+--
+
+return
+[arpeggio]
+
+alternates placing a musical figure forwards and in reverse until the desired number of bars are filled
+--
+
+reachn, for n 1-3
+[arpeggio]
+
+modifies length of an arpeggion, causing it to overflow into the next octave by n notes.
+--
+
+delayn, for n 1-4
+[arpeggio, simpline, strummer]
+
+fills the beginning of a bar with n 1/4 rests before placing a musical figure
+--
+
+lingern, for n 1-8
+[arpeggio]
+
+places n of each note in the musical figure instead of 1
+--
+
+pn, for n 1
+[simpline, strummer]
+
+overrides the note denominator selected for a chord sequence, and instead places notes in a special, pre-arranged pattern
+
+p1 - a dramatic, crashing pattern (12 12 12 8 8 2)
