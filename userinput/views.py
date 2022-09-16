@@ -484,10 +484,10 @@ def about(request):
     # return HttpResponse("So glad you made it.")
 
 def instructions(request):
-    return HttpResponse("So glad you made it.")
+    return render(request, "userinput/instructions.html")
 
 def dedication(request):
-    return HttpResponse("So glad you made it.")
+    return render(request, "userinput/dedication.html")
 
     
 

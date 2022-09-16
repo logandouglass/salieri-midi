@@ -25,7 +25,7 @@ logandouglass@gmail.com
 Instructions
 #=====
 
-The Basic Process
+Overview
 
 There are two main phases to using Salieri.
 
