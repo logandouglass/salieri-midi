@@ -355,7 +355,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     loop_value = math.ceil((denominator * duration) / len(full_list))
     
     if return_bool == True:
-        for _ in range(loop_value):
+        for _ in range(10): #arbitrary but effective, fix for return because loopval can come up short
             if return_counter % 2 != 0:
                 for note in full_list:
                     if denom_check(bar.length, bar.current_beat, denominator):

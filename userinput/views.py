@@ -489,7 +489,5 @@ def instructions(request):
 def dedication(request):
     return render(request, "userinput/dedication.html")
 
-    
-
 def dummy(request):
     return HttpResponse("Only a dummy would come here...dummy!")
