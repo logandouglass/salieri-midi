@@ -60,10 +60,9 @@ def bassify(base_lst, mut_lst=[]):
             note.octave -=3
     return base_lst
     
-def chordbuild(tonic, quality): # currently essential to automation
+def chordbuild(tonic, quality):
     """
     Returns an unclassed list of the notes in a chord.
-    No inversion support yet.
 
     """
     if tonic in ["", None]:
@@ -102,6 +101,22 @@ def chordbuild(tonic, quality): # currently essential to automation
 
         return note_list
 
+def delay(bar, mut_list=[]):
+    if "delay1" in mut_list:
+        bar.place_rest(4)
+    if "delay2" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay3" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+    if "delay4" in mut_list:
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+        bar.place_rest(4)
+
 def denom_check(blength, bbeat, denom):
     """
     In testing
@@ -134,27 +149,40 @@ def lingerer(note_l, linger_v):
             linger_list.append(note)
     return linger_list
 
-def inverter(base_list, invert_len, reverse_bool):
+def inverter(base_list, mut_list, reverse_bool):
+    """
+    Performs chord inversions
+    """
+    invert_val = 0
+
+    if "invert1" in mut_list:
+        invert_val = 1
+    elif "invert2" in mut_list:
+        invert_val = 2
+
     if reverse_bool == True:
         oct_adj = 1
     else:
         oct_adj = -1
-    for _ in range(invert_len):
-        new_note = Note()
-        new_note.name = base_list[-1].name
-        new_note.octave = base_list[-1].octave + oct_adj
-        base_list.pop(-1)
-        base_list.insert(0, new_note)
+
+    if invert_val:    
+        for _ in range(invert_val):
+            new_note = Note()
+            new_note.name = base_list[-1].name
+            new_note.octave = base_list[-1].octave + oct_adj
+            base_list.pop(-1)
+            base_list.insert(0, new_note)
     
     return base_list
 
 def octave_ascend(scale):
     """
-    Returns list of note ascending from the tonic in the octave.
+    Returns list of note objects ascending from the tonic in the octave.
     """
     start_note = scale[0]
-    corrected_scale = [] ##
+    corrected_scale = []
     initial = True
+    
     for note in scale:
         oct_up = False
         if initial == False:
@@ -164,8 +192,8 @@ def octave_ascend(scale):
         if oct_up == True:
             note.octave_up()
         initial = False
-        corrected_scale.append(note) ##
-    return corrected_scale ##
+        corrected_scale.append(note)
+    return corrected_scale
 
 def octave_descend(scale):
     """
@@ -234,29 +262,14 @@ def silence(duration):
 def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=[]):
     """
     Writes customizable arpeggios.
-
-    initial remaster 6/20
     """
     bar = Bar()
     chord_ascending = octave_ascend(chord)
     chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
 
-    ##delays
-    if "delay1" in mut_list:
-        bar.place_rest(4)
-    if "delay2" in mut_list:
-        bar.place_rest(4)
-        bar.place_rest(4)
-    if "delay3" in mut_list:
-        bar.place_rest(4)
-        bar.place_rest(4)
-        bar.place_rest(4)
-    if "delay4" in mut_list:
-        bar.place_rest(4)
-        bar.place_rest(4)
-        bar.place_rest(4)
-        bar.place_rest(4)
+    # delays
+    delay(bar, mut_list)
 
     # reverse
     reverse = False
@@ -268,18 +281,15 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     base_list = bassify(base_list, mut_list)
     base_list = trebify(base_list, mut_list)
     
-    # inversion
-    if "invert1" in mut_list:
-        invert_val = 1
-        base_list = inverter(base_list, invert_val, reverse)
-    elif "invert2" in mut_list:
-        invert_val = 2
-        base_list = inverter(base_list, invert_val, reverse)
+    # chord inversion
+
+    base_list = inverter(base_list, mut_list, reverse)
+
 
     # for reaches and full octave extension
     full_list = base_list.copy()
 
-    # octave extend
+    # octave extend -- convert this to a function
     num_octaves = 0
     if "o1" in mut_list:
         num_octaves = 1
