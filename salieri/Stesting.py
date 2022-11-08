@@ -17,6 +17,15 @@ from mingus.containers import Track as Mtrack
 def dub():
     return "apple", "orange"
 
-x, y = dub()
-print(x)
-print(y)
+def mult():
+    return ["apple", "orange"]
+
+# x, y = dub()
+# print(x)
+# print(y)
+
+# apple = mult()[0]
+# print(apple)
+
+# orange = mult()[1]
+# print(orange)

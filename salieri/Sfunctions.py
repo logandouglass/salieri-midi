@@ -305,6 +305,8 @@ def trebify(base_lst, mut_lst=[]):
 
 def silence(duration):
     """
+    Fills a bar with rests, resulting in a silent bar.
+    
     initial remaster 6/20
     """
     bar = Bar()
@@ -320,7 +322,10 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     """
     Writes customizable arpeggios and other arpeggio-like figures
     """
+    # MAKE THE BAR
     bar = Bar()
+
+    # MAKE ASCENDING AND DESCENDING BASIC NOTELIST OF CHORD)
     chord_ascending = octave_ascend(chord)
     chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
@@ -332,10 +337,10 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     # print(chord_ascending)
     # print(chord_descending)
 
-    # delays
+    # DELAYS
     delay(bar, mut_list)
 
-    # reverse
+    # REVERSE
     reverse = False
     if "reverse" in mut_list:
         base_list = chord_descending.copy()
@@ -343,20 +348,19 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     # print(f"reverse...{base_list}")
 
-    # bassify and trebify
+    # BASSIFY AND TREBIFY
     base_list = bassify(base_list, mut_list)
     base_list = trebify(base_list, mut_list)
     
-    # chord inversion
-
+    # INVERSION
     base_list = inverter(base_list, mut_list, reverse)
     print(f"after invert...{base_list}")
 
 
-    # for reaches and full octave extension
+    # FULL LIST CREATION BEGINS
     full_list = base_list.copy()
 
-    # octave extend -- convert this to a function
+    # OCTAVE EXTENSION
     num_octaves = 0
     if "o1" in mut_list:
         num_octaves = 1
@@ -383,12 +387,12 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     counter += counter_inc
     reach_mod = counter
 
-    # reach
-    
+    # REACH
+
     full_list = reacher(full_list, base_list, mut_list, reach_mod)
     print(f"reaching...{full_list}")
 
-    # return
+    # RETURN
     return_bool = False
     if "return" in mut_list:
         return_counter = 1
