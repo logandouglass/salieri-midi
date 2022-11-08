@@ -265,6 +265,35 @@ def octave_descend(scale):
         
     return corrected_scale
 
+def octave_extension(full_list, base_list, mut_list, reverse_bool):
+    num_octaves = 0
+    if "o1" in mut_list:
+        num_octaves = 1
+    elif "o2" in mut_list:
+        num_octaves = 2
+    elif "o3" in mut_list:
+        num_octaves = 3
+    
+    if reverse_bool == True:
+        counter_inc = -1
+
+    else:
+        counter_inc = 1
+
+    counter = 0
+    for _ in range(num_octaves):
+        counter += counter_inc
+        for note in base_list:
+            new_note = Note()
+            new_note.name = note.name
+            new_note.octave = note.octave + counter
+            full_list.append(new_note)
+    
+    counter += counter_inc
+    reach_mod = counter
+
+    return full_list, reach_mod
+
 def reacher(new_notelist, notelist, mut_list, oct_adj):
     
     len = 0
@@ -287,6 +316,30 @@ def reacher(new_notelist, notelist, mut_list, oct_adj):
     
     else:
         return new_notelist
+
+def returner(full_list, mut_list):
+    if "return" in mut_list:
+        return_counter = 1
+        return_list = full_list.copy()
+        return_list.reverse()
+        return_list.pop(0)
+        return_list.pop(-1)
+        return_bool = True
+
+        return full_list, return_bool
+    
+    else:
+        return_bool = False
+        return full_list, return_bool
+
+def reverser(base_list, desc_notelist, mut_list):
+    if "reverse" in mut_list:
+        base_list = desc_notelist.copy()
+        reverse_bool = True
+        return base_list, reverse_bool
+    else:
+        reverse_bool = False
+        return base_list, reverse_bool
 
 def trebify(base_lst, mut_lst=[]):
     if "trebify1" in mut_lst:
@@ -329,23 +382,14 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     chord_ascending = octave_ascend(chord)
     chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
-    
-
-    print(f"ascending... {base_list}")
-    print(f"descending...{chord_descending}")
-
-    # print(chord_ascending)
-    # print(chord_descending)
+    # print(f"ascending... {base_list}")
+    # print(f"descending...{chord_descending}")
 
     # DELAYS
     delay(bar, mut_list)
 
     # REVERSE
-    reverse = False
-    if "reverse" in mut_list:
-        base_list = chord_descending.copy()
-        reverse = True
-
+    base_list, reverse = reverser(base_list, chord_descending, mut_list)
     # print(f"reverse...{base_list}")
 
     # BASSIFY AND TREBIFY
@@ -361,52 +405,18 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     full_list = base_list.copy()
 
     # OCTAVE EXTENSION
-    num_octaves = 0
-    if "o1" in mut_list:
-        num_octaves = 1
-    elif "o2" in mut_list:
-        num_octaves = 2
-    elif "o3" in mut_list:
-        num_octaves = 3
-    
-    if reverse == True:
-        counter_inc = -1
-
-    else:
-        counter_inc = 1
-
-    counter = 0
-    for _ in range(num_octaves):
-        counter += counter_inc
-        for note in base_list:
-            new_note = Note()
-            new_note.name = note.name
-            new_note.octave = note.octave + counter
-            full_list.append(new_note)
-    
-    counter += counter_inc
-    reach_mod = counter
+    full_list, reach_mod = octave_extension(full_list, base_list, mut_list, reverse)
 
     # REACH
-
     full_list = reacher(full_list, base_list, mut_list, reach_mod)
     print(f"reaching...{full_list}")
 
     # RETURN
-    return_bool = False
-    if "return" in mut_list:
-        return_counter = 1
-        return_list = full_list.copy()
-        return_list.reverse()
-        return_list.pop(0)
-        return_list.pop(-1)
-        return_bool = True
+    return_list, return_bool = returner(full_list, mut_list)
     
-    # linger
-
+    # LINGER
     full_list = lingerer(full_list, mut_list)
-
-    print(f"full list...{full_list}")
+    print(f"lingers...{full_list}")
 
     if return_bool:
         return_list = lingerer(return_list, mut_list)
@@ -415,6 +425,7 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     loop_value = math.ceil((denominator * duration) / len(full_list))
     
     if return_bool == True:
+        return_counter = 1
         for _ in range(10): #arbitrary but effective, fix for return because loopval can come up short
             if return_counter % 2 != 0:
                 for note in full_list:
@@ -566,7 +577,7 @@ if __name__ == "__main__":
     tdur = 1
     tdenom = 8
     tmut_list = [] # leave unmuted
-    tmut_list = ["invert2", "reverse", "o2", "reach1"]
+    tmut_list = []
 
     if run_test:
         tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
