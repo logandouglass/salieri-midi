@@ -166,12 +166,7 @@ def lingerer(note_l, mut_list,):
             linger_list.append(note)
     return linger_list
 
-def inverter(base_list, mut_list, reverse_bool):
-    """
-    Performs chord inversions
-
-    Fix inverter language
-    """
+def inverter(base_list, mut_list):
     invert_val = 0
 
     if "invert1" in mut_list:
@@ -181,25 +176,7 @@ def inverter(base_list, mut_list, reverse_bool):
     elif "invert3" in mut_list:
         invert_val = 3
 
-    #old
-    # if reverse_bool == True:
-    #     oct_adj = 1
-    # else:
-    #     oct_adj = -1
-
-    #new
-    if reverse_bool == True:
-        oct_adj = -1
-    else:
-        oct_adj = 1
-
-    # if invert_val:    
-    #     for _ in range(invert_val):
-    #         new_note = Note()
-    #         new_note.name = base_list[-1].name
-    #         new_note.octave = base_list[-1].octave + oct_adj
-    #         base_list.pop(-1)
-    #         base_list.insert(0, new_note)
+    oct_adj = 1
 
     if invert_val:
         for _ in range(invert_val):
@@ -209,9 +186,27 @@ def inverter(base_list, mut_list, reverse_bool):
             base_list.pop(0)
             base_list.append(new_note)
 
-
-    
     return base_list
+
+    ...
+
+def inverterx(chord, mut_list):
+    invert_val = 0
+
+    if "invert1" in mut_list:
+        invert_val = 1
+    elif "invert2" in mut_list:
+        invert_val = 2
+    elif "invert3" in mut_list:
+        invert_val = 3
+
+    for _ in range (invert_val):
+        degree = chord[0]
+        chord.pop(0)
+        chord.append(degree)
+
+    return chord
+
 
 def octave_ascend(scale):
     """
@@ -326,15 +321,16 @@ def returner(full_list, mut_list):
         return_list.pop(-1)
         return_bool = True
 
-        return full_list, return_bool
+        return return_list, return_bool
     
     else:
+        return_list = []
         return_bool = False
-        return full_list, return_bool
+        return return_list, return_bool
 
-def reverser(base_list, desc_notelist, mut_list):
+def reverser(base_list, chord, mut_list):
     if "reverse" in mut_list:
-        base_list = desc_notelist.copy()
+        base_list = octave_descend(chord)
         reverse_bool = True
         return base_list, reverse_bool
     else:
@@ -378,34 +374,37 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     # MAKE THE BAR
     bar = Bar()
 
-    # MAKE ASCENDING AND DESCENDING BASIC NOTELIST OF CHORD)
+    # HANDLE INVERSION 1st, then do ascend/descends!!
+    print(chord)
+
+    chord = inverterx(chord, mut_list)
+    print(f"after inversion{chord}")
+
+    # MAKE ASCENDING LIST OF NOTE OBJECTS
     chord_ascending = octave_ascend(chord)
-    chord_descending = octave_descend(chord)
+    # chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
     # print(f"ascending... {base_list}")
     # print(f"descending...{chord_descending}")
 
-    # DELAYS
-    delay(bar, mut_list)
+    # INVERSION NEW
+    # base_list = inverter(base_list, mut_list)
+    # print(f"inversion...{base_list}")
 
     # REVERSE
-    base_list, reverse = reverser(base_list, chord_descending, mut_list)
-    # print(f"reverse...{base_list}")
+    base_list, reverse = reverser(base_list, chord, mut_list)
+    print(f"reverse...{base_list}")
 
     # BASSIFY AND TREBIFY
     base_list = bassify(base_list, mut_list)
     base_list = trebify(base_list, mut_list)
-    
-    # INVERSION
-    base_list = inverter(base_list, mut_list, reverse)
-    print(f"after invert...{base_list}")
-
 
     # FULL LIST CREATION BEGINS
     full_list = base_list.copy()
 
     # OCTAVE EXTENSION
     full_list, reach_mod = octave_extension(full_list, base_list, mut_list, reverse)
+    print(f"octave extension...{full_list}")
 
     # REACH
     full_list = reacher(full_list, base_list, mut_list, reach_mod)
@@ -423,6 +422,9 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     bar.length = duration
     loop_value = math.ceil((denominator * duration) / len(full_list))
+
+    # DELAYS
+    delay(bar, mut_list)
     
     if return_bool == True:
         return_counter = 1
@@ -573,9 +575,9 @@ if __name__ == "__main__":
     # print_test = True
 
     path = "testfile.mid"
-    tchord = chords.major_triad("C")
-    tdur = 1
-    tdenom = 8
+    tchord = chords.diminished_seventh("Gb")
+    tdur = 4
+    tdenom = 16
     tmut_list = [] # leave unmuted
     tmut_list = []
 
