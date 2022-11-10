@@ -60,6 +60,7 @@ def octave_ascendz(notelist):
     return new_notelist
 
 def octave_descendz(notelist):
+    
     new_notelist = []
 
     for note in notelist:
@@ -77,3 +78,52 @@ def octave_descendz(notelist):
     new_notelist.insert(0, tonic)
 
     return new_notelist
+
+def octave_extensionz(full_list, base_list, mut_list, reverse_bool):
+    num_octaves = 0
+    if "o1" in mut_list:
+        num_octaves = 1
+    elif "o2" in mut_list:
+        num_octaves = 2
+    elif "o3" in mut_list:
+        num_octaves = 3
+
+    for _ in range(num_octaves):
+        new_octave = base_list.copy()
+        if reverse_bool:
+            for note in new_octave:
+                while int(note) > int(full_list[-1]):
+                    note.octave_down()
+                full_list.append(note)
+
+            return full_list
+
+        else:
+            for note in new_octave:
+                while int(note) < int(full_list[-1]):
+                    note.octave_up()
+                full_list.append(note)
+            
+            return full_list
+
+def reacher_z(full_list, base_list, mut_list, reverse_bool):
+    len = 0
+    if "reach1" in mut_list:
+        len = 1   
+    elif "reach2" in mut_list:
+        len = 2
+    elif "reach3" in mut_list:
+        len = 3
+
+    for i in range(len):
+        reach_note = base_list[i]
+        if reverse_bool:
+            while int(reach_note) > int(full_list[-1]):
+                reach_note.octave_up()
+            full_list.append(reach_note)
+        else:
+            while int(reach_note) < int(full_list[-1]):
+                reach_note.ovtave_up()
+            full_list.append(reach_note)
+            
+    return full_list
