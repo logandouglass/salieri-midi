@@ -30,13 +30,13 @@ from mingus.containers import Track as Mtrack
 # orange = mult()[1]
 # print(orange)
 
-note1 = Note("C", 4)
-note2 = Note("Cb", 4)
-note3 = Note("B", 4)
+# note1 = Note("C", 4)
+# note2 = Note("Cb", 4)
+# note3 = Note("B", 4)
 
-print(int(note1))
-print(int(note2))
-print(int(note3))
+# print(int(note1))
+# print(int(note2))
+# print(int(note3))
 
 def octave_ascendz(notelist):
     new_notelist = []
@@ -49,11 +49,31 @@ def octave_ascendz(notelist):
         new_notelist.append(note)
     
     for i in range(len(new_notelist)):
-        if i == 0:
-            ref_int = int(new_notelist[i])
-            # output_notelist.append(new_notelist[i])
-        else:
+        # if i == 0:
+        #     ref_int = int(new_notelist[i])
+        #     # output_notelist.append(new_notelist[i])
+        # else:
+        if i > 0:
             while int(new_notelist[i]) > int(new_notelist[i - 1]):
                 new_notelist[i].octave_up()
     
+    return new_notelist
+
+def octave_descendz(notelist):
+    new_notelist = []
+
+    for note in notelist:
+        note = Note(note)
+        new_notelist.append(note)
+
+    for i in range(len(new_notelist)):
+        if i > 0:
+            while int(new_notelist[i]) < int(new_notelist[i - 1]):
+                new_notelist[i].octave_down()
+    
+    tonic = new_notelist[0]
+    new_notelist.pop(0)
+    new_notelist.reverse()
+    new_notelist.insert(0, tonic)
+
     return new_notelist

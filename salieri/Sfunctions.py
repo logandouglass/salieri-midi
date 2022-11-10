@@ -261,7 +261,6 @@ def octave_ascendz(notelist):
     # output_notelist = []
     # initial =True
 
-
     for note in notelist:
         note = Note(note)
         new_notelist.append(note)
@@ -305,6 +304,31 @@ def octave_descend(scale):
     corrected_scale.insert(0, tonic)
         
     return corrected_scale
+
+def octave_descendz(notelist):
+    new_notelist = []
+
+    for note in notelist:
+        note = Note(note)
+        new_notelist.append(note)
+
+    tonic = new_notelist[0]
+    tonic.octave_up()
+    new_notelist.pop(0)
+    new_notelist.reverse()
+    new_notelist.insert(0, tonic)
+
+    for i in range(len(new_notelist)):
+        if i > 0:
+            while int(new_notelist[i]) > int(new_notelist[i - 1]):
+                new_notelist[i].octave_down()
+    
+    # tonic = new_notelist[0]
+    # new_notelist.pop(0)
+    # new_notelist.reverse()
+    # new_notelist.insert(0, tonic)
+
+    return new_notelist
 
 def octave_extension(full_list, base_list, mut_list, reverse_bool):
     num_octaves = 0
@@ -374,7 +398,7 @@ def returnerx(full_list, mut_list):
 
 def reverser(base_list, chord, mut_list):
     if "reverse" in mut_list:
-        base_list = octave_descend(chord)
+        base_list = octave_descendz(chord)
         reverse_bool = True
         return base_list, reverse_bool
     else:
@@ -601,12 +625,12 @@ if __name__ == "__main__":
     # print_test = True
 
     path = "testfile.mid"
-    # tchord = chords.major_triad("Ab")
+    tchord = chords.major_triad("C")
     tchord = chords.major_thirteenth("C")
     tdur = 4
     tdenom = 9
     tmut_list = [] # leave unmuted
-    tmut_list = []
+    tmut_list = ["reverse", "invert3"]
 
     if run_test:
         tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
@@ -615,3 +639,4 @@ if __name__ == "__main__":
 
     # if print_test:
     #     ...
+
