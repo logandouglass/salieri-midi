@@ -18,6 +18,7 @@ from mingus.containers import Track as Mtrack
 ## for MATH
 import math
 
+## For *deep* copying!
 import copy
 
 ## For writing MIDI
@@ -168,31 +169,7 @@ def lingerer(note_l, mut_list,):
             linger_list.append(note)
     return linger_list
 
-def inverter(base_list, mut_list):
-    invert_val = 0
-
-    if "invert1" in mut_list:
-        invert_val = 1
-    elif "invert2" in mut_list:
-        invert_val = 2
-    elif "invert3" in mut_list:
-        invert_val = 3
-
-    oct_adj = 1
-
-    if invert_val:
-        for _ in range(invert_val):
-            new_note = Note()
-            new_note.name = base_list[0].name
-            new_note.octave = base_list[0].octave + oct_adj
-            base_list.pop(0)
-            base_list.append(new_note)
-
-    return base_list
-
-    ...
-
-def inverterx(chord, mut_list):
+def inverter(chord, mut_list):
     invert_val = 0
 
     if "invert1" in mut_list:
@@ -209,105 +186,21 @@ def inverterx(chord, mut_list):
 
     return chord
 
-def octave_ascend(scale):
-    """
-    Returns list of note objects ascending from the tonic in the octave.
-    """
-    start_note = scale[0]
-    corrected_scale = []
-    initial = True
-    
-    for note in scale:
-        oct_up = False
-        if initial == False:
-            if notes.note_to_int(note) <= notes.note_to_int(start_note):
-                oct_up = True
-        note = Note(note)
-        if "Cb" in note.name: # fixing the Cb weirdness
-            note.octave_up()
-        if oct_up == True:
-            note.octave_up()
-        initial = False
-        corrected_scale.append(note)
-    return corrected_scale
-
-def octave_ascendx(scale):
-    "doesn't fix it...*yet*..."
-    start_note = scale[0]
-    corrected_scale = []
-    initial = True
-    looped = False
-    
-    ""
-
-    for note in scale:
-        oct_adj = 0
-        if initial == False:
-            if notes.note_to_int(note) <= notes.note_to_int(start_note):
-                oct_adj += 1
-                looped = True
-            if (notes.note_to_int(note) > notes.note_to_int(start_note)) and looped:
-                oct_adj += 1
-        note = Note(note)
-        if "Cb" in note.name: # fixing the Cb weirdness
-            note.octave_up()
-        if oct_adj:
-            note.octave + oct_adj
-        if initial:
-            initial = False
-        corrected_scale.append(note)
-    return corrected_scale
-
-def octave_ascendz(notelist):
+def octave_ascend(notelist):
     new_notelist = []
-    # output_notelist = []
-    # initial =True
 
     for note in notelist:
         note = Note(note)
         new_notelist.append(note)
     
     for i in range(len(new_notelist)):
-        if i == 0:
-            ref_int = int(new_notelist[i])
-            # output_notelist.append(new_notelist[i])
-        else:
+        if i > 0:
             while int(new_notelist[i]) < int(new_notelist[i - 1]):
                 new_notelist[i].octave_up()
     
     return new_notelist
 
-def octave_descend(scale):
-    """
-    Returns list of note objects descending from the tonic in the octave.
-    """
-    start_note = scale[0]
-    corrected_scale = []
-    initial = True
-    for note in scale:
-        oct_down = False
-        if initial == False:
-            if notes.note_to_int(note) >= notes.note_to_int(start_note):
-                oct_down = True
-        note = Note(note)
-        if "Cb" in note.name: # fixing the Cb weirdness
-            note.octave_up()
-        if oct_down == True:
-            note.octave_down()
-        initial = False
-        corrected_scale.append(note)
-
-    for note in corrected_scale:
-        note.octave_up()
-
-    tonic = corrected_scale[0]
-    corrected_scale.pop(0)
-    corrected_scale.reverse()
-    corrected_scale.insert(0, tonic)
-        
-    return corrected_scale
-
-def octave_descendz(notelist):
+def octave_descend(notelist):
     new_notelist = []
 
     for note in notelist:
@@ -340,35 +233,6 @@ def octave_extension(full_list, base_list, mut_list, reverse_bool):
         num_octaves = 2
     elif "o3" in mut_list:
         num_octaves = 3
-    
-    if reverse_bool == True:
-        counter_inc = -1
-
-    else:
-        counter_inc = 1
-
-    counter = 0
-    for _ in range(num_octaves):
-        counter += counter_inc
-        for note in base_list:
-            new_note = Note()
-            new_note.name = note.name
-            new_note.octave = note.octave + counter
-            full_list.append(new_note)
-    
-    counter += counter_inc
-    reach_mod = counter
-
-    return full_list, reach_mod
-
-def octave_extensionz(full_list, base_list, mut_list, reverse_bool):
-    num_octaves = 0
-    if "o1" in mut_list:
-        num_octaves = 1
-    elif "o2" in mut_list:
-        num_octaves = 2
-    elif "o3" in mut_list:
-        num_octaves = 3
 
     for _ in range(num_octaves):
         new_octave = copy.deepcopy(base_list)
@@ -389,30 +253,7 @@ def octave_extensionz(full_list, base_list, mut_list, reverse_bool):
             # return full_list
     return full_list
 
-def reacher(new_notelist, notelist, mut_list, oct_adj):
-    
-    len = 0
-    
-    if "reach1" in mut_list:
-        len = 1   
-    elif "reach2" in mut_list:
-        len = 2
-    elif "reach3" in mut_list:
-        len = 3
-    
-    if len:
-
-        for i in range(len):
-            note = Note()
-            note.name = notelist[i].name
-            note.octave = (notelist[i].octave + oct_adj)
-            new_notelist.append(note)
-        return new_notelist
-    
-    else:
-        return new_notelist
-
-def reacherz(full_list, base_list, mut_list, reverse_bool):
+def reacher(full_list, base_list, mut_list, reverse_bool):
     deep_base_list = copy.deepcopy(base_list)
     
     len = 0
@@ -436,7 +277,7 @@ def reacherz(full_list, base_list, mut_list, reverse_bool):
             
     return full_list
 
-def returnerx(full_list, mut_list):
+def returner(full_list, mut_list):
     if "return" in mut_list:
         return_list = full_list.copy()
         return_list.reverse()
@@ -452,7 +293,7 @@ def returnerx(full_list, mut_list):
 
 def reverser(base_list, chord, mut_list):
     if "reverse" in mut_list:
-        base_list = octave_descendz(chord)
+        base_list = octave_descend(chord)
         reverse_bool = True
         return base_list, reverse_bool
     else:
@@ -477,12 +318,9 @@ def trebify(base_lst, mut_lst=[]):
 def silence(duration):
     """
     Fills a bar with rests, resulting in a silent bar.
-    
-    initial remaster 6/20
     """
     bar = Bar()
-    # numerator = 4 * duration
-    # bar.set_meter((numerator, 4))
+
     bar.length = duration
     range_val = 4 * duration
     for _ in range(range_val):
@@ -496,53 +334,45 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     # MAKE THE BAR
     bar = Bar()
 
-    # HANDLE INVERSION 1st, then do ascend/descends!!
-    print(chord)
-
-    chord = inverterx(chord, mut_list)
-    print(f"after inversion{chord}")
-
-    # MAKE ASCENDING LIST OF NOTE OBJECTS
-    # chord_ascending = octave_ascend(chord) # stable for non-extended
-    # chord_ascending = octave_ascendx(chord)
-    chord_ascending = octave_ascendz(chord)
+    # PRINT THE UNMUTATED CHORD COMPONENTS
+    print(f"chord before mutators...{chord}")
     
-    # chord_descending = octave_descend(chord)
-    base_list = chord_ascending.copy()
-    # print(f"ascending... {base_list}")
-    # print(f"descending...{chord_descending}")
+    # MUTATOR: CHORD INVERSION
+    chord = inverter(chord, mut_list)
+    print(f"after inversion...{chord}")
 
-    # INVERSION NEW
-    # base_list = inverter(base_list, mut_list)
-    # print(f"inversion...{base_list}")
+    # MAKE NOTEOBJS, PLACE IN ASCENDING ORDER 
+    base_list = octave_ascend(chord)
 
-    # REVERSE
+    # MUTATOR: REVERSE
     base_list, reverse = reverser(base_list, chord, mut_list)
     print(f"reverse...{base_list}")
 
-    # BASSIFY AND TREBIFY
+    # MUTATOR: BASSIFY AND TREBIFY
     base_list = bassify(base_list, mut_list)
     base_list = trebify(base_list, mut_list)
 
     # FULL LIST CREATION BEGINS
-    full_list = base_list.copy()
+    full_list = copy.deepcopy(base_list)
 
     # OCTAVE EXTENSION
-    full_list = octave_extensionz(full_list, base_list, mut_list, reverse)
+    full_list = octave_extension(full_list, base_list, mut_list, reverse)
     print(f"octave extension...{full_list}")
 
     # REACH
-    full_list = reacherz(full_list, base_list, mut_list, reverse)
+    full_list = reacher(full_list, base_list, mut_list, reverse)
     print(f"reaching...{full_list}")
 
     # RETURN
-    full_list = returnerx(full_list, mut_list)
+    full_list = returner(full_list, mut_list)
     print(f"after return...{full_list}")
     
     # LINGER
     full_list = lingerer(full_list, mut_list)
     print(f"lingers...{full_list}")
 
+
+    # SET LENGTH OF CLIP AND LOOP VALUE
     bar.length = duration
     loop_value = math.ceil((denominator * duration) / len(full_list))
 
@@ -602,9 +432,11 @@ def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
 
 def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=[]):
     bar = Bar()
+    
+    # INVERSION
+    chord = inverter(chord, mut_list)
+    
     chord_adj = octave_ascend(chord)
-
-    # !comingsoon! inversion here
 
     # trebify and bassify
     chord_adj = bassify(chord_adj, mut_list)
@@ -676,21 +508,19 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
 
 if __name__ == "__main__":
     run_test = True
-    # print_test = True
 
     path = "testfile.mid"
-    tchord = chords.major_triad("C")
-    tchord = chords.major_thirteenth("Cb")
-    tdur = 2
-    tdenom = 9
+    # tchord = chords.major_triad("C")
+    tchord = chords.minor_major_seventh("Ab")
+    # tchord = chords.dominant_thirteenth("Gb")
+    tdur = 4
+    tdenom = 2
     tmut_list = [] # leave unmuted
-    tmut_list = ["o1", "reach2", "reverse", "trebify2", "return"]
+    # tmut_list = ["o1", "reverse", "trebify2", "return", "invert3"]
+    # tmut_list = ["o1", "reverse", "trebify2", "return"]
 
     if run_test:
-        tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
+        # tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
+        tbar = strummer(tchord, tdenom, tdur, tmut_list)
 
         midi_file_out.write_Bar(path, tbar)
-
-    # if print_test:
-    #     ...
-
