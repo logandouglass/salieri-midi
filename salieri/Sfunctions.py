@@ -241,17 +241,41 @@ def octave_extension(full_list, base_list, mut_list, reverse_bool):
                 while int(note) > int(full_list[-1]):
                     note.octave_down()
                 full_list.append(note)
-
-            # return full_list
-
         else:
             for note in new_octave:
                 while int(note) < int(full_list[-1]):
                     note.octave_up()
                 full_list.append(note)
-            
-            # return full_list
+
     return full_list
+
+def octave_extension_s(scale, mut_list, reverse_bool):
+    full_scale = copy.deepcopy(scale)
+    
+    num_octaves = 0
+    if "o1" in mut_list:
+        num_octaves = 1
+    elif "o2" in mut_list:
+        num_octaves = 2
+    elif "o3" in mut_list:
+        num_octaves = 3
+    
+    for _ in range(num_octaves):
+        new_octave = copy.deepcopy(scale)
+        new_octave.pop(0)
+        if reverse_bool:
+            for note in new_octave:
+                while int(note) > int(full_scale[-1]):
+                    note.octave_down()
+                full_scale.append(note)
+
+        else:
+            for note in new_octave:
+                while int(note) < int(full_scale[-1]):
+                    note.octave_up()
+                full_scale.append(note)
+
+    return full_scale
 
 def reacher(full_list, base_list, mut_list, reverse_bool):
     deep_base_list = copy.deepcopy(base_list)
@@ -475,8 +499,30 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     return bar
 
 # Coming soon -- remastered scalerunner
-# def scalerunner():
-#     ...
+def scalerunner(scale=scales.Ionian("C").ascending(), denominator=4, duration=1, mut_list=[]):
+    bar = Bar()
+    
+    base_scale = scale
+    base_scale = octave_ascend(scale)
+
+    if "reverse" in mut_list:
+        reverse_bool = True
+        base_scale.reverse()
+
+    full_list = octave_extension_s(base_scale, mut_list, reverse_bool)
+
+    bar.length = duration
+    loop_value = math.ceil((denominator * duration) / len(full_list))
+
+    for _ in range(loop_value):
+        for note in full_list:
+            if denom_check(bar.length, bar.current_beat, denominator):
+                    bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
+            else:
+                bar.place_notes(note, denominator)
+
+    return bar
+    ...
 
 #####==========================================================================
 # == MASTER COMBINATORIAL FUNCTION ==
@@ -513,14 +559,18 @@ if __name__ == "__main__":
     # tchord = chords.major_triad("C")
     tchord = chords.minor_major_seventh("Ab")
     # tchord = chords.dominant_thirteenth("Gb")
+    tscale = scales.Ionian("C").ascending()
+    # tscale = scales.Bachian("Ab").ascending()
+    tscale = scales.WholeTone("Ab").ascending()
     tdur = 4
-    tdenom = 2
-    tmut_list = [] # leave unmuted
+    tdenom = 6
+    tmut_list = ["reverse", "o1"]
     # tmut_list = ["o1", "reverse", "trebify2", "return", "invert3"]
     # tmut_list = ["o1", "reverse", "trebify2", "return"]
 
     if run_test:
         # tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
-        tbar = strummer(tchord, tdenom, tdur, tmut_list)
+        # tbar = strummer(tchord, tdenom, tdur, tmut_list)
+        tbar = scalerunner(tscale, tdenom, tdur, tmut_list)
 
         midi_file_out.write_Bar(path, tbar)
