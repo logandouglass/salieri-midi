@@ -18,6 +18,8 @@ from mingus.containers import Track as Mtrack
 ## for MATH
 import math
 
+import copy
+
 ## For writing MIDI
 from mingus.midi import midi_file_out
 
@@ -359,6 +361,34 @@ def octave_extension(full_list, base_list, mut_list, reverse_bool):
 
     return full_list, reach_mod
 
+def octave_extensionz(full_list, base_list, mut_list, reverse_bool):
+    num_octaves = 0
+    if "o1" in mut_list:
+        num_octaves = 1
+    elif "o2" in mut_list:
+        num_octaves = 2
+    elif "o3" in mut_list:
+        num_octaves = 3
+
+    for _ in range(num_octaves):
+        new_octave = copy.deepcopy(base_list)
+        if reverse_bool:
+            for note in new_octave:
+                while int(note) > int(full_list[-1]):
+                    note.octave_down()
+                full_list.append(note)
+
+            # return full_list
+
+        else:
+            for note in new_octave:
+                while int(note) < int(full_list[-1]):
+                    note.octave_up()
+                full_list.append(note)
+            
+            # return full_list
+    return full_list
+
 def reacher(new_notelist, notelist, mut_list, oct_adj):
     
     len = 0
@@ -381,6 +411,30 @@ def reacher(new_notelist, notelist, mut_list, oct_adj):
     
     else:
         return new_notelist
+
+def reacherz(full_list, base_list, mut_list, reverse_bool):
+    deep_base_list = copy.deepcopy(base_list)
+    
+    len = 0
+    if "reach1" in mut_list:
+        len = 1   
+    elif "reach2" in mut_list:
+        len = 2
+    elif "reach3" in mut_list:
+        len = 3
+
+    for i in range(len):
+        reach_note = deep_base_list[i]
+        if reverse_bool:
+            while int(reach_note) > int(full_list[-1]):
+                reach_note.octave_down()
+            full_list.append(reach_note)
+        else:
+            while int(reach_note) < int(full_list[-1]):
+                reach_note.octave_up()
+            full_list.append(reach_note)
+            
+    return full_list
 
 def returnerx(full_list, mut_list):
     if "return" in mut_list:
@@ -474,11 +528,11 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     full_list = base_list.copy()
 
     # OCTAVE EXTENSION
-    full_list, reach_mod = octave_extension(full_list, base_list, mut_list, reverse)
+    full_list = octave_extensionz(full_list, base_list, mut_list, reverse)
     print(f"octave extension...{full_list}")
 
     # REACH
-    full_list = reacher(full_list, base_list, mut_list, reach_mod)
+    full_list = reacherz(full_list, base_list, mut_list, reverse)
     print(f"reaching...{full_list}")
 
     # RETURN
@@ -626,11 +680,11 @@ if __name__ == "__main__":
 
     path = "testfile.mid"
     tchord = chords.major_triad("C")
-    tchord = chords.major_thirteenth("C")
-    tdur = 4
+    tchord = chords.major_thirteenth("Cb")
+    tdur = 2
     tdenom = 9
     tmut_list = [] # leave unmuted
-    tmut_list = ["reverse", "o1"]
+    tmut_list = ["o1", "reach2", "reverse", "trebify2", "return"]
 
     if run_test:
         tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
