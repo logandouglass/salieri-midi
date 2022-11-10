@@ -207,7 +207,6 @@ def inverterx(chord, mut_list):
 
     return chord
 
-
 def octave_ascend(scale):
     """
     Returns list of note objects ascending from the tonic in the octave.
@@ -229,6 +228,53 @@ def octave_ascend(scale):
         initial = False
         corrected_scale.append(note)
     return corrected_scale
+
+def octave_ascendx(scale):
+    "doesn't fix it...*yet*..."
+    start_note = scale[0]
+    corrected_scale = []
+    initial = True
+    looped = False
+    
+    ""
+
+    for note in scale:
+        oct_adj = 0
+        if initial == False:
+            if notes.note_to_int(note) <= notes.note_to_int(start_note):
+                oct_adj += 1
+                looped = True
+            if (notes.note_to_int(note) > notes.note_to_int(start_note)) and looped:
+                oct_adj += 1
+        note = Note(note)
+        if "Cb" in note.name: # fixing the Cb weirdness
+            note.octave_up()
+        if oct_adj:
+            note.octave + oct_adj
+        if initial:
+            initial = False
+        corrected_scale.append(note)
+    return corrected_scale
+
+def octave_ascendz(notelist):
+    new_notelist = []
+    # output_notelist = []
+    # initial =True
+
+
+    for note in notelist:
+        note = Note(note)
+        new_notelist.append(note)
+    
+    for i in range(len(new_notelist)):
+        if i == 0:
+            ref_int = int(new_notelist[i])
+            # output_notelist.append(new_notelist[i])
+        else:
+            while int(new_notelist[i]) < int(new_notelist[i - 1]):
+                new_notelist[i].octave_up()
+    
+    return new_notelist
 
 def octave_descend(scale):
     """
@@ -312,21 +358,19 @@ def reacher(new_notelist, notelist, mut_list, oct_adj):
     else:
         return new_notelist
 
-def returner(full_list, mut_list):
+def returnerx(full_list, mut_list):
     if "return" in mut_list:
-        return_counter = 1
         return_list = full_list.copy()
         return_list.reverse()
         return_list.pop(0)
         return_list.pop(-1)
         return_bool = True
-
-        return return_list, return_bool
-    
+        full_list.extend(return_list)
+        return full_list
     else:
-        return_list = []
-        return_bool = False
-        return return_list, return_bool
+        return full_list
+    
+    ...
 
 def reverser(base_list, chord, mut_list):
     if "reverse" in mut_list:
@@ -381,7 +425,10 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     print(f"after inversion{chord}")
 
     # MAKE ASCENDING LIST OF NOTE OBJECTS
-    chord_ascending = octave_ascend(chord)
+    # chord_ascending = octave_ascend(chord) # stable for non-extended
+    # chord_ascending = octave_ascendx(chord)
+    chord_ascending = octave_ascendz(chord)
+    
     # chord_descending = octave_descend(chord)
     base_list = chord_ascending.copy()
     # print(f"ascending... {base_list}")
@@ -411,46 +458,25 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     print(f"reaching...{full_list}")
 
     # RETURN
-    return_list, return_bool = returner(full_list, mut_list)
+    full_list = returnerx(full_list, mut_list)
+    print(f"after return...{full_list}")
     
     # LINGER
     full_list = lingerer(full_list, mut_list)
     print(f"lingers...{full_list}")
-
-    if return_bool:
-        return_list = lingerer(return_list, mut_list)
 
     bar.length = duration
     loop_value = math.ceil((denominator * duration) / len(full_list))
 
     # DELAYS
     delay(bar, mut_list)
-    
-    if return_bool == True:
-        return_counter = 1
-        for _ in range(10): #arbitrary but effective, fix for return because loopval can come up short
-            if return_counter % 2 != 0:
-                for note in full_list:
-                    if denom_check(bar.length, bar.current_beat, denominator):
-                        bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
-                    else:
-                        bar.place_notes(note, denominator)
-                return_counter += 1
+
+    for _ in range(loop_value):
+        for note in full_list:
+            if denom_check(bar.length, bar.current_beat, denominator):
+                    bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
             else:
-                for note in return_list:
-                    if denom_check(bar.length, bar.current_beat, denominator):
-                        bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
-                    else:
-                        bar.place_notes(note, denominator)
-                return_counter += 1
-    else:
-        # print(full_list)     
-        for _ in range(loop_value):
-            for note in full_list:
-                if denom_check(bar.length, bar.current_beat, denominator):
-                        bar.place_notes(note, denom_corrrect(bar.length, bar.current_beat))
-                else:
-                    bar.place_notes(note, denominator)
+                bar.place_notes(note, denominator)
 
     return bar
 
@@ -575,9 +601,10 @@ if __name__ == "__main__":
     # print_test = True
 
     path = "testfile.mid"
-    tchord = chords.diminished_seventh("Gb")
+    # tchord = chords.major_triad("Ab")
+    tchord = chords.major_thirteenth("C")
     tdur = 4
-    tdenom = 16
+    tdenom = 9
     tmut_list = [] # leave unmuted
     tmut_list = []
 
