@@ -313,7 +313,7 @@ def octave_descendz(notelist):
         new_notelist.append(note)
 
     tonic = new_notelist[0]
-    tonic.octave_up()
+    # tonic.octave_up()
     new_notelist.pop(0)
     new_notelist.reverse()
     new_notelist.insert(0, tonic)
@@ -630,7 +630,7 @@ if __name__ == "__main__":
     tdur = 4
     tdenom = 9
     tmut_list = [] # leave unmuted
-    tmut_list = ["reverse", "invert3"]
+    tmut_list = ["reverse", "o1"]
 
     if run_test:
         tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
