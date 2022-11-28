@@ -359,18 +359,18 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     bar = Bar()
 
     # PRINT THE UNMUTATED CHORD COMPONENTS
-    print(f"chord before mutators...{chord}")
+    # print(f"chord before mutators...{chord}")
     
     # MUTATOR: CHORD INVERSION
     chord = inverter(chord, mut_list)
-    print(f"after inversion...{chord}")
+    # print(f"after inversion...{chord}")
 
     # MAKE NOTEOBJS, PLACE IN ASCENDING ORDER 
     base_list = octave_ascend(chord)
 
     # MUTATOR: REVERSE
     base_list, reverse = reverser(base_list, chord, mut_list)
-    print(f"reverse...{base_list}")
+    # print(f"reverse...{base_list}")
 
     # MUTATOR: BASSIFY AND TREBIFY
     base_list = bassify(base_list, mut_list)
@@ -381,19 +381,19 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
 
     # OCTAVE EXTENSION
     full_list = octave_extension(full_list, base_list, mut_list, reverse)
-    print(f"octave extension...{full_list}")
+    # print(f"octave extension...{full_list}")
 
     # REACH
     full_list = reacher(full_list, base_list, mut_list, reverse)
-    print(f"reaching...{full_list}")
+    # print(f"reaching...{full_list}")
 
     # RETURN
     full_list = returner(full_list, mut_list)
-    print(f"after return...{full_list}")
+    # print(f"after return...{full_list}")
     
     # LINGER
     full_list = lingerer(full_list, mut_list)
-    print(f"lingers...{full_list}")
+    # print(f"lingers...{full_list}")
 
 
     # SET LENGTH OF CLIP AND LOOP VALUE
