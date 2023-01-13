@@ -1,31 +1,28 @@
-## For acquiring and using music theoretical data
+#$ for acquiring and using music theoretical data
 import mingus.core.progressions as progressions
 import mingus.core.chords as chords
 import mingus.core.scales as scales
 import mingus.core.intervals as intervals
 import mingus.core.notes as notes
 
-## For writing notes, chords bars, tracks, comps
+#$ for writing notes, chords bars, tracks, comps
 from mingus.containers import Note
 from mingus.containers import NoteContainer
 from mingus.containers import Bar
 from mingus.containers import Composition as Mcomposition
 from mingus.containers import Track as Mtrack
 
-## For improvisation and randomized generation (coming eventually)
-# import random
-
-## for MATH
-import math
-
-## For *deep* copying!
-import copy
-
-## For writing MIDI
+#$ for writing MIDI
 from mingus.midi import midi_file_out
 
+#$ additional modules
+import math
+import copy
+# import random
+
 #####==========================================================================
-# Logistical Functions
+
+#$ Logistical Functions
 
 def bar_adder(barr_list, Mtrackk): # no longer necessary, but currently in use.  Candidate for revision
     """
@@ -38,7 +35,7 @@ def bar_adder(barr_list, Mtrackk): # no longer necessary, but currently in use. 
 
 def listify_mutators(mutator_string): # currently essential to automation
     """
-    converts mutators gather by the frontend into a list that can be easily scanned to activate mutators in note-writing functions.
+    Converts mutators gather by the frontend into a list that can be easily scanned to activate mutators in note-writing functions.
     """
     if mutator_string == ("" or None):
         return []
@@ -47,9 +44,13 @@ def listify_mutators(mutator_string): # currently essential to automation
         return (mutator_list)
 
 #####==========================================================================
-# General Musical Functions
+#$ General Musical Functions
 
 def bassify(base_lst, mut_lst=[]):
+    """
+    Drops the pitch of note objects in an input list by the specified # of octaves
+    """
+
     if "bassify1" in mut_lst:
         for note in base_lst:
             note.octave -=1
@@ -65,9 +66,11 @@ def bassify(base_lst, mut_lst=[]):
     
 def chordbuild(tonic, quality):
     """
-    Returns an unclassed list of the notes in a chord.
-
+    Returns a list of stringified letters/accidentals representing the notes in a chord.
+    
+    These can be converted into note-objects using octave_ascend or octave_descend.
     """
+
     if tonic in ["", None]:
         return None
     else:
@@ -105,6 +108,10 @@ def chordbuild(tonic, quality):
         return note_list
 
 def delay(bar, mut_list=[]):
+    """
+    Adds the requested number of quarter rests to the beginning of a measure.
+    """
+    
     if "delay1" in mut_list:
         bar.place_rest(4)
     if "delay2" in mut_list:
@@ -122,9 +129,11 @@ def delay(bar, mut_list=[]):
 
 def denom_check(blength, bbeat, denom):
     """
-    In testing
+    ** Test Version **
+
     Returns true if note denominator needs correcting.
     """
+
     if bbeat == 0:
         return False
 
@@ -136,9 +145,13 @@ def denom_check(blength, bbeat, denom):
 
 def denom_corrrect(blength, bbeat):
     """
-    In testing
-    Corrects denom in the event of a successful denom_check
+    **Test Version**
+
+    Corrects denom if denom_check returns the boolean True.
+
+    Used to mitigate floating-point errors caused by some note denominators.
     """
+
     if (blength - bbeat) != 0:
         corrected_denom = 1/(blength - bbeat)
     else:
@@ -146,7 +159,10 @@ def denom_corrrect(blength, bbeat):
     return corrected_denom
 
 def lingerer(note_l, mut_list,):
-    
+    """
+    Lingers on a note in a scale or arpeggio for the selected # of notes.
+    """
+
     linger_value = 1
     if "linger2" in mut_list:
         linger_value = 2
@@ -170,6 +186,14 @@ def lingerer(note_l, mut_list,):
     return linger_list
 
 def inverter(chord, mut_list):
+    """
+    Performs inversions on chords, returning the inverted unclassed note-list.
+
+    (Later discovered that mingus has built-in methods for this, making this function
+    a candidate for later replacement.)
+
+    """
+    
     invert_val = 0
 
     if "invert1" in mut_list:
@@ -187,12 +211,20 @@ def inverter(chord, mut_list):
     return chord
 
 def octave_ascend(notelist):
+    """
+    Converts list of strings representing notes into Note objects and
+    places them in ascending order in the octave.
+
+    Returns a list containing the reordered note objects
+    """
     new_notelist = []
 
+    # creates a Note object for every string in the input list
     for note in notelist:
         note = Note(note)
         new_notelist.append(note)
     
+    # Reorders all Note objects to ascend in order from the starting Note.
     for i in range(len(new_notelist)):
         if i > 0:
             while int(new_notelist[i]) < int(new_notelist[i - 1]):
@@ -201,6 +233,11 @@ def octave_ascend(notelist):
     return new_notelist
 
 def octave_descend(notelist):
+    """
+    Converts list of stringified letters/accidentals into note objects, and then
+    places them in descending order in the octave.
+    """
+
     new_notelist = []
 
     for note in notelist:
@@ -226,7 +263,16 @@ def octave_descend(notelist):
     return new_notelist
 
 def octave_extension(full_list, base_list, mut_list, reverse_bool):
+    """
+    Expands an input list of Note objects across additional octaves.
+    
+    Good for extending scales and arpeggios, or for creating
+    fuller chord voicings.
+    """
+    # default number of octaves to be added (0)
     num_octaves = 0
+
+    # adjust num_octaves variable if a valid mutator is detected
     if "o1" in mut_list:
         num_octaves = 1
     elif "o2" in mut_list:
@@ -234,22 +280,29 @@ def octave_extension(full_list, base_list, mut_list, reverse_bool):
     elif "o3" in mut_list:
         num_octaves = 3
 
+    # adds octaves based on the value of num_octaves
     for _ in range(num_octaves):
         new_octave = copy.deepcopy(base_list)
-        if reverse_bool:
+        if reverse_bool: # extends octaves downward if writing a descending musical figure
             for note in new_octave:
                 while int(note) > int(full_list[-1]):
                     note.octave_down()
                 full_list.append(note)
-        else:
+        else: # extends octaves upward if writing an ascending musical figure
             for note in new_octave:
                 while int(note) < int(full_list[-1]):
                     note.octave_up()
                 full_list.append(note)
 
-    return full_list
+    return full_list # returns a list of Note objects after octave extension
 
 def octave_extension_s(scale, mut_list, reverse_bool):
+    """
+    Adds additional octaves to an input list of note objects.
+    
+    * NB: used specifically for scalerunner
+
+    """
     full_scale = copy.deepcopy(scale)
     
     num_octaves = 0
@@ -278,6 +331,13 @@ def octave_extension_s(scale, mut_list, reverse_bool):
     return full_scale
 
 def reacher(full_list, base_list, mut_list, reverse_bool):
+    """
+    Adds note objects to a scale* or arpeggio by spilling the notelist into the next
+    octave by a desired number of notes.
+
+    *Not yet implemented on scalerunner.
+    
+    """
     deep_base_list = copy.deepcopy(base_list)
     
     len = 0
@@ -302,6 +362,9 @@ def reacher(full_list, base_list, mut_list, reverse_bool):
     return full_list
 
 def returner(full_list, mut_list):
+    """
+    Causes a scale/arpeggio to descend after it has completed ascension.
+    """
     if "return" in mut_list:
         return_list = full_list.copy()
         return_list.reverse()
@@ -316,6 +379,8 @@ def returner(full_list, mut_list):
     ...
 
 def reverser(base_list, chord, mut_list):
+    "Reverseses a scall/arpeggio so that it plays from high to low."
+
     if "reverse" in mut_list:
         base_list = octave_descend(chord)
         reverse_bool = True
@@ -413,6 +478,16 @@ def arpeggio(chord=chords.major_triad("A"), denominator=4, duration=1, mut_list=
     return bar
 
 def simpline(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=[]):
+    """
+    Writes simple, steady single note figures based on the tonic of the input chord.  
+    
+    Useful for writing very simple baselines 
+
+    Eventually should add a 
+
+    
+    """
+    
     bar = Bar()
     chord_adj = octave_ascend(chord)
 
@@ -550,27 +625,45 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
     return bar_list
 
 #####==========================================================================
-# In-script Testing #
+#$ In-script Testing v1 # it's a ladder
 
 if __name__ == "__main__":
+    #$ for debug -- integrate more thoroughly
     run_test = True
 
+    ## file path/name
     path = "testfile.mid"
+
+    #$ test chord
     # tchord = chords.major_triad("C")
     tchord = chords.minor_major_seventh("Ab")
     # tchord = chords.dominant_thirteenth("Gb")
+    
+    
+    #$ test scale
     tscale = scales.Ionian("C").ascending()
     # tscale = scales.Bachian("Ab").ascending()
     tscale = scales.WholeTone("Ab").ascending()
+    
+    #$ test parameters
     tdur = 4
     tdenom = 6
     tmut_list = ["reverse", "o1"]
     # tmut_list = ["o1", "reverse", "trebify2", "return", "invert3"]
     # tmut_list = ["o1", "reverse", "trebify2", "return"]
 
+    #$ bar creation
     if run_test:
         # tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
         # tbar = strummer(tchord, tdenom, tdur, tmut_list)
         tbar = scalerunner(tscale, tdenom, tdur, tmut_list)
 
         midi_file_out.write_Bar(path, tbar)
+
+    #$ ladder1 notes
+    ## only does one chord at a time...that's OK for now, but make one that does multiple chords at once
+    ## for when you want boilerplate jame sessions
+    ## add some more patterns to strummer and possibly rename it
+    ## super long notes and weird, compounding lengths
+
+# In-script Testing v2 (forthcoming)

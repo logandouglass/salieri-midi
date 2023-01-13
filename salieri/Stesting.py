@@ -38,4 +38,4 @@ from mingus.containers import Track as Mtrack
 # print(int(note2))
 # print(int(note3))
 
-print(scales.Aeolian("G").ascending())
+# print(scales.Aeolian("G").ascending())
