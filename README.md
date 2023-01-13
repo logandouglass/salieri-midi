@@ -11,7 +11,7 @@ The end goal is to create an accessible but powerful open source tool that can h
 
 You can try the demo version of Salieri at https://salierimidi.herokuapp.com/
 
-Expect a proper documentation and functionality update early fall 2022.
+Updates coming soon.
 
 
-<i>Logan Douglass, Salieri dev, 8/31/2022</i> 
+<i>Logan Douglass, Salieri dev, 1/11/2023</i> 
