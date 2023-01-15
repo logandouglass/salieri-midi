@@ -628,37 +628,37 @@ def musicorum_ex_machina(chord, duration, style, denom, mutator_list=[]): # chan
 #$ In-script Testing v1 # it's a ladder
 
 if __name__ == "__main__":
-    #$ for debug -- integrate more thoroughly
-    run_test = True
+    # #$ for debug -- integrate more thoroughly
+    # run_test = True
 
-    ## file path/name
-    path = "testfile.mid"
+    # ## file path/name
+    # path = "testfile.mid"
 
-    #$ test chord
-    # tchord = chords.major_triad("C")
-    tchord = chords.minor_major_seventh("Ab")
-    # tchord = chords.dominant_thirteenth("Gb")
+    # #$ test chord
+    # # tchord = chords.major_triad("C")
+    # tchord = chords.minor_major_seventh("Ab")
+    # # tchord = chords.dominant_thirteenth("Gb")
     
     
-    #$ test scale
-    tscale = scales.Ionian("C").ascending()
-    # tscale = scales.Bachian("Ab").ascending()
-    tscale = scales.WholeTone("Ab").ascending()
+    # #$ test scale
+    # tscale = scales.Ionian("C").ascending()
+    # # tscale = scales.Bachian("Ab").ascending()
+    # tscale = scales.WholeTone("Ab").ascending()
     
-    #$ test parameters
-    tdur = 4
-    tdenom = 6
-    tmut_list = ["reverse", "o1"]
-    # tmut_list = ["o1", "reverse", "trebify2", "return", "invert3"]
-    # tmut_list = ["o1", "reverse", "trebify2", "return"]
+    # #$ test parameters
+    # tdur = 4
+    # tdenom = 6
+    # tmut_list = ["reverse", "o1"]
+    # # tmut_list = ["o1", "reverse", "trebify2", "return", "invert3"]
+    # # tmut_list = ["o1", "reverse", "trebify2", "return"]
 
-    #$ bar creation
-    if run_test:
-        # tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
-        # tbar = strummer(tchord, tdenom, tdur, tmut_list)
-        tbar = scalerunner(tscale, tdenom, tdur, tmut_list)
+    # #$ bar creation
+    # if run_test:
+    #     # tbar = arpeggio(tchord, tdenom, tdur, tmut_list)
+    #     # tbar = strummer(tchord, tdenom, tdur, tmut_list)
+    #     tbar = scalerunner(tscale, tdenom, tdur, tmut_list)
 
-        midi_file_out.write_Bar(path, tbar)
+    #     midi_file_out.write_Bar(path, tbar)
 
     #$ ladder1 notes
     ## only does one chord at a time...that's OK for now, but make one that does multiple chords at once
@@ -666,4 +666,115 @@ if __name__ == "__main__":
     ## add some more patterns to strummer and possibly rename it
     ## super long notes and weird, compounding lengths
 
-# In-script Testing v2 (forthcoming)
+    # In-script Exp 2 (forthcoming)
+    
+    # runvar
+    run_var = 1
+    
+    # path
+    path = "testfile.mid"
+    
+    # test note-denoms
+    denoms = [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12,
+        16,
+        24,
+        32,
+        64
+    ]
+
+    # test chord
+    tchord = chords.major_triad("C")
+    
+    # test scale
+    tscale = scales.Ionian("C").ascending()
+    # print(tscale)
+
+    # test Notes
+    c_Notes = octave_ascend(tchord)
+    s_Notes = octave_ascend(tscale)
+    
+    # test NoteContainers
+    full_NC = NoteContainer(c_Notes)
+    NC_var1 = copy.deepcopy(c_Notes)
+    NC_var1.pop(0)
+    NC_var1 = NoteContainer(NC_var1)
+
+    
+    # bars
+    b1 = Bar()
+    b2 = Bar()
+    b3 = Bar()
+    b4 = Bar()
+
+    ######################################################
+
+    if run_var == 1:
+        # pattern draft 1 (JS10) "waltz 1" 
+
+        # b1.length = 3/4
+        b1.set_meter((3,4))
+
+        while b1.space_left() > 0:
+            b1.place_notes(c_Notes[0], 4)
+            b1.place_notes(NC_var1, 4)
+            b1.place_notes(NC_var1, 4)
+
+    # testing
+    if run_var:
+        midi_file_out.write_Bar(path, b1)
+
+    if run_var ==2:
+        # pattern draft 2 (JS11) "polka waltz"
+        
+
+        b1.set_meter((3,4))
+
+        while b1.space_left() > 0: 
+            b1.place_notes()
+    
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    # misc
+        # note placement
+        # b1.place_notes(Notes[0], 6)
+
+        # bar length & beat
+
+
+
+        # # print(b1.length) # 1.0 default
+        # # print(type(b1.length)) # float
+        # b1.length = 3/4
+        # # print(b1.value_left()) # wtf...?
+        # print(b1.space_left()) # there we go -- gives remaining 4/4 whole notes as a float
+
+        # print(b1.length)
+
+
+        # data tests
+        # print(b1.current_beat)
+        # print(type(b1.current_beat))
+
+
+
+
+
+    ...
