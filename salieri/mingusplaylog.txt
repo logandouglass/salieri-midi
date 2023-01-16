@@ -2,3 +2,14 @@
 -----
 
 set up imports for an independent page...you might really need your octave ascend and descend algos
+
+work at the bottom of Sfunctions for now
+
+1.14
+-----
+
+some modest experiments today
+
+added a walz pattern, refreshed myself on how length/meter and not containers work 
+
+add basic fib-type pattern 

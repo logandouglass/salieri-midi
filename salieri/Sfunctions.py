@@ -669,7 +669,7 @@ if __name__ == "__main__":
     # In-script Exp 2 (forthcoming)
     
     # runvar
-    run_var = 1
+    run_var = 4
     
     # path
     path = "testfile.mid"
@@ -689,7 +689,7 @@ if __name__ == "__main__":
     ]
 
     # test chord
-    tchord = chords.major_triad("C")
+    tchord = chords.major_triad("G")
     
     # test scale
     tscale = scales.Ionian("C").ascending()
@@ -725,19 +725,42 @@ if __name__ == "__main__":
             b1.place_notes(NC_var1, 4)
             b1.place_notes(NC_var1, 4)
 
-    # testing
-    if run_var:
-        midi_file_out.write_Bar(path, b1)
-
-    if run_var ==2:
-        # pattern draft 2 (JS11) "polka waltz"
+    if run_var == 2: # under construction
+        # (JS11) "polka waltz"
         
 
         b1.set_meter((3,4))
 
+
+
+    if run_var == 3:
+        # logan's fib
         while b1.space_left() > 0: 
-            b1.place_notes()
+            b1.place_notes(full_NC, 4)
+            b1.place_notes(full_NC, 4)
+            b1.place_notes(full_NC, 8)
+            b1.place_notes(full_NC, 8)
+            b1.place_notes(full_NC, 12)
+            b1.place_notes(full_NC, 12)
+            b1.place_notes(full_NC, 12)
+
+    if run_var == 4:
+        # the aeroplane
+
+        b1.set_meter((3,4))
+
+
+        while b1.space_left() > 0: 
+            b1.place_notes(full_NC, 4)
+            b1.place_notes(full_NC, 8)
+            b1.place_notes(full_NC, 8)
+            b1.place_notes(full_NC, 8)
+
+    # testing
+    if run_var:
+        midi_file_out.write_Bar(path, b1)
     
+
 
 
 
