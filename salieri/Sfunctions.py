@@ -402,6 +402,9 @@ def trebify(base_lst, mut_lst=[]):
     return base_lst
 
 #####==========================================================================
+# New Data Sets
+
+#####==========================================================================
 # Salieri Note & Rest-Placing Functions
 
 def silence(duration):
@@ -554,9 +557,9 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     ##delays
     delay(bar, mut_list)
 
-    if "p1" in mut_list: # they should have real names
-    ### fun pattern 1 - dramatic
-        for _ in range(loop_value): # 5? wtf lol
+    # crashing pattern from Salieri build
+    if "p1" in mut_list:
+        for _ in range(loop_value):
              bar.place_notes(note_c, 12) # fix
              bar.place_notes(note_c, 12)
              bar.place_notes(note_c, 12)
@@ -567,7 +570,7 @@ def strummer(chord=chords.minor_triad("A"), denominator=4, duration=1, mut_list=
     else:
         for _ in range(loop_value):
             if denom_check(bar.length, bar.current_beat, denominator):
-                        bar.place_notes(note_c, denom_corrrect(bar.length, bar.current_beat))
+                        bar.place_notes(note_c, denom_corrrect(bar.length, bar.current_beat)) # revisit all this denom correct shit, it can be done easier i'm sure
             else:
                 bar.place_notes(note_c, denominator)
         

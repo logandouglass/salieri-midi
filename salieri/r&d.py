@@ -12,6 +12,7 @@ from mingus.containers import Track # revise the capital M language
 
 # data sets
 harm_info = {
+    # ref chord wheel
     # diatonic with a couple common non-diatonic substitutions
     "I": ["M7", "M9", "M11", "M13", "6"], # tonic
     "ii": ["m7", "m9", "m11", "m6"], # supertonic
@@ -25,6 +26,9 @@ harm_info = {
 }
 
 basic_strums = {
+    
+    # pulled from that image with the holes in them -- had to take some liberties
+    # name these later
     "1": [8, 8, 4, 8, 8, "8r", "8r"],
     # "1a1": [8, 8, 8, "8r", 8, 8, "8r", "8r"],
     "2": [4, 8, 8, "8r", 8, 8, 8],
@@ -32,6 +36,8 @@ basic_strums = {
     "3": ["8r", 8, 8, 8, "8r", 8, 8, 8],
     "4": [], # didn't do this one, simpline can already do the whole note variant
     "5": [8,8,8,8,4,"8r",8],
+    "6": ["8r",8,"8r",8],
+    
 }
 
 
@@ -42,3 +48,11 @@ prog_test = progressions.to_chords(progression1, "C")
 print(prog_test)
 
 # test 2
+
+progressions_list = {
+# gonna need to add a lot more
+    "50s": ["I","vi","IV","V"],
+    "I-V-vi-IV": ["I", "V", "vi", "IV"],
+}
+
+
