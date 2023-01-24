@@ -210,6 +210,28 @@ def inverter(chord, mut_list):
 
     return chord
 
+def inverter_m(chord, mut_list):
+    
+    if "invert1" in mut_list:
+        chord = chords.first_inversion(chord)
+    elif "invert2" in mut_list:
+        chord = chords.second_inversion(chord)
+    elif "invert3" in mut_list:
+        chord = chords.third_inversion(chord)
+
+    return chord
+    ...
+
+def Note_maker(string_list):
+    Note_list = []
+    
+    for note_string in string_list:
+        note = Note(note_string)
+        Note_list.append(note)
+    
+    return Note_list
+
+
 def octave_ascend(notelist):
     """
     Converts list of strings representing notes into Note objects and
@@ -231,6 +253,17 @@ def octave_ascend(notelist):
                 new_notelist[i].octave_up()
     
     return new_notelist
+
+def octave_ascend_re(notelist):
+    "Octave ascend minus the in-built Note creation.  Migrate to this in time, it is more modular."
+
+    for i in range(len(notelist)):
+        if i > 0:
+            while int(notelist[i]) < int(notelist[i - 1]):
+                notelist[i].octave_up()
+
+    return notelist
+
 
 def octave_descend(notelist):
     """
