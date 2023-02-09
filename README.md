@@ -7,7 +7,7 @@ The current version had to be developed very quickly to be demo'd as a final pro
 
 I will make these improvements, as well as *drastically* expanding the functionality, in time.  
 
-The end goal is to create an accessible but powerful open source tool that can help users of all skill levels create their own music as midi.  Check back over time to see the project develop.
+The end goal is to create an accessible but powerful open source tool that can help users of all skill levels create their and download their own own music clips as midi.  Check back over time to see the project develop.
 
 You can try the demo version of Salieri at https://salierimidi.herokuapp.com/
 
