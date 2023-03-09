@@ -103,3 +103,8 @@ tbar = accompany(tchord, tdenom, tduration, tmut_list)
 
 
 midi_file_out.write_Bar(path, tbar)
+
+# easy way to control velocity?
+# mingus is unclear, it suggests you can but cannot find a place this paramater can be set
+# ...unless on the actual Note?
+# velocity is handled during note creation ***

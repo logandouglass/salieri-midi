@@ -10,6 +10,6 @@ work at the bottom of Sfunctions for now
 
 some modest experiments today
 
-added a walz pattern, refreshed myself on how length/meter and not containers work 
+added a walz pattern, refreshed myself on how length/meter and note containers work 
 
 add basic fib-type pattern 

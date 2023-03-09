@@ -734,6 +734,7 @@ if __name__ == "__main__":
     # test Notes
     c_Notes = octave_ascend(tchord)
     s_Notes = octave_ascend(tscale)
+    t_note = Note("C")
     
     # test NoteContainers
     full_NC = NoteContainer(c_Notes)
